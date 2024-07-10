@@ -8,7 +8,7 @@ This document serves as the summary description of the bounty, and includes a br
 - Offered by: Zaprite
 - Amount: 2.5m sats (minimum*)
 
-_* A [donation page](https://pay.zaprite.com) is available where anyone is free to donate sats to this bounty to either increase the original payout or incentivize additional features._
+_* A [donation page](https://pay.zaprite.com/pl_WzwH6KkHKn) is available where anyone is free to donate sats to this bounty to either increase the original payout or incentivize additional features._
 
 ### Links
 
@@ -111,4 +111,4 @@ The bounty recipient must send a Zaprite Invoice for the final amount in questio
 
 Zaprite is also hosting a donation page for anyone who would like to contribute sats towards this project. All donations are welcome, and 100%  of all donations will go towards the final bounty payment(s). 
 
-[Donate Here](https://pay.zaprite.com/pl_)
+[Donate Here](https://pay.zaprite.com/pl_WzwH6KkHKn)
