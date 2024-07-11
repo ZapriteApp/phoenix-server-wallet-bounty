@@ -1,0 +1,48 @@
+{# templates/payment/index.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Receive{% endblock %}
+
+{% block body %}
+<div class="home-container">
+    <h1 class="main-title">Receive</h1>
+    <h2 class="balance-title">Bolt 11</h2>
+    <div class="container mt-5">
+    <h1 class="mb-4">Payment Form</h1>
+    {{ form_start(form) }}
+        <div class="form-group">
+            {{ form_label(form.amount) }}
+            {{ form_widget(form.amount) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.description) }}
+            {{ form_widget(form.description) }}
+        </div>
+        <div class="form-group">
+            {{ form_widget(form.submit) }}
+        </div>
+    {{ form_end(form) }}
+    
+    {% if payment_result is defined %}
+    <div class="result-container mt-4">
+        <h2>Payment Result</h2>
+        <div class="result-content">
+            <p><strong>Amount:</strong> {{ payment_result.amountSat }}</p>
+            <p><strong>Payment Hash:</strong> {{ payment_result.paymentHash }}</p>
+            <div class="copy-bar">
+        	<span class="copy-text-12">{{ payment_result.serialized }}</span>
+        	<button class="btn-copy" onclick="copyToClipboard('.copy-text-12')">Copy Text</button>
+    </div>
+        </div>
+    </div>
+    {% endif %}
+   </div>
+    <h2 class="balance-title">Bolt 12</h2>
+    <p>This is your node's Bolt 12 offer. A static and reusable payment request that does not expire.</p>
+    <div class="copy-bar">
+        <span class="copy-text-11">{{ offer }}</span>
+        <button class="btn-copy" onclick="copyToClipboard('.copy-text-11')">Copy Text</button>
+    </div>
+</div>
+{% endblock %}
+

@@ -1,0 +1,53 @@
+{# templates/base.html.twig #}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Dashboard{% endblock %}</title>
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    {% block stylesheets %}{% endblock %}
+    {% block javascripts %}
+    {# templates/base.html.twig ou un fichier JavaScript séparé #}
+	<script>
+	function copyToClipboard(to_copy) {
+	    const copyText = document.querySelector(to_copy).innerText;
+	    navigator.clipboard.writeText(copyText).then(() => {
+		alert('Text copied to clipboard');
+	    }).catch(err => {
+		alert('Failed to copy text: ', err);
+	    });
+	}
+	</script>
+    {% endblock %}
+</head>
+<body>
+    <div class="wrapper">
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h3>Djahwork Wallet</h3>
+            </div>
+            <ul class="list-unstyled components">
+                <li>
+                    <a href="{{ path('index') }}">Dashboard</a>
+                </li>
+                <li>
+                    <a href="{{ path('history') }}">Transactions</a>
+                </li>
+                <li>
+                    <a href="{{ path('index') }}">Contacts</a>
+                </li>
+                <li>
+                    <a href="{{ path('index') }}">Settings</a>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="content">
+            <div class="container-fluid">
+                {% block body %}{% endblock %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

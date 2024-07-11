@@ -1,0 +1,15 @@
+{# templates/history/index.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Payment History{% endblock %}
+
+{% block body %}
+<div class="home-container">
+    <h1 class="main-title">Payment History</h1>
+    <h2 class="balance-title">Payments In</h2>
+    <pre>{{ payments_in|json_encode(constant('JSON_PRETTY_PRINT')) }}</pre>
+    <h2 class="balance-title">Payments Out</h2>
+    <pre>{{ payments_out|json_encode(constant('JSON_PRETTY_PRINT')) }}</pre>
+</div>
+{% endblock %}
+

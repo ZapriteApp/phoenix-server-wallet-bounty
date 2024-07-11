@@ -1,0 +1,47 @@
+{# templates/payment/pay_invoice.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Send{% endblock %}
+
+{% block body %}
+<div class="home-container">
+    <h1 class="main-title">Send</h1>
+    <h2 class="balance-title">Bolt 11</h2>
+    <div class="container mt-5">
+    <h1 class="mb-4">Payment Form</h1>
+    {{ form_start(form11) }}
+        <div class="form-group">
+            {{ form_label(form11.invoice) }}
+            {{ form_widget(form11.invoice) }}
+        </div>
+        <div class="form-group">
+            {{ form_widget(form11.submit) }}
+        </div>
+    {{ form_end(form11) }}
+    
+   </div>
+    <h2 class="balance-title">Bolt 12</h2>
+    <div class="container mt-5">
+    <h1 class="mb-4">Payment Form</h1>
+    {{ form_start(form12) }}
+        <div class="form-group">
+            {{ form_label(form12.amount) }}
+            {{ form_widget(form12.amount) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form12.message) }}
+            {{ form_widget(form12.message) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form12.offer) }}
+            {{ form_widget(form12.offer) }}
+        </div>
+        <div class="form-group">
+            {{ form_widget(form12.submit) }}
+        </div>
+    {{ form_end(form12) }}
+    
+   </div>
+</div>
+{% endblock %}
+

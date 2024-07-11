@@ -1,0 +1,16 @@
+{# templates/payment/pay_offer.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Payment{% endblock %}
+
+{% block body %}
+    <h1>Payment Form</h1>
+    {{ form_start(form) }}
+        {{ form_row(form.amount) }}
+        {{ form_row(form.offer) }}
+        {{ form_row(form.message) }}
+        {{ form_row(form.submit) }}
+    {{ form_end(form) }}
+{% endblock %}
+

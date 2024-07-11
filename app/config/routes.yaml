@@ -1,0 +1,18 @@
+controllers:
+    resource:
+        path: ../src/Controller/
+        namespace: App\Controller
+    type: attribute
+
+create_invoice:
+    path: /create_invoice
+    controller: App\Controller\PaymentController::create_invoice
+pay_invoice:
+    path: /pay_invoice
+    controller: App\Controller\PaymentController::pay_invoice
+index:
+    path: /
+    controller: App\Controller\IndexController::index
+history:
+    path: /history
+    controller: App\Controller\HistoryController::history

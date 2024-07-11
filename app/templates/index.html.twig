@@ -1,0 +1,24 @@
+{# templates/index.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+<div class="home-container">
+    <h1 class="main-title">Home</h1>
+    <h2 class="balance-title">Balance</h2>
+    <div class="balance-bar">
+        <a href="{{ path('pay_invoice') }}" class="btn-receive no-underline">Send</a>
+        <span class="balance-value">{{ balance.balanceSat }}</span>
+        <a href="{{ path('create_invoice') }}" class="btn-receive no-underline">Receive</a>
+    </div>
+    <h2 class="section-title">Liquidity</h2>
+    <h2 class="section-title">Offers</h2>
+    <p>This is your node's Bolt 12 offer. A static and reusable payment request that does not expire.</p>
+    <div class="copy-bar">
+        <span class="copy-text-12">{{ offer }}</span>
+        <button class="btn-copy" onclick="copyToClipboard('.copy-text-12')">Copy Text</button>
+    </div>
+</div>
+{% endblock %}
+
