@@ -3,27 +3,31 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use App\Service\ApiPhoenix;
 
 class IndexController extends AbstractController
 {
+
+    private $apiPhoenix;
+
+    public function __construct(ApiPhoenix $apiPhoenix)
+    {
+        $this->apiPhoenix = $apiPhoenix;
+    }
+
     #[Route('/index', name: 'app_index')]
     public function index(): Response
     {
-
-        $phoenix = new ApiPhoenix(
-          "http://phoenix:9740",
-          "phoenix",
-          "c7a44e42995dde3d997b2093b2024cc1339f8cf8b71cbb78bfd5024e5b8f80f4",
-        );
+        $this->denyAccessUnlessGranted('ROLE_USER');
 
         try {
-            $nodeInfo = $phoenix->getNodeInfo();
-            $channels = $phoenix->listChannels();
-            $balance = $phoenix->getBalance();
-            $offer = $phoenix->getOffer();
+            $nodeInfo = $this->apiPhoenix->getNodeInfo();
+            $channels = $this->apiPhoenix->listChannels();
+            $balance = $this->apiPhoenix->getBalance();
+            $offer = $this->apiPhoenix->getOffer();
         } catch (\Exception $e) {
             return new Response('Erreur: ' . $e->getMessage());
         }

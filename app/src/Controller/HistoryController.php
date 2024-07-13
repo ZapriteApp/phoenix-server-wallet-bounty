@@ -9,18 +9,21 @@ use App\Service\ApiPhoenix;
 
 class HistoryController extends AbstractController
 {
+    private $apiPhoenix;
+
+    public function __construct(ApiPhoenix $apiPhoenix)
+    {
+        $this->apiPhoenix = $apiPhoenix;
+    }
+
     #[Route('/history', name: 'app_history')]
     public function index(): Response
     {
-        $phoenix = new ApiPhoenix(
-          "http://phoenix:9740",
-          "phoenix",
-          "c7a44e42995dde3d997b2093b2024cc1339f8cf8b71cbb78bfd5024e5b8f80f4",
-        );
+        $this->denyAccessUnlessGranted('ROLE_USER');
 
         try {
-            $ins = $phoenix->listPaymentsIn(array("all" => true));
-            $outs = $phoenix->listPaymentsOut(array("all" => true));
+            $ins = $this->apiPhoenix->listPaymentsIn(array("all" => true));
+            $outs = $this->apiPhoenix->listPaymentsOut(array("all" => true));
         } catch (\Exception $e) {
             return new Response('Erreur: ' . $e->getMessage());
         }

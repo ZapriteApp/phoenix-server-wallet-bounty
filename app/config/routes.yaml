@@ -16,3 +16,9 @@ index:
 history:
     path: /history
     controller: App\Controller\HistoryController::history
+login:
+    path: /login
+    controller: App\Security\SecurityController::login
+logout:
+    path: /logout
+    controller: App\Security\SecurityController::logout

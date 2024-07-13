@@ -4,6 +4,9 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
+    phoenix_host: 'http://phoenix:9740'
+    phoenix_username: 'phoenix'
+    phoenix_password: 'e25b752af6135eb15f376e9e116bbe9b7af2cdbb337acd6a1c767f4ec4ed6eac'
 
 services:
     # default configuration for services in *this* file
@@ -22,3 +25,9 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    App\Service\ApiPhoenix:
+        arguments:
+            $host: '%phoenix_host%'
+            $username: '%phoenix_username%'
+            $password: '%phoenix_password%'

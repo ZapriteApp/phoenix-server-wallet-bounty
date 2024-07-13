@@ -16,6 +16,14 @@ security:
         main:
             lazy: true
             provider: app_user_provider
+            form_login:
+                login_path: login
+                check_path: login
+                username_parameter: 'login_form[_username]'
+                password_parameter: 'login_form[_password]'
+            logout:
+                path: logout
+                target: /
 
 
             # activate different ways to authenticate
@@ -29,8 +37,7 @@ security:
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
-        #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        #- { path: ^/, roles: ROLE_USER }
+        # - { path: ^/, roles: ROLE_USER }
 
 when@test:
     security:

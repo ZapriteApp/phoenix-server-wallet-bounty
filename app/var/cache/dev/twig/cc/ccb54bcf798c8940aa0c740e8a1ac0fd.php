@@ -85,29 +85,43 @@ class __TwigTemplate_d989befde6e166c6a22fbb7c85547343 extends Template
                     <a href=\"";
         // line 37
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("index");
-        yield "\">Contacts</a>
-                </li>
-                <li>
-                    <a href=\"";
-        // line 40
-        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("index");
         yield "\">Settings</a>
                 </li>
             </ul>
+            <div class=\"sidebar-bottom\">
+                ";
+        // line 41
+        if (CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 41, $this->source); })()), "user", [], "any", false, false, false, 41)) {
+            // line 42
+            yield "                    <div class=\"user-info\">
+                        <p>";
+            // line 43
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 43, $this->source); })()), "user", [], "any", false, false, false, 43), "email", [], "any", false, false, false, 43), "html", null, true);
+            yield "</p>
+                    </div>
+                    <form action=\"";
+            // line 45
+            yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("logout");
+            yield "\" method=\"post\">
+                        <button type=\"submit\" class=\"btn btn-danger\">Logout</button>
+                    </form>
+                ";
+        }
+        // line 49
+        yield "            </div>
         </nav>
 
         <div class=\"content\">
             <div class=\"container-fluid\">
                 ";
-        // line 47
+        // line 54
         yield from $this->unwrap()->yieldBlock('body', $context, $blocks);
-        // line 48
+        // line 55
         yield "            </div>
         </div>
     </div>
 </body>
 </html>
-
 ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -167,7 +181,7 @@ class __TwigTemplate_d989befde6e166c6a22fbb7c85547343 extends Template
         return; yield '';
     }
 
-    // line 47
+    // line 54
     public function block_body($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -201,7 +215,7 @@ class __TwigTemplate_d989befde6e166c6a22fbb7c85547343 extends Template
      */
     public function getDebugInfo()
     {
-        return array (  171 => 47,  153 => 10,  146 => 9,  133 => 8,  119 => 6,  105 => 48,  103 => 47,  93 => 40,  87 => 37,  81 => 34,  75 => 31,  64 => 22,  61 => 9,  59 => 8,  55 => 7,  51 => 6,  45 => 2,);
+        return array (  185 => 54,  167 => 10,  160 => 9,  147 => 8,  133 => 6,  120 => 55,  118 => 54,  111 => 49,  104 => 45,  99 => 43,  96 => 42,  94 => 41,  87 => 37,  81 => 34,  75 => 31,  64 => 22,  61 => 9,  59 => 8,  55 => 7,  51 => 6,  45 => 2,);
     }
 
     public function getSourceContext()
@@ -242,12 +256,19 @@ class __TwigTemplate_d989befde6e166c6a22fbb7c85547343 extends Template
                     <a href=\"{{ path('history') }}\">Transactions</a>
                 </li>
                 <li>
-                    <a href=\"{{ path('index') }}\">Contacts</a>
-                </li>
-                <li>
                     <a href=\"{{ path('index') }}\">Settings</a>
                 </li>
             </ul>
+            <div class=\"sidebar-bottom\">
+                {% if app.user %}
+                    <div class=\"user-info\">
+                        <p>{{ app.user.email }}</p>
+                    </div>
+                    <form action=\"{{ path('logout') }}\" method=\"post\">
+                        <button type=\"submit\" class=\"btn btn-danger\">Logout</button>
+                    </form>
+                {% endif %}
+            </div>
         </nav>
 
         <div class=\"content\">
@@ -258,7 +279,6 @@ class __TwigTemplate_d989befde6e166c6a22fbb7c85547343 extends Template
     </div>
 </body>
 </html>
-
 ", "base.html.twig", "/var/www/symfony_docker/templates/base.html.twig");
     }
 }

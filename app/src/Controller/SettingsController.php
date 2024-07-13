@@ -11,6 +11,8 @@ class SettingsController extends AbstractController
     #[Route('/settings', name: 'app_settings')]
     public function index(): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+
         return $this->render('settings/index.html.twig', [
             'controller_name' => 'SettingsController',
         ]);

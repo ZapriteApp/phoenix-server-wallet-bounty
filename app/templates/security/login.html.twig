@@ -1,0 +1,34 @@
+{# templates/security/login.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Login{% endblock %}
+
+{% block body %}
+<div class="home-container">
+    <h1 class="main-title">Login</h1>
+    <div class="container mt-5">
+    {% if error %}
+        <div class="alert alert-danger">
+            {{ error.messageKey|trans(error.messageData, 'security') }}
+        </div>
+    {% endif %}
+    {{ form_start(form) }}
+        <div class="form-group">
+            {{ form_label(form._username) }}
+            {{ form_widget(form._username) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form._password) }}
+            {{ form_widget(form._password) }}
+        </div>
+        <div class="form-group">
+            {{ form_widget(form.submit) }}
+        </div>
+    {{ form_end(form) }}
+
+
+   </div>
+
+</div>
+{% endblock %}

@@ -15,19 +15,22 @@ use App\Form\PayOfferType;
 class PaymentController extends AbstractController
 {
 
+    private $apiPhoenix;
+
+    public function __construct(ApiPhoenix $apiPhoenix)
+    {
+        $this->apiPhoenix = $apiPhoenix;
+    }
+
     /**
      * @Route("/create_invoice", name="create_invoice")
      */
     public function create_invoice(Request $request): Response
     {
-        $phoenix = new ApiPhoenix(
-          "http://phoenix:9740",
-          "phoenix",
-          "c7a44e42995dde3d997b2093b2024cc1339f8cf8b71cbb78bfd5024e5b8f80f4",
-        );
+        $this->denyAccessUnlessGranted('ROLE_USER');
 
         try {
-            $offer = $phoenix->getOffer();
+            $offer = $this->apiPhoenix->getOffer();
         } catch (\Exception $e) {
             return new Response('Erreur: ' . $e->getMessage());
         }
@@ -40,7 +43,7 @@ class PaymentController extends AbstractController
             $response = null;
 
             try {
-                $response = $phoenix->createInvoice($data['amount'], $data['description']);
+                $response = $this->apiPhoenix->createInvoice($data['amount'], $data['description']);
             } catch (\Exception $e) {
                 return new Response('Erreur: ' . $e->getMessage());
             }
@@ -63,11 +66,7 @@ class PaymentController extends AbstractController
      */
     public function pay_invoice(Request $request): Response
     {
-        $phoenix = new ApiPhoenix(
-          "http://phoenix:9740",
-          "phoenix",
-          "c7a44e42995dde3d997b2093b2024cc1339f8cf8b71cbb78bfd5024e5b8f80f4",
-        );
+        $this->denyAccessUnlessGranted('ROLE_USER');
 
         $form11 = $this->createForm(PayInvoiceType::class);
         $form11->handleRequest($request);
@@ -77,7 +76,7 @@ class PaymentController extends AbstractController
             $response = null;
 
             try {
-                $response = $phoenix->payInvoice($data['invoice']);
+                $response = $this->apiPhoenix->payInvoice($data['invoice']);
             } catch (\Exception $e) {
                 return new Response('Erreur: ' . $e->getMessage());
             }
@@ -95,7 +94,7 @@ class PaymentController extends AbstractController
             $response = null;
 
             try {
-                $response = $phoenix->payOffer($data['amount'], $data['offer'], $data['message']);
+                $response = $this->apiPhoenix->payOffer($data['amount'], $data['offer'], $data['message']);
             } catch (\Exception $e) {
                 return new Response('Erreur: ' . $e->getMessage());
             }

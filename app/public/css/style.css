@@ -215,3 +215,20 @@ h1 {
     text-decoration: none; /* Supprime le soulignement */
 }
 
+.sidebar-bottom {
+    position: absolute;
+    bottom: 0;
+    width: 230px;
+    padding: 10px;
+    text-align: center;
+}
+
+.user-info {
+    margin-bottom: 10px;
+}
+
+.btn-danger {
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+}

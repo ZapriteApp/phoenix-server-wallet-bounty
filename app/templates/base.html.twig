@@ -34,12 +34,19 @@
                     <a href="{{ path('history') }}">Transactions</a>
                 </li>
                 <li>
-                    <a href="{{ path('index') }}">Contacts</a>
-                </li>
-                <li>
                     <a href="{{ path('index') }}">Settings</a>
                 </li>
             </ul>
+            <div class="sidebar-bottom">
+                {% if app.user %}
+                    <div class="user-info">
+                        <p>{{ app.user.email }}</p>
+                    </div>
+                    <form action="{{ path('logout') }}" method="post">
+                        <button type="submit" class="btn btn-danger">Logout</button>
+                    </form>
+                {% endif %}
+            </div>
         </nav>
 
         <div class="content">
@@ -50,4 +57,3 @@
     </div>
 </body>
 </html>
-

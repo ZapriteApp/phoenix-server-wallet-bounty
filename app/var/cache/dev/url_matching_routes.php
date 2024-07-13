@@ -13,9 +13,13 @@ return [
             [['_route' => 'history', '_controller' => 'App\\Controller\\HistoryController::history'], null, null, null, false, false, null],
         ],
         '/index' => [[['_route' => 'app_index', '_controller' => 'App\\Controller\\IndexController::index'], null, null, null, false, false, null]],
+        '/register' => [[['_route' => 'app_register', '_controller' => 'App\\Controller\\RegistrationController::register'], null, null, null, false, false, null]],
+        '/settings' => [[['_route' => 'app_settings', '_controller' => 'App\\Controller\\SettingsController::index'], null, null, null, false, false, null]],
         '/create_invoice' => [[['_route' => 'create_invoice', '_controller' => 'App\\Controller\\PaymentController::create_invoice'], null, null, null, false, false, null]],
         '/pay_invoice' => [[['_route' => 'pay_invoice', '_controller' => 'App\\Controller\\PaymentController::pay_invoice'], null, null, null, false, false, null]],
         '/' => [[['_route' => 'index', '_controller' => 'App\\Controller\\IndexController::index'], null, null, null, false, false, null]],
+        '/login' => [[['_route' => 'login', '_controller' => 'App\\Security\\SecurityController::login'], null, null, null, false, false, null]],
+        '/logout' => [[['_route' => 'logout', '_controller' => 'App\\Security\\SecurityController::logout'], null, null, null, false, false, null]],
     ],
     [ // $regexpList
         0 => '{^(?'
