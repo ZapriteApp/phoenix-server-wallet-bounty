@@ -1,2 +1,4 @@
 /mysql/*
 /app/vendor/*
+/app/var/cache/*
+/app/var/log/*
