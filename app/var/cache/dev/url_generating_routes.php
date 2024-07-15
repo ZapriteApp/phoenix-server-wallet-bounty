@@ -4,6 +4,7 @@
 
 return [
     '_preview_error' => [['code', '_format'], ['_controller' => 'error_controller::preview', '_format' => 'html'], ['code' => '\\d+'], [['variable', '.', '[^/]++', '_format', true], ['variable', '/', '\\d+', 'code', true], ['text', '/_error']], [], [], []],
+    'api_index' => [[], ['_controller' => 'App\\Controller\\APIController::getConfig'], [], [['text', '/api/index']], [], [], []],
     'app_history' => [[], ['_controller' => 'App\\Controller\\HistoryController::index'], [], [['text', '/history']], [], [], []],
     'app_index' => [[], ['_controller' => 'App\\Controller\\IndexController::index'], [], [['text', '/index']], [], [], []],
     'app_register' => [[], ['_controller' => 'App\\Controller\\RegistrationController::register'], [], [['text', '/register']], [], [], []],
@@ -14,6 +15,7 @@ return [
     'history' => [[], ['_controller' => 'App\\Controller\\HistoryController::history'], [], [['text', '/history']], [], [], []],
     'login' => [[], ['_controller' => 'App\\Security\\SecurityController::login'], [], [['text', '/login']], [], [], []],
     'logout' => [[], ['_controller' => 'App\\Security\\SecurityController::logout'], [], [['text', '/logout']], [], [], []],
+    'App\Controller\APIController::getConfig' => [[], ['_controller' => 'App\\Controller\\APIController::getConfig'], [], [['text', '/api/index']], [], [], []],
     'App\Controller\HistoryController::index' => [[], ['_controller' => 'App\\Controller\\HistoryController::index'], [], [['text', '/history']], [], [], []],
     'App\Controller\IndexController::index' => [[], ['_controller' => 'App\\Controller\\IndexController::index'], [], [['text', '/index']], [], [], []],
     'App\Controller\RegistrationController::register' => [[], ['_controller' => 'App\\Controller\\RegistrationController::register'], [], [['text', '/register']], [], [], []],

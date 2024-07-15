@@ -20,6 +20,7 @@ return [
         '/' => [[['_route' => 'index', '_controller' => 'App\\Controller\\IndexController::index'], null, null, null, false, false, null]],
         '/login' => [[['_route' => 'login', '_controller' => 'App\\Security\\SecurityController::login'], null, null, null, false, false, null]],
         '/logout' => [[['_route' => 'logout', '_controller' => 'App\\Security\\SecurityController::logout'], null, null, null, false, false, null]],
+        '/api' => [[['_route' => 'api_index', '_controller' => 'App\\Security\\APIController::index'], null, null, null, false, false, null]],
     ],
     [ // $regexpList
         0 => '{^(?'

@@ -31,3 +31,7 @@ services:
             $host: '%phoenix_host%'
             $username: '%phoenix_username%'
             $password: '%phoenix_password%'
+
+    App\EventListener\ApiKeySubscriber:
+        tags:
+            - { name: 'kernel.event_subscriber' }
