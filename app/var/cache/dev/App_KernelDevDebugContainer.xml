@@ -60,7 +60,7 @@
     <parameter key="kernel.container_class">App_KernelDevDebugContainer</parameter>
     <parameter key="phoenix_host">http://phoenix:9740</parameter>
     <parameter key="phoenix_username">phoenix</parameter>
-    <parameter key="phoenix_password">e25b752af6135eb15f376e9e116bbe9b7af2cdbb337acd6a1c767f4ec4ed6eac</parameter>
+    <parameter key="phoenix_password">c7a44e42995dde3d997b2093b2024cc1339f8cf8b71cbb78bfd5024e5b8f80f4</parameter>
     <parameter key="event_dispatcher.event_aliases" type="collection">
       <parameter key="Symfony\Component\Console\Event\ConsoleCommandEvent">console.command</parameter>
       <parameter key="Symfony\Component\Console\Event\ConsoleErrorEvent">console.error</parameter>
@@ -254,6 +254,7 @@
     <service id="App\Controller\SettingsController" class="App\Controller\SettingsController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
+      <argument type="service" id="doctrine.orm.default_entity_manager"/>
       <call method="setContainer">
         <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\SettingsController"/>
       </call>
@@ -262,6 +263,9 @@
       <tag name="kernel.event_subscriber"/>
       <tag name="container.hot_path"/>
       <argument type="service" id="doctrine.orm.default_entity_manager"/>
+    </service>
+    <service id="App\Form\ApiKeyType" class="App\Form\ApiKeyType" autowire="true" autoconfigure="true">
+      <tag name="form.type"/>
     </service>
     <service id="App\Form\CreateInvoiceType" class="App\Form\CreateInvoiceType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
@@ -304,7 +308,7 @@
     <service id="App\Service\ApiPhoenix" class="App\Service\ApiPhoenix" autowire="true" autoconfigure="true">
       <argument>http://phoenix:9740</argument>
       <argument>phoenix</argument>
-      <argument>e25b752af6135eb15f376e9e116bbe9b7af2cdbb337acd6a1c767f4ec4ed6eac</argument>
+      <argument>c7a44e42995dde3d997b2093b2024cc1339f8cf8b71cbb78bfd5024e5b8f80f4</argument>
     </service>
     <service id="argument_metadata_factory" class="Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadataFactory"/>
     <service id="argument_resolver.backed_enum_resolver" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\BackedEnumValueResolver">
@@ -914,6 +918,7 @@
         <argument>Symfony\Bridge\Doctrine\Form\Type</argument>
       </argument>
       <argument type="collection">
+        <argument>App\Form\ApiKeyType</argument>
         <argument>App\Form\CreateInvoiceType</argument>
         <argument>App\Form\LoginFormType</argument>
         <argument>App\Form\PayInvoiceType</argument>
@@ -2095,7 +2100,7 @@
       <argument type="service" id="form.registry"/>
     </service>
     <service id="form.extension" class="Symfony\Component\Form\Extension\DependencyInjection\DependencyInjectionExtension">
-      <argument type="service" id=".service_locator.gbP7lB9"/>
+      <argument type="service" id=".service_locator.Xbya0_k"/>
       <argument type="collection">
         <argument key="Symfony\Component\Form\Extension\Core\Type\FormType" type="iterator">
           <argument type="service" id="form.type_extension.form.transformation_failure_handling"/>
@@ -4446,6 +4451,8 @@
     <service id=".abstract.instanceof.App\Controller\SettingsController" class="App\Controller\SettingsController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\EventDispatcher\EventSubscriberInterface.0.App\EventListener\ApiKeySubscriber" class="App\EventListener\ApiKeySubscriber" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\EventListener\ApiKeySubscriber" class="App\EventListener\ApiKeySubscriber" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\ApiKeyType" class="App\Form\ApiKeyType" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Form\ApiKeyType" class="App\Form\ApiKeyType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\CreateInvoiceType" class="App\Form\CreateInvoiceType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\CreateInvoiceType" class="App\Form\CreateInvoiceType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\LoginFormType" class="App\Form\LoginFormType" autowire="true" abstract="true"/>
@@ -5001,9 +5008,10 @@
       <argument type="service" id="argument_resolver.query_parameter_value_resolver"/>
       <argument type="service" id="debug.stopwatch"/>
     </service>
-    <service id=".service_locator.gbP7lB9" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.Xbya0_k" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
+        <argument key="App\Form\ApiKeyType" type="service_closure" id="App\Form\ApiKeyType"/>
         <argument key="App\Form\CreateInvoiceType" type="service_closure" id="App\Form\CreateInvoiceType"/>
         <argument key="App\Form\LoginFormType" type="service_closure" id="App\Form\LoginFormType"/>
         <argument key="App\Form\PayInvoiceType" type="service_closure" id="App\Form\PayInvoiceType"/>
@@ -6257,7 +6265,7 @@
     <service id=".service_locator.V6D1oJY" alias=".service_locator.e_4zbH4"/>
     <service id=".service_locator.RZK_.hF" alias=".service_locator.nTBRX5_"/>
     <service id=".service_locator.BFrsqsn" alias=".service_locator.F9PKc.7"/>
-    <service id=".service_locator.tGvRaM." alias=".service_locator.gbP7lB9"/>
+    <service id=".service_locator.Ugaden4" alias=".service_locator.Xbya0_k"/>
     <service id=".service_locator.LMuqDDe" alias=".service_locator.VHsrTPK"/>
     <service id=".service_locator.jUv.zyj" alias=".service_locator.O2p6Lk7"/>
     <service id="http_client" alias="http_client.uri_template"/>

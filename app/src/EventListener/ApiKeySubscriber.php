@@ -12,7 +12,6 @@ use App\Entity\ApiKey;
 
 class ApiKeySubscriber implements EventSubscriberInterface
 {
-    private $apiKeyRepository;
 
     public function __construct(EntityManagerInterface $entityManager)
     {

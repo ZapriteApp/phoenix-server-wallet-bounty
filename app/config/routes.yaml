@@ -22,6 +22,9 @@ login:
 logout:
     path: /logout
     controller: App\Security\SecurityController::logout
+app_settings:
+    path: /settings
+    controller: App\Controller\SettingsController::index
 
 api_index:
     path: /api

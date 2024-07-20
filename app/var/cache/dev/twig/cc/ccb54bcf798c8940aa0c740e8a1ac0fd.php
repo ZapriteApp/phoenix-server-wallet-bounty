@@ -84,7 +84,7 @@ class __TwigTemplate_d989befde6e166c6a22fbb7c85547343 extends Template
                 <li>
                     <a href=\"";
         // line 37
-        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("index");
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_settings");
         yield "\">Settings</a>
                 </li>
             </ul>
@@ -256,7 +256,7 @@ class __TwigTemplate_d989befde6e166c6a22fbb7c85547343 extends Template
                     <a href=\"{{ path('history') }}\">Transactions</a>
                 </li>
                 <li>
-                    <a href=\"{{ path('index') }}\">Settings</a>
+                    <a href=\"{{ path('app_settings') }}\">Settings</a>
                 </li>
             </ul>
             <div class=\"sidebar-bottom\">

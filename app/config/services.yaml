@@ -6,7 +6,7 @@
 parameters:
     phoenix_host: 'http://phoenix:9740'
     phoenix_username: 'phoenix'
-    phoenix_password: 'e25b752af6135eb15f376e9e116bbe9b7af2cdbb337acd6a1c767f4ec4ed6eac'
+    phoenix_password: 'c7a44e42995dde3d997b2093b2024cc1339f8cf8b71cbb78bfd5024e5b8f80f4'
 
 services:
     # default configuration for services in *this* file

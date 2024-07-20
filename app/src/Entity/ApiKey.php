@@ -19,6 +19,9 @@ class ApiKey
     #[ORM\ManyToOne(inversedBy: 'apiKeys')]
     private ?User $user = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $roles = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -44,6 +47,18 @@ class ApiKey
     public function setUser(?User $user): static
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getRoles(): ?string
+    {
+        return $this->roles;
+    }
+
+    public function setRoles(string $roles): static
+    {
+        $this->roles = $roles;
 
         return $this;
     }
