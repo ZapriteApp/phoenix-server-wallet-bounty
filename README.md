@@ -50,7 +50,7 @@ The wallet should have the ability to **Receive** a lightning payment by:
 
 A draft [design prototype](https://xd.adobe.com/view/7b5bb288-1c73-4ad5-ac82-cf8cd1e3b192-2e08/) has been prepared by Zaprite as a rough guide to accompany this bounty summary.
 
-<img width="1478" alt="phoenix-server-wallet-settings" src="https://github.com/ZapriteApp/phoenix-server-wallet-bounty/assets/12265052/09869e18-3145-4bb0-9691-d4ab7e6855e9">
+<img width="1478" alt="phoenix-server-wallet-settings" src="https://github.com/user-attachments/assets/9aded1d2-031e-4326-9eef-fafb941e0e00">
 
 _**Note**: the prototype above contains additional features not required in the MVP for this bounty to be paid._
 
