@@ -26,9 +26,13 @@ The goal is to build a lightning wallet UI on top of Phoenix Server (phoenixd) t
 The following items are the minimum functionality required for this bounty to be paid out.
 - Standard wallet UI with **Dashboard** showing channel information.
 - Basic **Send and Receive** functionality.
-- Ability to create and manage permissioned **API Keys** (Admin and Read-only) via the UI.
-- Ability to create and manage **Webhook URLs** via the UI.
+- ~~Ability to create and manage permissioned **API Keys** (Admin and Read-only) via the UI.~~ (1)
+- ~~Ability to create and manage **Webhook URLs** via the UI.~~ (2)
 - A basic **Transaction History** page.
+
+(1) This requirement is no longer needed due to the new 'limited access password' feature: https://github.com/ACINQ/phoenixd/pull/84
+
+(2) This requirement is no longer needed due to the new 'per-invoice webhook' feature: https://github.com/ACINQ/phoenixd/pull/85
 
 ### Send and Receive
 
@@ -41,33 +45,6 @@ The wallet should have the ability to **Receive** a lightning payment by:
 
 1. Generating a bolt11 invoice
 2. Decoding a bolt12 offer
-
-## API Keys
-
-Zaprite allows merchants to connect wallets and nodes through various methods. Due to Zaprite’s non-custodial stance, this bounty requires that a permissioned API Key system be built around the wallet.
-
-The requirement is for two main API Key permission sets to be created:
-
-1. Read-only (“Invoice”)
-2. Full-access (“Admin”)
-
-The _Invoice API Key_ should have access to the **following endpoints only**:
-
-#### Get node info
-`GET /getinfo`
-
-#### Get Bolt12 offer
-`POST /getoffer`
-
-#### Create Bolt11 invoice
-`POST /createinvoice`
-
-#### Get incoming payment
-`GET /payments/incoming/{paymentHash}`
-
-## Webhook URLs
-
-Zaprite, and other third-party applications, need to be notified when payments have been received via pheonixd’s built-in Webhooks functionality. The wallet should include a UI to add and manage Webhook URLs.
 
 ## Design Prototype
 
