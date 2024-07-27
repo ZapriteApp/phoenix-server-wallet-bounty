@@ -9,15 +9,31 @@
     <h2 class="section-title">Balance</h2>
     <div class="balance-bar">
         <a href="{{ path('pay') }}" class="btn-send no-underline">Send</a>
-        <span class="balance-value">{{ balance.balanceSat }}</span>
+        <span class="balance-value">{{ balance.balanceSat|number_format(0, '.', ',') }}</span>
         <a href="{{ path('receive') }}" class="btn-receive no-underline">Receive</a>
     </div>
     <h2 class="section-title">Liquidity</h2>
+        {% for channel in channels %}
+        {% set local_amount = channel.commitments.active[0].localCommit.spec.toLocal/1000 %}
+        {% set remote_amount = channel.commitments.active[0].localCommit.spec.toRemote/1000 %}
+        {% set total_amount = local_amount + remote_amount %}
+        <div class="liquidity-bar">
+            <div class="balance-progress-orange"><div class="balance-progress" style="width: {{ local_amount / total_amount * 100 }}%;"></div></div>
+            <div class="balance-bar">
+                <div class="text-box left"><h3>Outbound -></h3>You can send <b>{{ local_amount|number_format(0, '.', ',') }} sats</b></div>
+                <div class="text-box center"><h3>Acinq</h3><b>{{ total_amount|number_format(0, '.', ',') }} sats</b></div>
+                <div class="text-box right"><h3><- Inbound</h3>You can receive <b>{{ remote_amount|number_format(0, '.', ',') }} sats</b></div>
+            </div>
+        </div>
+        {% endfor %}
     <h2 class="section-title">Offers</h2>
     <p>This is your node's Bolt 12 offer. A static and reusable payment request that does not expire.</p>
     <div class="copy-bar">
         <span class="copy-text-12">{{ offer }}</span>
+        <div id="qrcode" class="qrcode"></div>
         <button class="btn-copy" onclick="copyToClipboard('.copy-text-12')">Copy Text</button>
+        <button class="btn-qr" onclick="toggleVisibility('qrcode')">QR Code</button>
     </div>
+    <script type="text/javascript">new QRCode(document.getElementById("qrcode"), {text: "{{ offer }}", width: 210, height: 210});</script>
 </div>
 {% endblock %}

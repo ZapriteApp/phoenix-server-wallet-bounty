@@ -60,7 +60,7 @@ class __TwigTemplate_d989befde6e166c6a22fbb7c85547343 extends Template
         // line 9
         yield "    ";
         yield from $this->unwrap()->yieldBlock('javascripts', $context, $blocks);
-        // line 22
+        // line 24
         yield "</head>
 <body>
     <div class=\"wrapper\">
@@ -71,24 +71,24 @@ class __TwigTemplate_d989befde6e166c6a22fbb7c85547343 extends Template
             <nav>
                <ul>
                    <li class=\"";
-        // line 31
-        if ((CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 31, $this->source); })()), "request", [], "any", false, false, false, 31), "get", ["_route"], "method", false, false, false, 31) == "index")) {
+        // line 33
+        if ((CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 33, $this->source); })()), "request", [], "any", false, false, false, 33), "get", ["_route"], "method", false, false, false, 33) == "index")) {
             yield "active";
         }
         yield "\"><a href=\"";
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("index");
         yield "\">Dashboard</a></li>
                    <li class=\"";
-        // line 32
-        if ((CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 32, $this->source); })()), "request", [], "any", false, false, false, 32), "get", ["_route"], "method", false, false, false, 32) == "app_history")) {
+        // line 34
+        if ((CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 34, $this->source); })()), "request", [], "any", false, false, false, 34), "get", ["_route"], "method", false, false, false, 34) == "app_history")) {
             yield "active";
         }
         yield "\"><a href=\"";
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("history");
         yield "\">Transactions</a></li>
                    <li class=\"";
-        // line 33
-        if ((CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 33, $this->source); })()), "request", [], "any", false, false, false, 33), "get", ["_route"], "method", false, false, false, 33) == "app_settings")) {
+        // line 35
+        if ((CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 35, $this->source); })()), "request", [], "any", false, false, false, 35), "get", ["_route"], "method", false, false, false, 35) == "app_settings")) {
             yield "active";
         }
         yield "\"><a href=\"";
@@ -98,17 +98,17 @@ class __TwigTemplate_d989befde6e166c6a22fbb7c85547343 extends Template
            </nav>
             <div class=\"sidebar-bottom\">
                 ";
-        // line 37
-        if (CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 37, $this->source); })()), "user", [], "any", false, false, false, 37)) {
-            // line 38
+        // line 39
+        if (CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 39, $this->source); })()), "user", [], "any", false, false, false, 39)) {
+            // line 40
             yield "                    <nav>
                       <ul>
                         <li class=\"border\"><a>";
-            // line 40
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 40, $this->source); })()), "user", [], "any", false, false, false, 40), "email", [], "any", false, false, false, 40), "html", null, true);
+            // line 42
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 42, $this->source); })()), "user", [], "any", false, false, false, 42), "email", [], "any", false, false, false, 42), "html", null, true);
             yield "</a></li>
                         <li class=\"border\"><a href=\"";
-            // line 41
+            // line 43
             yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("logout");
             yield "\">Logout</a></li>
                         <li class=\"border footer\"><a href=\"https://github.com/djahwork/phoenix-server-wallet-bounty\">Version 0.1.0 Github</a></li>
@@ -116,16 +116,16 @@ class __TwigTemplate_d989befde6e166c6a22fbb7c85547343 extends Template
                   </nav>
                 ";
         }
-        // line 46
+        // line 48
         yield "            </div>
         </nav>
 
         <div class=\"content\">
             <div class=\"container-fluid\">
                 ";
-        // line 51
+        // line 53
         yield from $this->unwrap()->yieldBlock('body', $context, $blocks);
-        // line 52
+        // line 54
         yield "            </div>
         </div>
     </div>
@@ -173,7 +173,16 @@ class __TwigTemplate_d989befde6e166c6a22fbb7c85547343 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "javascripts"));
 
         // line 10
-        yield "    \t<script>
+        yield "    ";
+        // line 11
+        yield "  <script src=\"";
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("js/qrcode.js"), "html", null, true);
+        yield "\"></script>
+  <script src=\"";
+        // line 12
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("js/show_qr.js"), "html", null, true);
+        yield "\"></script>
+\t<script>
 \tfunction copyToClipboard(to_copy) {
 \t    const copyText = document.querySelector(to_copy).innerText;
 \t    navigator.clipboard.writeText(copyText).then(() => {
@@ -190,7 +199,7 @@ class __TwigTemplate_d989befde6e166c6a22fbb7c85547343 extends Template
         return; yield '';
     }
 
-    // line 51
+    // line 53
     public function block_body($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -224,7 +233,7 @@ class __TwigTemplate_d989befde6e166c6a22fbb7c85547343 extends Template
      */
     public function getDebugInfo()
     {
-        return array (  194 => 51,  176 => 10,  169 => 9,  156 => 8,  142 => 6,  129 => 52,  127 => 51,  120 => 46,  112 => 41,  108 => 40,  104 => 38,  102 => 37,  91 => 33,  83 => 32,  75 => 31,  64 => 22,  61 => 9,  59 => 8,  55 => 7,  51 => 6,  45 => 2,);
+        return array (  203 => 53,  183 => 12,  178 => 11,  176 => 10,  169 => 9,  156 => 8,  142 => 6,  129 => 54,  127 => 53,  120 => 48,  112 => 43,  108 => 42,  104 => 40,  102 => 39,  91 => 35,  83 => 34,  75 => 33,  64 => 24,  61 => 9,  59 => 8,  55 => 7,  51 => 6,  45 => 2,);
     }
 
     public function getSourceContext()
@@ -239,6 +248,8 @@ class __TwigTemplate_d989befde6e166c6a22fbb7c85547343 extends Template
     {% block stylesheets %}{% endblock %}
     {% block javascripts %}
     {# templates/base.html.twig ou un fichier JavaScript séparé #}
+  <script src=\"{{ asset('js/qrcode.js') }}\"></script>
+  <script src=\"{{ asset('js/show_qr.js') }}\"></script>
 \t<script>
 \tfunction copyToClipboard(to_copy) {
 \t    const copyText = document.querySelector(to_copy).innerText;

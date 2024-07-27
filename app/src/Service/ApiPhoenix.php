@@ -79,7 +79,7 @@ class ApiPhoenix
 
     public function listChannels()
     {
-        return $this->makeRequest('/listchannels');
+        return $this->makeRequest('/listchannels')->toArray();
     }
 
     public function payInvoice($invoice)

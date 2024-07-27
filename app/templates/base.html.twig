@@ -8,6 +8,8 @@
     {% block stylesheets %}{% endblock %}
     {% block javascripts %}
     {# templates/base.html.twig ou un fichier JavaScript séparé #}
+  <script src="{{ asset('js/qrcode.js') }}"></script>
+  <script src="{{ asset('js/show_qr.js') }}"></script>
 	<script>
 	function copyToClipboard(to_copy) {
 	    const copyText = document.querySelector(to_copy).innerText;
