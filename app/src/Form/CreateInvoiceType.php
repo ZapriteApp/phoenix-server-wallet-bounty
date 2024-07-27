@@ -15,12 +15,16 @@ class CreateInvoiceType extends AbstractType
     {
         $builder
             ->add('amount', TextType::class, [
-                'label' => 'Amount (satoshis)',
-                'attr' => ['class' => 'form-control'],
+                'attr' => [
+                  'class' => 'form-control',
+                  'placeholder' => 'Amount (satoshis)'
+                ],
             ])
             ->add('description', TextType::class, [
-                'label' => 'Description',
-                'attr' => ['class' => 'form-control'],
+                'attr' => [
+                  'class' => 'form-control',
+                  'placeholder' => 'Description'
+                ],
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Generate',

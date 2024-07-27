@@ -14,10 +14,6 @@ class ApiKeyType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('key', TextType::class, [
-                'label' => 'API Key',
-                'attr' => ['class' => 'form-control'],
-            ])
             ->add('role', ChoiceType::class, [
                 'label' => 'Role',
                 'choices' => [

@@ -23,9 +23,9 @@ class PaymentController extends AbstractController
     }
 
     /**
-     * @Route("/create_invoice", name="create_invoice")
+     * @Route("/receive", name="app_receive")
      */
-    public function create_invoice(Request $request): Response
+    public function receive(Request $request): Response
     {
         $this->denyAccessUnlessGranted('ROLE_USER');
 
@@ -62,9 +62,9 @@ class PaymentController extends AbstractController
     }
 
     /**
-     * @Route("/pay_invoice", name="pay_invoice")
+     * @Route("/pay", name="pay")
      */
-    public function pay_invoice(Request $request): Response
+    public function pay(Request $request): Response
     {
         $this->denyAccessUnlessGranted('ROLE_USER');
 

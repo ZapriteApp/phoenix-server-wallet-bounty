@@ -5,11 +5,10 @@
 
 {% block body %}
 <div class="home-container">
-    <h1 class="main-title">Payment History</h1>
-    <h2 class="balance-title">Payments In</h2>
+    <h1 class="page-title">Transactions</h1>
+    <h2 class="section-title">Activity</h2>
+    <h3 class="sub-section-title">Your full activity history for this account</h3>
     <pre>{{ payments_in|json_encode(constant('JSON_PRETTY_PRINT')) }}</pre>
-    <h2 class="balance-title">Payments Out</h2>
     <pre>{{ payments_out|json_encode(constant('JSON_PRETTY_PRINT')) }}</pre>
 </div>
 {% endblock %}
-

@@ -60,7 +60,7 @@
     <parameter key="kernel.container_class">App_KernelDevDebugContainer</parameter>
     <parameter key="phoenix_host">http://phoenix:9740</parameter>
     <parameter key="phoenix_username">phoenix</parameter>
-    <parameter key="phoenix_password">c7a44e42995dde3d997b2093b2024cc1339f8cf8b71cbb78bfd5024e5b8f80f4</parameter>
+    <parameter key="phoenix_password">e25b752af6135eb15f376e9e116bbe9b7af2cdbb337acd6a1c767f4ec4ed6eac</parameter>
     <parameter key="event_dispatcher.event_aliases" type="collection">
       <parameter key="Symfony\Component\Console\Event\ConsoleCommandEvent">console.command</parameter>
       <parameter key="Symfony\Component\Console\Event\ConsoleErrorEvent">console.error</parameter>
@@ -220,6 +220,13 @@
         <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\APIController"/>
       </call>
     </service>
+    <service id="App\Controller\ContactsController" class="App\Controller\ContactsController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="container.service_subscriber"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\ContactsController"/>
+      </call>
+    </service>
     <service id="App\Controller\HistoryController" class="App\Controller\HistoryController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
@@ -289,6 +296,10 @@
       <tag name="doctrine.repository_service"/>
       <argument type="service" id="doctrine"/>
     </service>
+    <service id="App\Repository\ContactRepository" class="App\Repository\ContactRepository" autowire="true" autoconfigure="true">
+      <tag name="doctrine.repository_service"/>
+      <argument type="service" id="doctrine"/>
+    </service>
     <service id="App\Repository\UserRepository" class="App\Repository\UserRepository" autowire="true" autoconfigure="true">
       <tag name="doctrine.repository_service"/>
       <argument type="service" id="doctrine"/>
@@ -308,7 +319,7 @@
     <service id="App\Service\ApiPhoenix" class="App\Service\ApiPhoenix" autowire="true" autoconfigure="true">
       <argument>http://phoenix:9740</argument>
       <argument>phoenix</argument>
-      <argument>c7a44e42995dde3d997b2093b2024cc1339f8cf8b71cbb78bfd5024e5b8f80f4</argument>
+      <argument>e25b752af6135eb15f376e9e116bbe9b7af2cdbb337acd6a1c767f4ec4ed6eac</argument>
     </service>
     <service id="argument_metadata_factory" class="Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadataFactory"/>
     <service id="argument_resolver.backed_enum_resolver" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\BackedEnumValueResolver">
@@ -3231,7 +3242,7 @@
     <service id="doctrine.orm.configuration" class="Doctrine\ORM\Configuration" abstract="true"/>
     <service id="doctrine.orm.entity_manager.abstract" class="Doctrine\ORM\EntityManager" lazy="true" abstract="true"/>
     <service id="doctrine.orm.container_repository_factory" class="Doctrine\Bundle\DoctrineBundle\Repository\ContainerRepositoryFactory">
-      <argument type="service" id=".service_locator._phSrCR"/>
+      <argument type="service" id=".service_locator.AqapM1Z"/>
     </service>
     <service id="doctrine.orm.manager_configurator.abstract" class="Doctrine\Bundle\DoctrineBundle\ManagerConfigurator" abstract="true">
       <argument type="collection"/>
@@ -4434,6 +4445,9 @@
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\APIController" class="App\Controller\APIController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\APIController" class="App\Controller\APIController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\APIController" class="App\Controller\APIController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\ContactsController" class="App\Controller\ContactsController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\ContactsController" class="App\Controller\ContactsController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\ContactsController" class="App\Controller\ContactsController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\HistoryController" class="App\Controller\HistoryController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\HistoryController" class="App\Controller\HistoryController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\HistoryController" class="App\Controller\HistoryController" autowire="true" autoconfigure="true" abstract="true"/>
@@ -4467,6 +4481,8 @@
     <service id=".abstract.instanceof.App\Form\RegistrationFormType" class="App\Form\RegistrationFormType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\ApiKeyRepository" class="App\Repository\ApiKeyRepository" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Repository\ApiKeyRepository" class="App\Repository\ApiKeyRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\ContactRepository" class="App\Repository\ContactRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\ContactRepository" class="App\Repository\ContactRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\UserRepository" class="App\Repository\UserRepository" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Repository\UserRepository" class="App\Repository\UserRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Security\SecurityController" class="App\Security\SecurityController" autowire="true" abstract="true"/>
@@ -5035,10 +5051,11 @@
         <argument key="doctrine.orm.listeners.pdo_session_handler_schema_listener" type="service_closure" id="doctrine.orm.listeners.pdo_session_handler_schema_listener"/>
       </argument>
     </service>
-    <service id=".service_locator._phSrCR" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.AqapM1Z" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Repository\ApiKeyRepository" type="service_closure" id="App\Repository\ApiKeyRepository"/>
+        <argument key="App\Repository\ContactRepository" type="service_closure" id="App\Repository\ContactRepository"/>
         <argument key="App\Repository\UserRepository" type="service_closure" id="App\Repository\UserRepository"/>
       </argument>
     </service>
@@ -5200,6 +5217,12 @@
     <service id=".service_locator.O2p6Lk7.App\Controller\APIController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\APIController"/>
       <argument>App\Controller\APIController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.O2p6Lk7" method="withContext"/>
+    </service>
+    <service id=".service_locator.O2p6Lk7.App\Controller\ContactsController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\ContactsController"/>
+      <argument>App\Controller\ContactsController</argument>
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.O2p6Lk7" method="withContext"/>
     </service>
@@ -5370,6 +5393,7 @@
         <argument type="collection">
           <argument>App\Kernel</argument>
           <argument>App\Controller\APIController</argument>
+          <argument>App\Controller\ContactsController</argument>
           <argument>App\Controller\HistoryController</argument>
           <argument>App\Controller\IndexController</argument>
           <argument>App\Controller\PaymentController</argument>

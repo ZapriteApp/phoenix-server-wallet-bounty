@@ -4,12 +4,12 @@ controllers:
         namespace: App\Controller
     type: attribute
 
-create_invoice:
-    path: /create_invoice
-    controller: App\Controller\PaymentController::create_invoice
-pay_invoice:
-    path: /pay_invoice
-    controller: App\Controller\PaymentController::pay_invoice
+receive:
+    path: /receive
+    controller: App\Controller\PaymentController::receive
+pay:
+    path: /pay
+    controller: App\Controller\PaymentController::pay
 index:
     path: /
     controller: App\Controller\IndexController::index
@@ -25,7 +25,12 @@ logout:
 app_settings:
     path: /settings
     controller: App\Controller\SettingsController::index
-
+register:
+    path: /register
+    controller: App\Controller\RegistrationController::register
+app_contact:
+    path: /contacts
+    controller: App\Controller\ContactsController::contacts
 api_index:
     path: /api
     controller: App\Security\APIController::index

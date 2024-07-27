@@ -24,27 +24,24 @@
     <div class="wrapper">
         <nav class="sidebar">
             <div class="sidebar-header">
-                <h3>Djahwork Wallet</h3>
+                <h3>Sample Wallet</h3>
             </div>
-            <ul class="list-unstyled components">
-                <li>
-                    <a href="{{ path('index') }}">Dashboard</a>
-                </li>
-                <li>
-                    <a href="{{ path('history') }}">Transactions</a>
-                </li>
-                <li>
-                    <a href="{{ path('app_settings') }}">Settings</a>
-                </li>
-            </ul>
+            <nav>
+               <ul>
+                   <li class="{% if app.request.get('_route') == 'index' %}active{% endif %}"><a href="{{ path('index') }}">Dashboard</a></li>
+                   <li class="{% if app.request.get('_route') == 'app_history' %}active{% endif %}"><a href="{{ path('history') }}">Transactions</a></li>
+                   <li class="{% if app.request.get('_route') == 'app_settings' %}active{% endif %}"><a href="{{ path('app_settings') }}">Settings</a></li>
+               </ul>
+           </nav>
             <div class="sidebar-bottom">
                 {% if app.user %}
-                    <div class="user-info">
-                        <p>{{ app.user.email }}</p>
-                    </div>
-                    <form action="{{ path('logout') }}" method="post">
-                        <button type="submit" class="btn btn-danger">Logout</button>
-                    </form>
+                    <nav>
+                      <ul>
+                        <li class="border"><a>{{ app.user.email }}</a></li>
+                        <li class="border"><a href="{{ path('logout') }}">Logout</a></li>
+                        <li class="border footer"><a href="https://github.com/djahwork/phoenix-server-wallet-bounty">Version 0.1.0 Github</a></li>
+                    </ul>
+                  </nav>
                 {% endif %}
             </div>
         </nav>

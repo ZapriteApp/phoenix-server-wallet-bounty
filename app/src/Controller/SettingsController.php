@@ -28,9 +28,15 @@ class SettingsController extends AbstractController
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
             $api_key->setUser($this->getUser());
-            $api_key->setApikey("123");
-            $api_key->setRoles("ROLE_USER");
+            $api_key->setApikey(bin2hex(random_bytes(32)));
+            if($data['role'] == "ROLE_USER"){
+                $api_key->setRoles("ROLE_USER");
+            }
+            else{
+                $api_key->setRoles("ROLE_ADMIN");
+            }
             $this->entityManager->persist($api_key);
             $this->entityManager->flush();
 

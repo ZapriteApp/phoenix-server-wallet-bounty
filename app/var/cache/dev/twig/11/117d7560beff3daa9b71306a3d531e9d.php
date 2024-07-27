@@ -73,13 +73,13 @@ class __TwigTemplate_663be4c2edf6bb85e32717b83aea1798 extends Template
 
         // line 7
         yield "<div class=\"home-container\">
-    <h1 class=\"main-title\">Payment History</h1>
-    <h2 class=\"balance-title\">Payments In</h2>
+    <h1 class=\"page-title\">Transactions</h1>
+    <h2 class=\"section-title\">Activity</h2>
+    <h3 class=\"sub-section-title\">Your full activity history for this account</h3>
     <pre>";
-        // line 10
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(json_encode((isset($context["payments_in"]) || array_key_exists("payments_in", $context) ? $context["payments_in"] : (function () { throw new RuntimeError('Variable "payments_in" does not exist.', 10, $this->source); })()), Twig\Extension\CoreExtension::constant("JSON_PRETTY_PRINT")), "html", null, true);
+        // line 11
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(json_encode((isset($context["payments_in"]) || array_key_exists("payments_in", $context) ? $context["payments_in"] : (function () { throw new RuntimeError('Variable "payments_in" does not exist.', 11, $this->source); })()), Twig\Extension\CoreExtension::constant("JSON_PRETTY_PRINT")), "html", null, true);
         yield "</pre>
-    <h2 class=\"balance-title\">Payments Out</h2>
     <pre>";
         // line 12
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(json_encode((isset($context["payments_out"]) || array_key_exists("payments_out", $context) ? $context["payments_out"] : (function () { throw new RuntimeError('Variable "payments_out" does not exist.', 12, $this->source); })()), Twig\Extension\CoreExtension::constant("JSON_PRETTY_PRINT")), "html", null, true);
@@ -113,7 +113,7 @@ class __TwigTemplate_663be4c2edf6bb85e32717b83aea1798 extends Template
      */
     public function getDebugInfo()
     {
-        return array (  85 => 12,  80 => 10,  75 => 7,  68 => 6,  54 => 4,  37 => 2,);
+        return array (  85 => 12,  81 => 11,  75 => 7,  68 => 6,  54 => 4,  37 => 2,);
     }
 
     public function getSourceContext()
@@ -125,14 +125,13 @@ class __TwigTemplate_663be4c2edf6bb85e32717b83aea1798 extends Template
 
 {% block body %}
 <div class=\"home-container\">
-    <h1 class=\"main-title\">Payment History</h1>
-    <h2 class=\"balance-title\">Payments In</h2>
+    <h1 class=\"page-title\">Transactions</h1>
+    <h2 class=\"section-title\">Activity</h2>
+    <h3 class=\"sub-section-title\">Your full activity history for this account</h3>
     <pre>{{ payments_in|json_encode(constant('JSON_PRETTY_PRINT')) }}</pre>
-    <h2 class=\"balance-title\">Payments Out</h2>
     <pre>{{ payments_out|json_encode(constant('JSON_PRETTY_PRINT')) }}</pre>
 </div>
 {% endblock %}
-
 ", "history/index.html.twig", "/var/www/symfony_docker/templates/history/index.html.twig");
     }
 }

@@ -14,16 +14,22 @@ class PayOfferType extends AbstractType
     {
       $builder
       ->add('amount', TextType::class, [
-          'label' => 'Amount (satoshis)',
-          'attr' => ['class' => 'form-control'],
+          'attr' => [
+            'class' => 'form-control',
+            'placeholder' => 'Amount (satoshis)'
+          ],
       ])
       ->add('offer', TextType::class, [
-          'label' => 'Offer Bolt12',
-          'attr' => ['class' => 'form-control'],
+          'attr' => [
+            'class' => 'form-control',
+            'placeholder' => 'Offer Bolt12'
+          ],
       ])
       ->add('message', TextType::class, [
-          'label' => 'Message',
-          'attr' => ['class' => 'form-control'],
+          'attr' => [
+            'class' => 'form-control',
+            'placeholder' => 'Message'
+          ],
       ])
       ->add('submit', SubmitType::class, [
           'label' => 'Pay',

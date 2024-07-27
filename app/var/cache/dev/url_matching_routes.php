@@ -8,14 +8,21 @@
 return [
     false, // $matchHost
     [ // $staticRoutes
+        '/contacts' => [
+            [['_route' => 'app_contacts', '_controller' => 'App\\Controller\\ContactsController::index'], null, null, null, false, false, null],
+            [['_route' => 'app_contact', '_controller' => 'App\\Controller\\ContactsController::contacts'], null, null, null, false, false, null],
+        ],
         '/history' => [
             [['_route' => 'app_history', '_controller' => 'App\\Controller\\HistoryController::index'], null, null, null, false, false, null],
             [['_route' => 'history', '_controller' => 'App\\Controller\\HistoryController::history'], null, null, null, false, false, null],
         ],
         '/index' => [[['_route' => 'app_index', '_controller' => 'App\\Controller\\IndexController::index'], null, null, null, false, false, null]],
-        '/register' => [[['_route' => 'app_register', '_controller' => 'App\\Controller\\RegistrationController::register'], null, null, null, false, false, null]],
-        '/create_invoice' => [[['_route' => 'create_invoice', '_controller' => 'App\\Controller\\PaymentController::create_invoice'], null, null, null, false, false, null]],
-        '/pay_invoice' => [[['_route' => 'pay_invoice', '_controller' => 'App\\Controller\\PaymentController::pay_invoice'], null, null, null, false, false, null]],
+        '/register' => [
+            [['_route' => 'app_register', '_controller' => 'App\\Controller\\RegistrationController::register'], null, null, null, false, false, null],
+            [['_route' => 'register', '_controller' => 'App\\Controller\\RegistrationController::register'], null, null, null, false, false, null],
+        ],
+        '/receive' => [[['_route' => 'receive', '_controller' => 'App\\Controller\\PaymentController::receive'], null, null, null, false, false, null]],
+        '/pay' => [[['_route' => 'pay', '_controller' => 'App\\Controller\\PaymentController::pay'], null, null, null, false, false, null]],
         '/' => [[['_route' => 'index', '_controller' => 'App\\Controller\\IndexController::index'], null, null, null, false, false, null]],
         '/login' => [[['_route' => 'login', '_controller' => 'App\\Security\\SecurityController::login'], null, null, null, false, false, null]],
         '/logout' => [[['_route' => 'logout', '_controller' => 'App\\Security\\SecurityController::logout'], null, null, null, false, false, null]],

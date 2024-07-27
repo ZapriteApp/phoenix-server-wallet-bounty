@@ -15,12 +15,16 @@ class LoginFormType extends AbstractType
     {
         $builder
         ->add('_username', EmailType::class, [
-            'label' => 'Email',
-            'attr' => ['class' => 'form-control'],
+            'attr' => [
+              'class' => 'form-control',
+              'placeholder' => 'Email'
+            ],
         ])
         ->add('_password', PasswordType::class, [
-            'label' => 'Password',
-            'attr' => ['class' => 'form-control'],
+            'attr' => [
+              'class' => 'form-control',
+              'placeholder' => 'Password'
+            ],
         ])
         ->add('submit', SubmitType::class, [
             'label' => 'Login',

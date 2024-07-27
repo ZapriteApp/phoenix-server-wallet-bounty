@@ -5,7 +5,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f8f9fa;
+    background-color: black;
 }
 
 .wrapper {
@@ -14,42 +14,72 @@ body {
 
 .sidebar {
     width: 250px;
-    background: #343a40;
+    border: 2px solid #595959;
     color: white;
     min-height: 100vh;
-    padding: 15px;
 }
 
 .sidebar-header {
     font-size: 1.5em;
     margin-bottom: 1em;
+    padding-left: 10px;
 }
 
-.sidebar ul.components {
-    padding: 0;
+.sidebar nav ul {
     list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
-.sidebar ul li {
-    padding: 10px;
-    text-align: left;
-}
-
-.sidebar ul li a {
+.sidebar nav ul li a {
     color: white;
     text-decoration: none;
+    font-size: 18px;
+    padding: 20px;
     display: block;
+    transition: background-color 0.3s;
 }
 
-.sidebar ul li a:hover {
-    background: #495057;
-    text-decoration: none;
+.sidebar nav ul li a:hover {
+    background-color: #262626;
+}
+
+.sidebar nav ul li.active {
+    background-color: #1a1a1a;
+}
+
+.sidebar nav ul li.active a {
+    color: orange;
+}
+
+.sidebar-bottom {
+    width: 250px;
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+}
+
+.sidebar nav ul li.border {
+    border-top: 1px solid #595959;
+}
+
+.sidebar nav ul li.footer {
+    text-align: left;
+    height: 100px;
+}
+
+.sidebar nav ul li.footer a {
+    padding: 50px;
+    font-size: 14px;
+}
+
+.sidebar nav ul li.footer a:hover {
+    background-color: black;
 }
 
 .content {
     flex: 1;
-    padding: 20px;
-    background: #f8f9fa;
+    background: black;
 }
 
 .container-fluid {
@@ -59,12 +89,30 @@ body {
 
 .home-container {
     padding: 20px;
+    color: white;
 }
 
 .main-title {
-    color: black;
-    font-size: 2em;
+    color: orange;
+    font-size: 2.4em;
     margin-bottom: 1em;
+}
+
+.page-title {
+    color: white;
+    font-size: 2.2em;
+    font-weight: lighter;
+    margin-bottom: 1em;
+}
+
+.sub-title {
+    color: white;
+    font-size: 1.6em;
+    font-weight: lighter;
+}
+
+.centered {
+    text-align: center;
 }
 
 .balance-title {
@@ -74,52 +122,70 @@ body {
 }
 
 .balance-bar {
-    background: #343a40;
-    padding: 10px;
+    background: #1a1a1a;
+    padding: 30px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 1em;
-    border-radius: 5px;
 }
 
 .btn-send, .btn-receive {
-    padding: 10px 20px;
+    padding: 14px 46px;
+    width: 65px;
+    text-align: center;
     border: none;
     cursor: pointer;
-    font-size: 1em;
-    border-radius: 5px;
+    font-size: 1.1em;
 }
 
 .btn-send {
-    background: white;
+    background: #ffffff;
     color: orange;
 }
 
 .btn-receive {
-    background: orange;
+    background: #ff9900;
+    color: white;
+}
+
+.btn-send:hover {
+    background: #f2f2f2;
+    color: orange;
+}
+
+.btn-receive:hover {
+    background: #e68a00;
     color: white;
 }
 
 .balance-value {
     color: white;
     font-size: 1.5em;
+    background-color: #262626;
+    padding: 10px 30px;
 }
 
 .section-title {
     color: orange;
-    font-size: 1.2em;
-    margin-top: 1em;
+    font-size: 1.5em;
+    margin-bottom: 0.5em;
+}
+
+.sub-section-title {
+    color: white;
+    font-size: 1em;
+    font-weight: lighter;
+    margin-bottom: 0.5em;
 }
 
 .copy-bar {
-    background: #343a40;
+    background: #1a1a1a;
     padding: 10px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-top: 1em;
-    border-radius: 5px;
 }
 
 .btn-copy {
@@ -127,13 +193,17 @@ body {
     border: none;
     cursor: pointer;
     font-size: 1em;
-    border-radius: 5px;
     background: white;
     color: orange;
 }
 
+.btn-copy:hover {
+    background: #f2f2f2;
+}
+
 .copy-text-11 {
     color: white;
+    padding: 20px;
     font-size: 1em;
     word-wrap: break-word; /* Pour gérer les sauts de ligne */
     word-break: break-all; /* Pour gérer les sauts de ligne */
@@ -142,17 +212,24 @@ body {
 
 .copy-text-12 {
     color: white;
+    padding: 20px;
     font-size: 1em;
     word-wrap: break-word; /* Pour gérer les sauts de ligne */
     word-break: break-all; /* Pour gérer les sauts de ligne */
     max-width: 80%; /* Limite la largeur du texte */
 }
 
+.text-overflow {
+    white-space: nowrap;
+    overflow-x: scroll;
+    border-bottom: 1px solid #ccc;
+    padding: 5px;
+}
+
 .container {
-    max-width: 600px;
     margin: 0 auto;
     padding: 20px;
-    background-color: #f9f9f9;
+    background-color: black;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
@@ -167,25 +244,40 @@ h1 {
 }
 
 .form-control {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    width: 40%;
+    padding: 15px;
+    background-color: #0d0d0d;
+    border: 2px solid #595959;
+    color: #595959;
+    font-size: 1em;
+}
+
+.form-control:hover {
+    border: 2px solid #white;
+    color: white;
+}
+
+.register-link {
+    color: white;
+    text-decoration: none;
+}
+
+.register-link:hover {
+    text-decoration: underline;
 }
 
 .btn-primary {
-    background-color: #007bff;
+    background-color: #ff9900;
     border: none;
     color: white;
-    padding: 10px 20px;
-    font-size: 16px;
+    padding: 15px 40px;
+    font-size: 18px;
     cursor: pointer;
-    border-radius: 4px;
     transition: background-color 0.3s;
 }
 
 .btn-primary:hover {
-    background-color: #0056b3;
+    background-color: #e68a00;
 }
 
 .mt-5 {
@@ -201,9 +293,8 @@ h1 {
 }
 
 .result-container {
-    background-color: #e9ecef;
-    padding: 20px;
-    border-radius: 8px;
+    border: 1px solid #595959;
+    padding: 10px;
     margin-top: 20px;
 }
 
@@ -213,18 +304,6 @@ h1 {
 
 .no-underline {
     text-decoration: none; /* Supprime le soulignement */
-}
-
-.sidebar-bottom {
-    position: absolute;
-    bottom: 0;
-    width: 230px;
-    padding: 10px;
-    text-align: center;
-}
-
-.user-info {
-    margin-bottom: 10px;
 }
 
 .btn-danger {
@@ -238,25 +317,21 @@ table {
     border-collapse: collapse;
 }
 
+table thead {
+    color: #595959;
+}
+
+table tbody {
+    color: white;
+}
+
 table, th, td {
-    border: 1px solid #ddd;
+    border-bottom: 2px solid #595959;
 }
 
 th, td {
     padding: 8px;
     text-align: left;
-}
-
-th {
-    background-color: #f2f2f2;
-}
-
-tr:nth-child(even) {
-    background-color: #f9f9f9;
-}
-
-tr:hover {
-    background-color: #f1f1f1;
 }
 
 td form {

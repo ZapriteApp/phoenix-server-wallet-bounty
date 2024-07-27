@@ -4,34 +4,16 @@
 
 {% block body %}
 <div class="home-container">
-    <h1 class="main-title">Settings</h1>
-    <h2 class="balance-title">Add API key</h2>
-    <div class="container mt-5">
-    <h1 class="mb-4">Payment Form</h1>
-    {{ form_start(form) }}
-        <div class="form-group">
-            {{ form_label(form.key) }}
-            {{ form_widget(form.key) }}
-        </div>
-        <div class="form-group">
-            {{ form_label(form.role) }}
-            {{ form_widget(form.role) }}
-        </div>
-        <div class="form-group">
-            {{ form_widget(form.submit) }}
-        </div>
-    {{ form_end(form) }}
-    
-   </div>
-   
-   <h2 class="balance-title">Existing API Keys</h2>
-    <div class="container mt-5">
+    <h1 class="page-title">Account Settings</h1>
+   <h2 class="section-title">API Keys</h2>
+   <h3 class="sub-section-title">Manage API Keys for third-party applications</h3>
+    <div class="container">
     <table>
         <thead>
             <tr>
                 <th>ID</th>
                 <th>Key</th>
-                <th>Created At</th>
+                <th>Roles</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -40,6 +22,7 @@
                 <tr>
                     <td>{{ apiKey.id }}</td>
                     <td>{{ apiKey.apikey }}</td>
+                    <td>{{ apiKey.roles }}</td>
                     <td>
                         <form method="post" action="{{ path('settings_api_keys_delete', {'id': apiKey.id}) }}" onsubmit="return confirm('Are you sure you want to delete this key?');">
                             <button type="submit">Delete</button>
@@ -49,8 +32,18 @@
             {% endfor %}
         </tbody>
     </table>
-    
    </div>
+   <h2 class="section-title">New Key</h2>
+   <div class="container">
+   {{ form_start(form) }}
+         <div class="form-group">
+             {{ form_widget(form.role) }}
+         </div>
+         <div class="form-group">
+             {{ form_widget(form.submit) }}
+         </div>
+   {{ form_end(form) }}
+
+  </div>
 </div>
 {% endblock %}
-

@@ -73,20 +73,20 @@ class __TwigTemplate_170c781133a3ad51de65002c89eab15d extends Template
 
         // line 7
         yield "<div class=\"home-container\">
-    <h1 class=\"main-title\">Home</h1>
-    <h2 class=\"balance-title\">Balance</h2>
+    <h1 class=\"page-title\">Home</h1>
+    <h2 class=\"section-title\">Balance</h2>
     <div class=\"balance-bar\">
         <a href=\"";
         // line 11
-        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("pay_invoice");
-        yield "\" class=\"btn-receive no-underline\">Send</a>
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("pay");
+        yield "\" class=\"btn-send no-underline\">Send</a>
         <span class=\"balance-value\">";
         // line 12
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["balance"]) || array_key_exists("balance", $context) ? $context["balance"] : (function () { throw new RuntimeError('Variable "balance" does not exist.', 12, $this->source); })()), "balanceSat", [], "any", false, false, false, 12), "html", null, true);
         yield "</span>
         <a href=\"";
         // line 13
-        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("create_invoice");
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("receive");
         yield "\" class=\"btn-receive no-underline\">Receive</a>
     </div>
     <h2 class=\"section-title\">Liquidity</h2>
@@ -140,12 +140,12 @@ class __TwigTemplate_170c781133a3ad51de65002c89eab15d extends Template
 
 {% block body %}
 <div class=\"home-container\">
-    <h1 class=\"main-title\">Home</h1>
-    <h2 class=\"balance-title\">Balance</h2>
+    <h1 class=\"page-title\">Home</h1>
+    <h2 class=\"section-title\">Balance</h2>
     <div class=\"balance-bar\">
-        <a href=\"{{ path('pay_invoice') }}\" class=\"btn-receive no-underline\">Send</a>
+        <a href=\"{{ path('pay') }}\" class=\"btn-send no-underline\">Send</a>
         <span class=\"balance-value\">{{ balance.balanceSat }}</span>
-        <a href=\"{{ path('create_invoice') }}\" class=\"btn-receive no-underline\">Receive</a>
+        <a href=\"{{ path('receive') }}\" class=\"btn-receive no-underline\">Receive</a>
     </div>
     <h2 class=\"section-title\">Liquidity</h2>
     <h2 class=\"section-title\">Offers</h2>
@@ -156,7 +156,6 @@ class __TwigTemplate_170c781133a3ad51de65002c89eab15d extends Template
     </div>
 </div>
 {% endblock %}
-
 ", "index.html.twig", "/var/www/symfony_docker/templates/index.html.twig");
     }
 }

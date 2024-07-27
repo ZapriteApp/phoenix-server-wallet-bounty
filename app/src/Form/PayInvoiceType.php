@@ -14,8 +14,10 @@ class PayInvoiceType extends AbstractType
     {
         $builder
         ->add('invoice', TextType::class, [
-            'label' => 'Invoice Bolt11',
-            'attr' => ['class' => 'form-control'],
+            'attr' => [
+              'class' => 'form-control',
+              'placeholder' => 'Invoice Bolt11'
+            ],
         ])
         ->add('submit', SubmitType::class, [
             'label' => 'Pay',
