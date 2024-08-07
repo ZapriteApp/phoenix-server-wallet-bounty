@@ -4,7 +4,7 @@ const cors = require('cors');
 const app = express();
 const port = 3000;
 const { Buffer } = require('buffer')
-// const fetch = require('node-fetch').fetch
+require('dotenv').config();
 const path = require('path');
 
 const corsOptions = {
@@ -16,22 +16,19 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 
-// Middleware to serve static files
-// app.use(express.static('public'));
 app.use('/public', express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
-  // res.send('Hello World');
 });
 
 app.get('/api/getbalance', async (req, res) => {
   const url = 'http://127.0.0.1:9740/getbalance';
-  const username = ''; // Username if required, otherwise leave it empty
-  const password = 'd04c7770c202ec95996fd74b89bcafc7e737c687093a945d906cfbb656115e03'; // Your password
+  const username = ''; 
+  const httpPassword = process.env.HTTP_PASSWORD;
 
   const headers = {
-    'Authorization': 'Basic ' + Buffer.from(`${username}:${password}`).toString('base64')
+    'Authorization': 'Basic ' + Buffer.from(`${username}:${httpPassword}`).toString('base64')
   
   }
 
