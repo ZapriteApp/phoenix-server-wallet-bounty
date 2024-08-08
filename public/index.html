@@ -3,20 +3,32 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lightning Wallet UI</title>
+  <title>Phoenixd Wallet</title>
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="/public/styles.css">
   <link rel="stylesheet" href="/public/bootstrap.min.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+  
   
 </head>
-<body>
+<body class="body-style">
   <div class="container">
-    <h1 class="mt-5">Lightning Wallet UI</h1>
-    <div class="balance mt-3">
-      <button class="btn btn-primary bg-success" id="fetchBalanceBtn">Get Balance</button>
-      <p id="balance">Balance: </p>
-    </div>
+    <h1 class="mt-4 h1-styling">Phoenixd Wallet</h1>
+    <p class="mt-3 welcome-message">Welcome back</p>
+    <form>
+      <div class="form-group form-placeholder">
+        <input type="password" style="color: white; width: 500px; background-color: #111111; border: 2px solid white;" class="" placeholder="Password">
+      </div>
+      <button type="submit" class="btn login-button" style="background-color: #f19528; color: white;  padding: 8px 12px;">
+        Login <i class="bi bi-box-arrow-in-right"></i>
+      </button>
+    </form>
   </div>
+  
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="https://kit.fontawesome.com/a076d05399.js"></script>
   <script src="/public/script.js"></script>
  
 </body>
