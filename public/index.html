@@ -15,11 +15,11 @@
   <div class="container">
     <h1 class="mt-4 h1-styling">Phoenixd Wallet</h1>
     <p class="mt-3 welcome-message">Welcome back</p>
-    <form>
+    <form action="/login">
       <div class="form-group form-placeholder">
         <input type="password" style="color: white; width: 500px; background-color: #111111; border: 2px solid white;" class="" placeholder="Password">
       </div>
-      <button type="submit" class="btn login-button" style="background-color: #f19528; color: white;  padding: 8px 12px;">
+      <button type="submit" class="btn login-button" id="login" style="background-color: #f19528; color: white;  padding: 8px 12px;">
         Login <i class="bi bi-box-arrow-in-right"></i>
       </button>
     </form>
@@ -28,8 +28,15 @@
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  <script src="https://kit.fontawesome.com/a076d05399.js"></script>
   <script src="/public/script.js"></script>
+
+  
+  <script>
+    document.getElementById('login').addEventListener('click', function() {
+        console.log("Login clicked")
+        window.location.href = 'public/dashboard.html'; // Replace with the path to your HTML page
+    });
+</script>
  
 </body>
 </html>

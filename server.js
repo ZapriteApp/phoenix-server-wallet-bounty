@@ -22,6 +22,12 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
+app.get('/login', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'dashboard.html'));
+});
+
+
+
 app.get('/api/getbalance', async (req, res) => {
   const url = 'http://127.0.0.1:9740/getbalance';
   const username = ''; 

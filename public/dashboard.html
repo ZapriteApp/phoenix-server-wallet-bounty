@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: black;
+            color: white;
+        }
+        .side-panel {
+            height: 100vh; /* Full height */
+            background-color: #333; /* Darker background for side panel */
+            padding: 20px;
+            border-right: 1px solid yellow; /* Border separating the panels */
+        }
+        .main-content {
+            padding: 20px;
+        }
+        .app-name {
+            font-size: 1.5rem;
+            color: yellow;
+            margin-bottom: 20px;
+        }
+        .menu-item {
+            color: yellow;
+            margin-bottom: 10px;
+            display: block;
+            text-decoration: none;
+        }
+        .menu-item:hover {
+            text-decoration: underline;
+        }
+        .logout-button {
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+        .version-icon, .sponsors-badge {
+            display: block;
+            margin-top: 20px;
+            color: yellow;
+        }
+        .row {
+            margin-bottom: 20px; /* Space between rows */
+        }
+        .row .heading {
+            font-size: 1.5rem; /* Heading size */
+            color: yellow;
+            margin-bottom: 10px; /* Space below the heading */
+        }
+        .heading-home {
+            font-size: 2rem; /* Larger heading size for Home */
+            color: yellow;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Side Panel -->
+            <div class="col-md-3 side-panel">
+                <div class="app-name">My App</div>
+                <a href="#" class="menu-item">Option 1</a>
+                <a href="#" class="menu-item">Option 2</a>
+                <a href="#" class="menu-item">Option 3</a>
+                <button class="logout-button">Logout</button>
+                <div class="version-icon">Version 1.0.0</div>
+                <div class="sponsors-badge">Sponsors</div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-md-9 main-content">
+                <div class="heading-home">Home</div>
+                <div class="row">
+                    <div class="col">
+                        <div class="heading">Heading 1</div>
+                        <p>Content for the first section.</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="heading">Heading 2</div>
+                        <p>Content for the second section.</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="heading">Heading 3</div>
+                        <p>Content for the third section.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
