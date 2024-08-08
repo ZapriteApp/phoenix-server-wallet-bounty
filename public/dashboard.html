@@ -62,19 +62,56 @@
             margin-bottom: 20px;
         }
     </style>
+
+
+<style>
+    /* Modal styles */
+    .modal {
+        display: none; /* Hidden by default */
+        position: fixed;
+        z-index: 1; /* Sit on top */
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgba(0,0,0,0.5); /* Black with opacity */
+        padding-top: 60px;
+    }
+    .modal-content {
+        background-color: #fff;
+        margin: 5% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%; /* Could be more or less, depending on screen size */
+        text-align: center;
+    }
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+</style>
 </head>
 <body>
     <div class="container-fluid">
         <div class="row">
             <!-- Side Panel -->
             <div class="col-md-3 side-panel">
-                <div class="app-name">My App</div>
-                <a href="#" class="menu-item">Option 1</a>
-                <a href="#" class="menu-item">Option 2</a>
-                <a href="#" class="menu-item">Option 3</a>
-                <button class="logout-button">Logout</button>
+                <div class="app-name">Phoenixd Wallet</div>
+                <a href="#" class="menu-item">Dashboard</a>
+                <a href="#" class="menu-item">Transactions</a>
+                <a href="#" class="menu-item">Contacts</a>
+                <button class="logout-button">Log out</button>
                 <div class="version-icon">Version 1.0.0</div>
-                <div class="sponsors-badge">Sponsors</div>
+                <div class="sponsors-badge"></div>
             </div>
 
             <!-- Main Content -->
@@ -82,26 +119,61 @@
                 <div class="heading-home">Home</div>
                 <div class="row">
                     <div class="col">
-                        <div class="heading">Heading 1</div>
-                        <p>Content for the first section.</p>
+                        <div class="heading">Balance</div>
+                        <p>Balance</p><p class="balance"></p>
+                        <button id="sendButton">Send -></button>
+                        <button id="receiveButton">Recieve </button>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col">
-                        <div class="heading">Heading 2</div>
-                        <p>Content for the second section.</p>
+                        <div class="heading">Liquidity</div>
+                        <p>Outbound</p><p class="outbound"></p>
+                        <p>Acinq</p><p class="acinq"></p>
+
+                        <p>Inbound</p><p class="inbound"></p>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col">
-                        <div class="heading">Heading 3</div>
-                        <p>Content for the third section.</p>
+                        <div class="heading">Offers</div>
+                        <p>This is your node's Bolt12 offer. A static and reusable payment request that does not expire</p>
+                        <p></p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
+    <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <h2>Select an Option</h2>
+          <form id="">
+            
+            <select id="options" name="option">
+                <option value="optionA">Option A</option>
+                <option value="optionB">Option B</option>
+                <option value="optionC">Option C</option>
+            </select>
+
+              <button type="button" id="submitOption">Submit</button>
+          </form>
+        </div>
+      
+      </div>
+
+      <p id="selectedOption"></p>
+
+    <!-- <script>
+        document.getElementById('alertButton').addEventListener('click', function() {
+            alert('Hello! This is an alert message.');
+        });
+    </script> -->
+
+    <script src="/public/script.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
