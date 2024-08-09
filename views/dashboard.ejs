@@ -106,7 +106,7 @@
             <!-- Side Panel -->
             <div class="col-md-3 side-panel">
                 <div class="app-name">Phoenixd Wallet</div>
-                <a href="#" class="menu-item" id="dashboard">Dashboard</a>
+                <a href="#" class="menu-item" id="home">Dashboard</a>
                 <a href="#" class="menu-item" id="transactions">Transactions</a>
                 <a href="#" class="menu-item">Contacts</a>
                 <button class="logout-button">Log out</button>
@@ -116,31 +116,7 @@
 
             <!-- Main Content -->
             <div class="col-md-9 main-content" id="rightPanel">
-                <div class="heading-home">Home</div>
-                <div class="row">
-                    <div class="col">
-                        <div class="heading">Balance</div>
-                        <p>Balance</p><p class="balance"></p>
-                        <button id="sendButton">Send -></button>
-                        <button id="receiveButton">Recieve </button>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <div class="heading">Liquidity</div>
-                        <p>Outbound</p><p class="outbound"></p>
-                        <p>Acinq</p><p class="acinq"></p>
-
-                        <p>Inbound</p><p class="inbound"></p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <div class="heading">Offers</div>
-                        <p>This is your node's Bolt12 offer. A static and reusable payment request that does not expire</p>
-                        <p></p>
-                    </div>
-                </div>
+                <%- include('partials/home') %>
             </div>
         </div>
     </div>

@@ -13,8 +13,13 @@ const corsOptions = {
   allowedHeaders: 'Content-Type,Authorization'
 };
 
+app.set('view engine', 'ejs');
+
+app.set('views', path.join(__dirname, 'views'));
+
 app.use(cors(corsOptions));
 
+app.use('/views', express.static(path.join(__dirname, 'views')));
 
 app.use('/public', express.static(path.join(__dirname, 'public')));
 
@@ -22,8 +27,8 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-app.get('/login', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'dashboard.html'));
+app.get('/home', (req, res) => {
+  res.render('dashboard');
 });
 
 

@@ -1,6 +1,21 @@
-// document.getElementById('login').addEventListener('click', function() {
-//   window.location.href = 'public/dashboard.html';
-// });
+
+document.getElementById('home').addEventListener('click', function() {
+  fetch('views/partials/home.ejs')
+  .then(response => response.text())
+  .then(html => {
+      document.getElementById('rightPanel').innerHTML = html;
+  })
+  .catch(error => console.error('Error loading partial:', error));
+});
+
+document.getElementById('transactions').addEventListener('click', function() {
+  fetch('views/partials/transactions.ejs')
+  .then(response => response.text())
+  .then(html => {
+      document.getElementById('rightPanel').innerHTML = html;
+  })
+  .catch(error => console.error('Error loading partial:', error));
+});
 
 // function getBalance(){
 //   fetch('/api/getbalance')
@@ -31,13 +46,13 @@
 
 sendButton = document.getElementById("sendButton")
 receiveButton = document.getElementById("receiveButton")
+rightPanel = document.getElementById("rightPanel")
+transactions = document.getElementById("transactions")
+transactions = document.getElementById("transactions")
 
-// alertButton.addEventListener('click', function() {
-//   alert('You clicked receive button');
-// });
 
 receiveButton.addEventListener('click', function() {
-  alert('You clicked send button');
+  alert('You clicked recieve button');
 });
 
 
@@ -67,6 +82,20 @@ window.onclick = function(event) {
   }
 }
 
+document.querySelectorAll('.load-partial').forEach(link => {
+  link.addEventListener('click', function(event) {
+      event.preventDefault();
+      const url = this.getAttribute('href');
+
+      fetch(url)
+          .then(response => response.text())
+          .then(data => {
+              document.getElementById('partialContainer').innerHTML = data;
+          })
+          .catch(error => console.error('Error loading partial:', error));
+  });
+});
+
 // Handle the radio button selection
 document.getElementById('submitOption').addEventListener('click', function() {
   var selectedOption = document.getElementById('options').value;
@@ -78,6 +107,29 @@ document.getElementById('submitOption').addEventListener('click', function() {
     }
     modal.style.display = "none"; // Close the modal
 })
-    
+
+// document.getElementById('transactions').addEventListener('click', function(event) {
+//   event.preventDefault();
+//   console.log("Clicked transactions")
+//   // fetch('views/partials/transactions.ejs')
+//   // .then(response => response.text())
+//   // .then(data => {
+//   //   document.getElementById("rightPanel").innerHTML =data;
+//   // })
+//   // .catch(error => console.error('Error loading partial view:', error));
+//   rightPanel.innerHTML = '<h1>You clicked transctions</h1>';
+// })
+
+
+function loadPartial(url) {
+  fetch(url)
+      .then(response => response.text())
+      .then(data => {
+          document.getElementById('content').innerHTML = data;
+      })
+      .catch(error => console.error('Error loading partial:', error));
+}
+
+
 
   
