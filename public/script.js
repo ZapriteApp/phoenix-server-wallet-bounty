@@ -27,6 +27,25 @@ $(document).ready(function () {
 });
 
 
+$(document).ready(function () {
+  let balance;
+  fetch('/api/get-balance')
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok ' + response.statusText);
+      }
+      return response.json();
+    })
+    .then(data => {
+      // document.getElementsByClassName('.balance').innerText = data.balanceSat;
+      $('.balance').html(`Balance: ${data.balanceSat} sats`);
+      console.log(data)
+    })
+    .catch(error => {
+      console.error('Error fetching balance:', error);
+    });
+});
+
 
 
 // document.getElementById('home').addEventListener('click', function() {
@@ -114,16 +133,16 @@ $(document).ready(function () {
   // Get the <span> element that closes the modal
   var $span = $(".close").first();
 
-  $(".main-content").on("click", '#receiveButton', function(){
+  $(".main-content").on("click", '#receiveButton', function () {
     alert('Receive sats button');
   })
 
   // When the user clicks the button, open the modal
-  $(".main-content").on("click", '#sendButton', function(){
+  $(".main-content").on("click", '#sendButton', function () {
     $modal.show();
   })
 
-  
+
 
   // When the user clicks on <span> (x), close the modal
   $span.on("click", function () {
@@ -217,6 +236,5 @@ function loadPartial(url) {
     })
     .catch(error => console.error('Error loading partial:', error));
 }
-
 
 
