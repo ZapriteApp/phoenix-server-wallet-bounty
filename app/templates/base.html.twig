@@ -1,0 +1,58 @@
+{# templates/base.html.twig #}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Dashboard{% endblock %}</title>
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    {% block stylesheets %}{% endblock %}
+    {% block javascripts %}
+    {# templates/base.html.twig ou un fichier JavaScript séparé #}
+  <script src="{{ asset('js/qrcode.js') }}"></script>
+  <script src="{{ asset('js/show_qr.js') }}"></script>
+	<script>
+	function copyToClipboard(to_copy) {
+	    const copyText = document.querySelector(to_copy).innerText;
+	    navigator.clipboard.writeText(copyText).then(() => {
+		alert('Text copied to clipboard');
+	    }).catch(err => {
+		alert('Failed to copy text: ', err);
+	    });
+	}
+	</script>
+    {% endblock %}
+</head>
+<body>
+    <div class="wrapper">
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h3>Sample Wallet</h3>
+            </div>
+            <nav>
+               <ul>
+                   <li class="{% if app.request.get('_route') == 'index' %}active{% endif %}"><a href="{{ path('index') }}">Dashboard</a></li>
+                   <li class="{% if app.request.get('_route') == 'app_history' %}active{% endif %}"><a href="{{ path('history') }}">Transactions</a></li>
+                   <li class="{% if app.request.get('_route') == 'app_settings' %}active{% endif %}"><a href="{{ path('app_settings') }}">Settings</a></li>
+               </ul>
+           </nav>
+            <div class="sidebar-bottom">
+                {% if app.user %}
+                    <nav>
+                      <ul>
+                        <li class="border"><a>{{ app.user.email }}</a></li>
+                        <li class="border"><a href="{{ path('logout') }}">Logout</a></li>
+                        <li class="border footer"><a href="https://github.com/djahwork/phoenix-server-wallet-bounty">Version 0.1.0 Github</a></li>
+                    </ul>
+                  </nav>
+                {% endif %}
+            </div>
+        </nav>
+
+        <div class="content">
+            <div class="container-fluid">
+                {% block body %}{% endblock %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

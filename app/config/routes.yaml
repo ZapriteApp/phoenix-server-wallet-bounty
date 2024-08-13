@@ -1,0 +1,36 @@
+controllers:
+    resource:
+        path: ../src/Controller/
+        namespace: App\Controller
+    type: attribute
+
+receive:
+    path: /receive
+    controller: App\Controller\PaymentController::receive
+pay:
+    path: /pay
+    controller: App\Controller\PaymentController::pay
+index:
+    path: /
+    controller: App\Controller\IndexController::index
+history:
+    path: /history
+    controller: App\Controller\HistoryController::history
+login:
+    path: /login
+    controller: App\Security\SecurityController::login
+logout:
+    path: /logout
+    controller: App\Security\SecurityController::logout
+app_settings:
+    path: /settings
+    controller: App\Controller\SettingsController::index
+register:
+    path: /register
+    controller: App\Controller\RegistrationController::register
+app_contact:
+    path: /contacts
+    controller: App\Controller\ContactsController::contacts
+api_index:
+    path: /api
+    controller: App\Security\APIController::index
