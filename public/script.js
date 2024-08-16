@@ -116,9 +116,24 @@ $(document).ready(function () {
     //   $("#selectedOption").text('No option selected.');
     // }
 
-    var invoice = $("#requestInvoice").val();
+    const invoice = $("#requestInvoice").val();
+    const amountSat=50;
     console.log(invoice)
-    $modal2.find("input").val("");
+    console.log(amountSat)
+
+    fetch('/api/pay-invoice', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ amountSat, invoice })
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok ' + response.statusText);
+      }
+      console.log(response.json());
+    })
     
     $modal2.hide();
     $modal3.show(); // Close the modal
