@@ -65,7 +65,7 @@ $(document).ready(function () {
   $(".close").on("click", function () {
     var modalId = $(this).data('modal');
     $("#" + modalId).hide();
-});
+  });
 
   $(".main-content").on("click", '#receiveButton', function () {
     alert('Receive sats button');
@@ -95,13 +95,14 @@ $(document).ready(function () {
 
   $("#myModal1").on("click", "#submitOption", function () {
     console.log("Submit clicked")
-    // var selectedOption = $("#options").val();
-    // if (selectedOption) {
-    //   $("#selectedOption").text('You selected: ' + selectedOption);
-    // } else {
-    //   $("#selectedOption").text('No option selected.');
-    // }
+    var selectedOption = $("#options").val();
+    if (selectedOption) {
+        console.log(selectedOption)
+    } else {
+      $("#selectedOption").text('No option selected.');
+    }
     $modal1.hide();
+    
     $modal2.show(); // Close the modal
   });
 
@@ -114,6 +115,11 @@ $(document).ready(function () {
     // } else {
     //   $("#selectedOption").text('No option selected.');
     // }
+
+    var invoice = $("#requestInvoice").val();
+    console.log(invoice)
+    $modal2.find("input").val("");
+    
     $modal2.hide();
     $modal3.show(); // Close the modal
   });
