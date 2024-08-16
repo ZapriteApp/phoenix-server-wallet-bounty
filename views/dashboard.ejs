@@ -8,6 +8,7 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 
+
     <style>
         body {
             background-color: black;
@@ -132,6 +133,8 @@
             cursor: pointer;
         }
     </style>
+    <link rel="stylesheet" href="public/font-awesome-4.7.0/css/font-awesome.min.css">
+
 </head>
 
 <body>
@@ -164,9 +167,9 @@
             <form id="">
 
                 <select id="options" name="option">
-                    <option value="optionA">Contact</option>
-                    <option value="optionB">Invoice</option>
-                    <option value="optionC">Offer</option>
+                    <option value="contact">Contact</option>
+                    <option value="invoice">Invoice</option>
+                    <option value="offer">Offer</option>
                 </select>
                 <button type="button" id="submitOption">Submit</button>
             </form>
@@ -179,16 +182,24 @@
         <div class="modal-content">
             <span class="close" data-modal="myModal2">&times;</span>
             <h2>Payment type</h2>
-            <button type="button" id="submitOption2">Submit</button>
+            <form>
+                <div class="form-group">
+                    <label for="requestInvoice">Enter Request Invoice:</label>
+                    <input type="text" id="requestInvoice" name="requestInvoice" class="form-control"
+                        placeholder="Enter Request Invoice ">
+                </div>
+            </form>
+            <button class="btn btn-primary" type="button" id="submitOption2">Submit</button>
         </div>
     </div>
 
-      <!-- Third Modal -->
-      <div id="myModal3" class="modal">
+    <!-- Third Modal -->
+    <div id="myModal3" class="modal">
         <div class="modal-content">
-            <span class="close" data-modal="myModal2">&times;</span>
+            <span class="close" data-modal="myModal3">&times;</span>
             <h2>Success</h2>
-            <button type="button" id="submitOption3">Submit</button>
+            <i class="fa fa-check fa-5x text-primary" aria-hidden="true" ></i>
+            <button class="btn btn-primary"  type="button" id="submitOption3">Submit</button>
         </div>
     </div>
 
