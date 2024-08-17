@@ -109,17 +109,11 @@ $(document).ready(function () {
 
   $("#myModal2").on("click", "#submitOption2", function () {
     console.log("Submit clicked")
-    // var selectedOption = $("#options").val();
-    // if (selectedOption) {
-    //   $("#selectedOption").text('You selected: ' + selectedOption);
-    // } else {
-    //   $("#selectedOption").text('No option selected.');
-    // }
-
     const invoice = $("#requestInvoice").val();
     const amountSat=50;
-    console.log(invoice)
-    console.log(amountSat)
+    console.log(invoice);
+    console.log(amountSat);
+    $("#requestInvoice").val(" ");
 
     fetch('/api/pay-invoice', {
       method: 'POST',
@@ -141,12 +135,6 @@ $(document).ready(function () {
 
   $("#myModal3").on("click", "#submitOption3", function () {
     console.log("Submit clicked")
-    // var selectedOption = $("#options").val();
-    // if (selectedOption) {
-    //   $("#selectedOption").text('You selected: ' + selectedOption);
-    // } else {
-    //   $("#selectedOption").text('No option selected.');
-    // }
     $modal3.hide(); // Close the modal
   });
 
