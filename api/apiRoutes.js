@@ -8,7 +8,7 @@ router.get('/get-balance', async (req, res) => {
         res.json(data);
     }
     catch(error) {
-        res.status(500).json({ message: 'Error retreving data'});
+        res.status(500).json({ message: 'Error retreving balance'});
     }
 })
 
@@ -21,5 +21,15 @@ router.post('/pay-invoice', async(req, res) => {
         res.status(500).json({message: 'Error paying invoice'});
     }
 })
+
+router.get('/get-node-info', async(req, res) => {
+    try {
+        const data = await apService.getNodeInfo();
+        res.json(data);
+    }catch(error) {
+        res.status(500).json({message: 'Error paying getting node information'});
+    }
+})
+
 
 module.exports = router;

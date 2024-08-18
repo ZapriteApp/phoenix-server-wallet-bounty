@@ -37,7 +37,6 @@ $(document).ready(function () {
       return response.json();
     })
     .then(data => {
-      // document.getElementsByClassName('.balance').innerText = data.balanceSat;
       $('.balance').html(`Balance: ${data.balanceSat} sats`);
     })
     .catch(error => {
@@ -45,11 +44,28 @@ $(document).ready(function () {
     });
 });
 
-sendButton = document.getElementById("sendButton")
-receiveButton = document.getElementById("receiveButton")
-rightPanel = document.getElementById("rightPanel")
-transactions = document.getElementById("transactions")
-transactions = document.getElementById("transactions")
+$(document).ready(function () {
+  fetch('/api/get-node-info')
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok ' + response.statusText);
+      }
+      return response.json();
+    })
+    .then(data => {
+      inboundLiquiditySat = data.channels[0].inboundLiquiditySat;
+      capacitySat = data.channels[0].capacitySat;
+      balanceSat = data.channels[0].balanceSat;
+
+      $('.inbound').html(`${inboundLiquiditySat} sats`);
+      $('.acinq').html(`${capacitySat} sats`);
+      $('.outbound').html(`${balanceSat} sats`);
+    })
+    .catch(error => {
+      console.error('Error fetching balance:', error);
+    });
+});
+
 
 $(document).ready(function () {
   var $modal1 = $("#myModal1");

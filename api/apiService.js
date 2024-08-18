@@ -9,7 +9,7 @@ const headers = {
 };
 
 const getBalance = async () => {
-  path = '/getbalance'
+  path = '/getbalance';
   url = new URL(path, baseUrl).href;
   try {
     const response = await axios.get(url, { headers });
@@ -38,4 +38,16 @@ const payInvoice = async (amountSat, invoice) => {
   }
 }
 
-module.exports = { getBalance, payInvoice };
+const getNodeInfo = async () => {
+  path = '/getinfo';
+  url = new URL(path, baseUrl).href;
+  try {
+    const response = await axios.get(url, { headers });
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching data', error);
+    throw error;
+  }
+}
+
+module.exports = { getBalance, payInvoice, getNodeInfo};
