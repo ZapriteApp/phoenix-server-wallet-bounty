@@ -61,7 +61,7 @@ const createInvoice = async (description, amountSat, externalId, webhookUrl) => 
   data.append('webhookUrl', webhookUrl);
 
   try{
-    const response = await axios.post(url, { headers });
+    const response = await axios.post(url, data.toString(), { headers });
     return response.data
   }catch(error){
     console.error('Error creating invoice:', error );

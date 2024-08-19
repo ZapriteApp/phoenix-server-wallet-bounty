@@ -186,21 +186,36 @@ $(document).ready(function () {
 
   $("#paymentRequestModal").on("click", "#nextToSharePaymentRequest", function () {
     console.log("Next to share payment button clicked")
-    var requestInvoiceAmount = $("#requestInvoiceAmount").val();
+    var amountSat = parseInt($("#requestInvoiceAmount").val());
     var requestInvoiceName = $("#requestInvoiceName").val();
     var requestInvoiceDescription = $("#requestInvoiceDescription").val();
+    const description = `${requestInvoiceName} - ${requestInvoiceDescription}`
+    const webhookUrl = '';
+    const externalId = '';
 
-    console.log(requestInvoiceAmount);
-    console.log(requestInvoiceName);
-    console.log(requestInvoiceDescription);
-    // if (selectedOption) {
-    //     console.log(selectedOption)
-    // } else {
-    //   $("#selectedOption").text('No option selected.');
-    // }
-    $paymentRequestModal.hide();
+    console.log(amountSat);
+    console.log(description);
+
+    fetch('/api/create-invoice', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ description, amountSat, externalId, webhookUrl})
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok ' + response);
+      }
+      return response.json();
+    }).then(data => {
+      $paymentRequestModal.hide();
+      $('.invoice').html(`${data.serialized}`);    
+      $sharePaymentRequestModal.show();
+      console.log(data);
+    })
+
     
-    $sharePaymentRequestModal.show(); // Close the modal
   });
 
   $("#paymentRequestModal").on("click", "#cancelPaymentRequest", function () {
