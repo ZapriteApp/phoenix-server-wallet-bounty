@@ -160,7 +160,7 @@
 
     <div id="myModal1" class="modal">
 
-        <!-- Modal content -->
+        <!-- Payment type modal -->
         <div class="modal-content">
             <span class="close">&times;</span>
             <h2>Payment type</h2>
@@ -177,7 +177,7 @@
 
     </div>
 
-    <!-- Second Modal -->
+    <!-- Input payment invoice modal -->
     <div id="myModal2" class="modal">
         <div class="modal-content">
             <span class="close" data-modal="myModal2">&times;</span>
@@ -193,15 +193,54 @@
         </div>
     </div>
 
-    <!-- Third Modal -->
+    <!-- Success Modal -->
     <div id="myModal3" class="modal">
         <div class="modal-content">
             <span class="close" data-modal="myModal3">&times;</span>
             <h2>Success</h2>
-            <i class="fa fa-check fa-5x text-primary" aria-hidden="true" ></i>
-            <button class="btn btn-primary"  type="button" id="submitOption3">Submit</button>
+            <i class="fa fa-check fa-5x text-primary" aria-hidden="true"></i>
+            <button class="btn btn-primary" type="button" id="submitOption3">Submit</button>
         </div>
     </div>
+
+    <!-- Payment request modal-->
+    <div id="paymentRequestModal" class="modal">
+        <div class="modal-content">
+            <span class="close" data-modal="paymentRequestModal">&times;</span>
+            <h2>Payment request</h2>
+            <form>
+                <div class="form-group">
+                    <label for="requestInvoice">Amount</label>
+                    <input type="text" id="requestInvoice" name="requestInvoice" class="form-control"
+                        placeholder="00000">
+                    <label for="requestInvoice">Your name(Optional)</label>
+                    <input type="text" id="requestInvoice" name="Satoshi" class="form-control"
+                        placeholder="Enter Request Invoice ">
+                    <label for="requestInvoice">Desription</label>
+                    <input type="text" id="requestInvoice" name="requestInvoice" class="form-control"
+                        placeholder="Sample description">
+                </div>
+            </form>
+            <div>
+                <button class="btn btn-primary" type="button" id="cancelPaymentRequest">Cancel</button>
+                <button class="btn btn-primary" type="button" id="nextToSharePaymentRequest">Next</button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Share payment request Modal -->
+    <div id="sharePaymentRequestModal" class="modal">
+        <div class="modal-content">
+            <span class="close" data-modal="sharePaymentRequestModal">&times;</span>
+            <h2>Share Payment Request</h2>
+            <i class="fa fa-barcode fa-5x text-primary" aria-hidden="true"></i>
+            <p class="invoice">lnbc500n1pntlrs3pp5pgq0eumuz5udush6w6tg0ujuu4e2x32k2x4r886khn237pj4nk5qdpcge6ku</p>
+            <button class="btn btn-primary" type="button" id="closeSharePaymentRequest">Close</button>
+            <button class="btn btn-primary" type="button" id="doneSharePaymentRequest">Done</button>
+        </div>
+    </div>
+
 
     <p id="selectedOption"></p>
     <script src="/public/script.js"></script>

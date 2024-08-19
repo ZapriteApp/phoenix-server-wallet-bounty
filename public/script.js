@@ -83,10 +83,6 @@ $(document).ready(function () {
     $("#" + modalId).hide();
   });
 
-  $(".main-content").on("click", '#receiveButton', function () {
-    alert('Receive sats button');
-  })
-
   // When the user clicks the button, open the modal
   $(".main-content").on("click", '#sendButton', function () {
     $modal1.show();
@@ -152,6 +148,109 @@ $(document).ready(function () {
   $("#myModal3").on("click", "#submitOption3", function () {
     console.log("Submit clicked")
     $modal3.hide(); // Close the modal
+  });
+
+
+})
+
+$(document).ready(function () {
+  // Get the button that opens the modal
+  var $paymentRequestModal = $("#paymentRequestModal");
+  var $sharePaymentRequestModal = $("#sharePaymentRequestModal");
+
+  // Get the <span> element that closes the modal
+  var $span = $(".close").first();
+  $(".close").on("click", function () {
+    var modalId = $(this).data('modal');
+    $("#" + modalId).hide();
+  });
+
+  $(".main-content").on("click", '#receiveButton', function () {
+    $paymentRequestModal.show();
+  })
+
+  // When the user clicks on <span> (x), close the modal
+  $span.on("click", function () {
+    $paymentRequestModal.hide();
+  });
+
+
+  // When the user clicks anywhere outside of the modal, close it
+  $(window).on("click", function (event) {
+    if ($(event.target).is($paymentRequestModal)) {
+      $paymentRequestModal.hide();
+    }
+  });
+
+
+
+  $("#paymentRequestModal").on("click", "#nextToSharePaymentRequest", function () {
+    console.log("Submit clicked")
+    // var selectedOption = $("#options").val();
+    // if (selectedOption) {
+    //     console.log(selectedOption)
+    // } else {
+    //   $("#selectedOption").text('No option selected.');
+    // }
+    $paymentRequestModal.hide();
+    
+    $sharePaymentRequestModal.show(); // Close the modal
+  });
+
+  $("#paymentRequestModal").on("click", "#cancelPaymentRequest", function () {
+    console.log("Submit clicked");
+    $paymentRequestModal.hide();
+  });
+
+  $("#myModal2").on("click", "#submitOption2", function () {
+    console.log("Submit clicked")
+    const invoice = $("#requestInvoice").val();
+    const amountSat=50;
+    console.log(invoice);
+    console.log(amountSat);
+    $("#requestInvoice").val(" ");
+
+    fetch('/api/pay-invoice', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ amountSat, invoice })
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok ' + response.statusText);
+      }
+      console.log(response.json());
+    })
+    
+    $modal2.hide();
+    $modal3.show(); // Close the modal
+  });
+
+  $("#myModal3").on("click", "#submitOption3", function () {
+    console.log("Submit clicked")
+    $modal3.hide(); // Close the modal
+  });
+
+  $('#sharePaymentRequestModal').on('click', '#doneSharePaymentRequest', function () {
+    $sharePaymentRequestModal.hide();
+    $.ajax({
+      url: 'views/partials/transactions.ejs',
+      method: 'GET',
+      success: function (html) {
+        $('#rightPanel').html(html);
+      },
+      error: function (xhr, status, error) {
+        console.error('Error loading partial:', error);
+      }
+    });
+  });
+
+
+  $("#sharePaymentRequestModal").on("click", "#closeSharePaymentRequest", function () {
+    console.log("Share Payment Request Modal closed")
+    $sharePaymentRequestModal.hide(); 
   });
 
 
