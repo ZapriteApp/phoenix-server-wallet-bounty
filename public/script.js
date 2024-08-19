@@ -186,7 +186,13 @@ $(document).ready(function () {
 
   $("#paymentRequestModal").on("click", "#nextToSharePaymentRequest", function () {
     console.log("Submit clicked")
-    // var selectedOption = $("#options").val();
+    var requestInvoiceAmount = $("#requestInvoiceAmount").val();
+    var requestInvoiceName = $("#requestInvoiceName").val();
+    var requestInvoiceDescription = $("#requestInvoiceDescription").val();
+
+    console.log(requestInvoiceAmount);
+    console.log(requestInvoiceName);
+    console.log(requestInvoiceDescription);
     // if (selectedOption) {
     //     console.log(selectedOption)
     // } else {
