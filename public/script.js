@@ -185,7 +185,7 @@ $(document).ready(function () {
 
 
   $("#paymentRequestModal").on("click", "#nextToSharePaymentRequest", function () {
-    console.log("Submit clicked")
+    console.log("Next to share payment button clicked")
     var requestInvoiceAmount = $("#requestInvoiceAmount").val();
     var requestInvoiceName = $("#requestInvoiceName").val();
     var requestInvoiceDescription = $("#requestInvoiceDescription").val();

@@ -31,5 +31,15 @@ router.get('/get-node-info', async(req, res) => {
     }
 })
 
+router.post('/create-invoice', async(req, res) => {
+    const { description, amountSat, externalId, webhookUrl } = req.body;
+    try {
+        const data = await apService.payInvoice(description, amountSat, externalId, webhookUrl);
+        res.json(data);
+    }catch(error) {
+        res.status(500).json({message: 'Error paying invoice'});
+    }
+})
+
 
 module.exports = router;

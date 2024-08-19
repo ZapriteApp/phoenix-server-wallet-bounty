@@ -50,4 +50,22 @@ const getNodeInfo = async () => {
   }
 }
 
-module.exports = { getBalance, payInvoice, getNodeInfo};
+const createInvoice = async (description, amountSat, externalId, webhookUrl) => {
+  path = '/createinvoice';
+  url = new URL(path, baseUrl).href;
+
+  const data = new URLSearchParams();
+  data.append('description', description);
+  data.append('amountSat', amountSat);
+  data.append('extranlID', externalId);
+  data.append('webhookUrl', webhookUrl);
+
+  try{
+    const response = await axios.post(url, { headers });
+    return response.data
+  }catch(error){
+    console.error('Error creating invoice:', error );
+  }
+}
+
+module.exports = { getBalance, payInvoice, getNodeInfo, createInvoice};
