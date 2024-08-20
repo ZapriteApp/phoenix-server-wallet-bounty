@@ -41,5 +41,25 @@ router.post('/create-invoice', async(req, res) => {
     }
 })
 
+router.get('/outgoing-payments', async(req, res) => {
+    const { from, to, limit, offset, all } = req.body;
+    try {
+        const data = await apService.getOutgoingPayments(from, to, limit, offset, all);
+        res.json(data);
+    }catch(error) {
+        res.status(500).json({message: 'Error fetching payments'});
+    }
+})
+
+router.get('/incoming-payments', async(req, res) => {
+    const { from, to, limit, offset, all } = req.body;
+    try {
+        const data = await apService.getIncomingPayments(from, to, limit, offset, all);
+        res.json(data);
+    }catch(error) {
+        res.status(500).json({message: 'Error fetching payments'});
+    }
+})
+
 
 module.exports = router;

@@ -31,8 +31,8 @@ const payInvoice = async (amountSat, invoice) => {
   try {
     const response = await axios.post(url, data.toString(), { headers });
     return response.data;
-    
-  }catch(error) {
+
+  } catch (error) {
     console.error("Error paying invoice", error)
     throw error
   }
@@ -60,12 +60,57 @@ const createInvoice = async (description, amountSat, externalId, webhookUrl) => 
   data.append('extranlID', externalId);
   data.append('webhookUrl', webhookUrl);
 
-  try{
+  try {
     const response = await axios.post(url, data.toString(), { headers });
     return response.data
-  }catch(error){
-    console.error('Error creating invoice:', error );
+  } catch (error) {
+    console.error('Error creating invoice:', error);
   }
 }
 
-module.exports = { getBalance, payInvoice, getNodeInfo, createInvoice};
+const getIncomingPayments = async (from, to, limit, offset, all) => {
+  path = '/payments/incoming';
+  url = new URL(path, baseUrl).href;
+
+  const params = {
+    from: from,
+    to: to,
+    limit: limit,
+    offset: offset,
+    all: all
+  }
+
+  try {
+    const response = await axios.get(url, {  params, headers });
+    return response.data
+  } catch (error) {
+    console.error('Error fetching payments:', error);
+  }
+}
+
+
+const getOutgoingPayments = async (from, to, limit, offset, all) => {
+  path = '/payments/outgoing';
+  url = new URL(path, baseUrl).href;
+  const params = {
+    from: from,
+    to: to,
+    limit: limit,
+    offset: offset,
+    all: all
+  }
+
+  try {
+    const response = await axios.get(url, {  params, headers });
+    return response.data
+  } catch (error) {
+    console.error('Error fetching payments:', error);
+  }
+
+}
+
+
+module.exports = {
+  getBalance, payInvoice, getNodeInfo, createInvoice,
+  getIncomingPayments, getOutgoingPayments
+};
