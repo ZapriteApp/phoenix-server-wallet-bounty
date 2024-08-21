@@ -112,8 +112,24 @@ const getOutgoingPayments = async (from, to, limit, offset, all) => {
 
 }
 
+const payOffer = async (amountSat, offer, message) => {
+  const path = '/payoffer';
+  const url = new URL(path, baseUrl).href;
+
+  const data = new URLSearchParams();
+  data.append('amountSat', amountSat);
+  data.append('offer', offer);
+  data.append('message', message);
+
+  try {
+    const response = await axios.post(url, data.toString(), { headers });
+    return response.data;
+  } catch (error) {
+    console.error('Error paying offer:', error);
+  }
+};
 
 module.exports = {
   getBalance, payInvoice, getNodeInfo, createInvoice,
-  getIncomingPayments, getOutgoingPayments
+  getIncomingPayments, getOutgoingPayments, payOffer
 };

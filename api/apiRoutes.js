@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const apService = require('./apiService');
+const apiService = require('./apiService');
 
 router.get('/get-balance', async (req, res) => {
     try  {
-        const data = await apService.getBalance();
+        const data = await apiService.getBalance();
         res.json(data);
     }
     catch(error) {
@@ -15,7 +15,7 @@ router.get('/get-balance', async (req, res) => {
 router.post('/pay-invoice', async(req, res) => {
     const { amountSat, invoice } = req.body;
     try {
-        const data = await apService.payInvoice(amountSat, invoice);
+        const data = await apiService.payInvoice(amountSat, invoice);
         res.json(data);
     }catch(error) {
         res.status(500).json({message: 'Error paying invoice'});
@@ -24,7 +24,7 @@ router.post('/pay-invoice', async(req, res) => {
 
 router.get('/get-node-info', async(req, res) => {
     try {
-        const data = await apService.getNodeInfo();
+        const data = await apiService.getNodeInfo();
         res.json(data);
     }catch(error) {
         res.status(500).json({message: 'Error paying getting node information'});
@@ -34,7 +34,7 @@ router.get('/get-node-info', async(req, res) => {
 router.post('/create-invoice', async(req, res) => {
     const { description, amountSat, externalId, webhookUrl } = req.body;
     try {
-        const data = await apService.createInvoice(description, amountSat, externalId, webhookUrl);
+        const data = await apiService.createInvoice(description, amountSat, externalId, webhookUrl);
         res.json(data);
     }catch(error) {
         res.status(500).json({message: 'Error paying invoice'});
@@ -44,7 +44,7 @@ router.post('/create-invoice', async(req, res) => {
 router.get('/outgoing-payments', async(req, res) => {
     const { from, to, limit, offset, all } = req.body;
     try {
-        const data = await apService.getOutgoingPayments(from, to, limit, offset, all);
+        const data = await apiService.getOutgoingPayments(from, to, limit, offset, all);
         res.json(data);
     }catch(error) {
         res.status(500).json({message: 'Error fetching payments'});
@@ -54,12 +54,21 @@ router.get('/outgoing-payments', async(req, res) => {
 router.get('/incoming-payments', async(req, res) => {
     const { from, to, limit, offset, all } = req.body;
     try {
-        const data = await apService.getIncomingPayments(from, to, limit, offset, all);
+        const data = await apiService.getIncomingPayments(from, to, limit, offset, all);
         res.json(data);
     }catch(error) {
         res.status(500).json({message: 'Error fetching payments'});
     }
 })
 
+router.post('/pay-offer', async(req, res) => {
+    const { amountSat, invoice } = req.body;
+    try {
+        const data = await apiService.payOffer(amountSat, offer, message);
+        res.json(data);
+    }catch(error) {
+        res.status(500).json({message: 'Error paying offer'});
+    }
+})
 
 module.exports = router;
