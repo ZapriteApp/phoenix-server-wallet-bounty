@@ -18,6 +18,7 @@ $(document).ready(function () {
       method: 'GET',
       success: function (html) {
         $('#rightPanel').html(html);
+
       },
       error: function (xhr, status, error) {
         console.error('Error loading partial:', error);
@@ -25,6 +26,53 @@ $(document).ready(function () {
     });
   });
 });
+
+$(document).ready(function () {
+  function formatTimestamp(timestamp) {
+    return new Date(timestamp).toLocaleString();
+  }
+  const transactions = "Some transactions";
+
+  const params = {
+    all: true,
+    limit: 3,
+    offset: 2
+  }
+
+  const queryString = new URLSearchParams(params).toString();
+
+  fetch(`/api/outgoing-payments?${queryString}`)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok ' + response.statusText);
+      }
+
+      return response.json();
+    })
+    .then(data => {
+      const $tableBody = $('#paymentsTable tbody');
+      console.log(data[0].paymentId);
+      data.forEach(function (payment) {
+        const row = `
+            <tr>
+                <td>${payment.paymentId}</td>
+                <td>${payment.paymentHash}</td>
+                <td>${payment.preimage}</td>
+                <td>${payment.isPaid ? 'Yes' : 'No'}</td>
+                <td>${payment.sent}</td>
+                <td>${payment.fees}</td>
+                <td>${payment.invoice}</td>
+                <td>${formatTimestamp(payment.completedAt)}</td>
+                <td>${formatTimestamp(payment.createdAt)}</td>
+            </tr>
+        `;
+        $tableBody.append(row);
+      });
+    })
+    .catch(error => {
+      console.error('Error fetching balance:', error);
+    });
+})
 
 
 $(document).ready(function () {
@@ -44,6 +92,7 @@ $(document).ready(function () {
     });
 });
 
+// Update node details
 $(document).ready(function () {
   fetch('/api/get-node-info')
     .then(response => {
@@ -66,7 +115,7 @@ $(document).ready(function () {
     });
 });
 
-
+//Send modal details
 $(document).ready(function () {
   var $modal1 = $("#myModal1");
   var $modal2 = $("#myModal2");
@@ -109,12 +158,12 @@ $(document).ready(function () {
     console.log("Submit clicked")
     var selectedOption = $("#options").val();
     if (selectedOption) {
-        console.log(selectedOption)
+      console.log(selectedOption)
     } else {
       $("#selectedOption").text('No option selected.');
     }
     $modal1.hide();
-    
+
     $modal2.show(); // Close the modal
   });
 
@@ -122,7 +171,8 @@ $(document).ready(function () {
   $("#myModal2").on("click", "#submitOption2", function () {
     console.log("Submit clicked")
     const invoice = $("#requestInvoice").val();
-    const amountSat=50;
+    let amountSat =  $("#requestInvoiceAmount").val();
+    amountSat = parseInt(amountSat)
     console.log(invoice);
     console.log(amountSat);
     $("#requestInvoice").val(" ");
@@ -132,15 +182,15 @@ $(document).ready(function () {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ amountSat, invoice })
+      body: JSON.stringify({ invoice })
     })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok ' + response.statusText);
-      }
-      console.log(response.json());
-    })
-    
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok ' + response.statusText);
+        }
+        console.log(response.json());
+      })
+
     $modal2.hide();
     $modal3.show(); // Close the modal
   });
@@ -149,7 +199,6 @@ $(document).ready(function () {
     console.log("Submit clicked")
     $modal3.hide(); // Close the modal
   });
-
 
 })
 
@@ -182,8 +231,6 @@ $(document).ready(function () {
     }
   });
 
-
-
   $("#paymentRequestModal").on("click", "#nextToSharePaymentRequest", function () {
     console.log("Next to share payment button clicked")
     var amountSat = parseInt($("#requestInvoiceAmount").val());
@@ -201,57 +248,28 @@ $(document).ready(function () {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ description, amountSat, externalId, webhookUrl})
+      body: JSON.stringify({ description, amountSat, externalId, webhookUrl })
     })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok ' + response);
-      }
-      return response.json();
-    }).then(data => {
-      $paymentRequestModal.hide();
-      $('.invoice').html(`${data.serialized}`);    
-      $sharePaymentRequestModal.show();
-      console.log(data);
-    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok ' + response);
+        }
+        return response.json();
+      }).then(data => {
+        $paymentRequestModal.hide();
+        $('.invoice').html(`${data.serialized}`);
+        $sharePaymentRequestModal.show();
+        console.log(data);
+        $("#requestInvoiceAmount").val(" ");
+        $("#requestInvoiceName").val(" ");
+        $("#requestInvoiceName").val(" ");
 
-    
+      })
   });
 
   $("#paymentRequestModal").on("click", "#cancelPaymentRequest", function () {
     console.log("Submit clicked");
     $paymentRequestModal.hide();
-  });
-
-  $("#myModal2").on("click", "#submitOption2", function () {
-    console.log("Submit clicked")
-    const invoice = $("#requestInvoice").val();
-    const amountSat=50;
-    console.log(invoice);
-    console.log(amountSat);
-    $("#requestInvoice").val(" ");
-
-    fetch('/api/pay-invoice', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ amountSat, invoice })
-    })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok ' + response.statusText);
-      }
-      console.log(response.json());
-    })
-    
-    $modal2.hide();
-    $modal3.show(); // Close the modal
-  });
-
-  $("#myModal3").on("click", "#submitOption3", function () {
-    console.log("Submit clicked")
-    $modal3.hide(); // Close the modal
   });
 
   $('#sharePaymentRequestModal').on('click', '#doneSharePaymentRequest', function () {
@@ -271,7 +289,7 @@ $(document).ready(function () {
 
   $("#sharePaymentRequestModal").on("click", "#closeSharePaymentRequest", function () {
     console.log("Share Payment Request Modal closed")
-    $sharePaymentRequestModal.hide(); 
+    $sharePaymentRequestModal.hide();
   });
 
 
