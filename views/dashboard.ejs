@@ -166,7 +166,7 @@
             <h2>Payment type</h2>
             <form id="">
 
-                <select id="options" name="option">
+                <select id="paymentOptions" name="paymentOptions">
                     <option value="contact">Contact</option>
                     <option value="invoice">Invoice</option>
                     <option value="offer">Offer</option>
@@ -181,7 +181,7 @@
     <div id="invoicePaymentType" class="modal">
         <div class="modal-content">
             <span class="close" data-modal="invoicePaymentType">&times;</span>
-            <h2>Payment type</h2>
+            <h2>Pay invoice</h2>
             <form>
                 <div class="form-group">
                     <label for="requestInvoice">Enter Request Invoice:</label>
@@ -189,7 +189,29 @@
                         placeholder="Enter Request Invoice ">
                 </div>
             </form>
-            <button class="btn btn-primary" type="button" id="submitInvoice">Submit</button>
+            <button class="btn btn-primary" type="button" id="submitInvoice">Send</button>
+        </div>
+    </div>
+
+    <!-- Offer payment type modal -->
+    <div id="offerPaymentType" class="modal">
+        <div class="modal-content">
+            <span class="close" data-modal="offerPaymentType">&times;</span>
+            <h2>Pay offer</h2>
+            <form>
+                <div class="form-group">
+                    <label for="requestOffer">Enter Request Offer:</label>
+                    <input type="text" id="requestOffer" name="requestOffer" class="form-control"
+                        placeholder="Enter Request Offer">
+                    <label for="offerAmount">Amount:</label>
+                    <input type="text" id="offerAmount" name="offerAmount" class="form-control"
+                        placeholder="100,000">
+                    <label for="offerDesription">Desription:</label>
+                    <input type="text" id="offerDesription" name="offerDesription" class="form-control"
+                        placeholder="Payment to demo@zaprite.com">
+                </div>
+            </form>
+            <button class="btn btn-primary" type="button" id="submitOffer">Send</button>
         </div>
     </div>
 
@@ -214,8 +236,7 @@
                     <input type="text" id="requestInvoiceAmount" name="requestInvoice" class="form-control"
                         placeholder="100">
                     <label for="requestInvoiceName">Your name(Optional)</label>
-                    <input type="text" id="requestInvoiceName" name="Satoshi" class="form-control"
-                        placeholder="Name">
+                    <input type="text" id="requestInvoiceName" name="Satoshi" class="form-control" placeholder="Name">
                     <label for="requestInvoiceDescription">Desription</label>
                     <input type="text" id="requestInvoiceDescription" name="requestInvoice" class="form-control"
                         placeholder="Sample description">

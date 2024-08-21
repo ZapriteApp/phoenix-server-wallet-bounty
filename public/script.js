@@ -153,8 +153,10 @@ $(document).ready(function () {
   });
 
   $("#paymentTypeModal").on("click", "#submitPaymentType", function () {
-    console.log("Submit clicked")
-    var selectedOption = $("#options").val();
+    console.log("Payment offer selected")
+    var selectedOption = $("#paymentOptions").val();
+    console.log(selectedOption);
+    
     if (selectedOption == "invoice") {
       $paymentTypeModal.hide();
       $invoicePaymentType.show();
@@ -167,9 +169,11 @@ $(document).ready(function () {
 
     if (selectedOption == "offer") {
       $paymentTypeModal.hide();
-      $invoicePaymentType.show();
-    }
+      $offerPaymentType.show();
+    }    
     
+    $("#paymentOptions").val('');
+
   });
 
 
