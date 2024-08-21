@@ -117,9 +117,11 @@ $(document).ready(function () {
 
 //Send modal details
 $(document).ready(function () {
-  var $modal1 = $("#myModal1");
-  var $modal2 = $("#myModal2");
-  var $modal3 = $("#myModal3");
+  var $paymentTypeModal = $("#paymentTypeModal");
+  var $invoicePaymentType = $("#invoicePaymentType");
+  var $offerPaymentType = $("#offerPaymentType");
+  var $contactPaymentType = $("#contactPaymentType");
+  var $successfulPaymentModal = $("#successfulPaymentModal");
 
   // Get the button that opens the modal
   var $sendButton = $("#sendButton");
@@ -134,41 +136,44 @@ $(document).ready(function () {
 
   // When the user clicks the button, open the modal
   $(".main-content").on("click", '#sendButton', function () {
-    $modal1.show();
+    $paymentTypeModal.show();
   })
-
 
 
   // When the user clicks on <span> (x), close the modal
   $span.on("click", function () {
-    $modal1.hide();
+    $paymentTypeModal.hide();
   });
-
 
   // When the user clicks anywhere outside of the modal, close it
   $(window).on("click", function (event) {
-    if ($(event.target).is($modal1)) {
-      $modal1.hide();
+    if ($(event.target).is($paymentTypeModal)) {
+      $paymentTypeModal.hide();
     }
   });
 
-
-
-  $("#myModal1").on("click", "#submitOption", function () {
+  $("#paymentTypeModal").on("click", "#submitPaymentType", function () {
     console.log("Submit clicked")
     var selectedOption = $("#options").val();
-    if (selectedOption) {
-      console.log(selectedOption)
-    } else {
-      $("#selectedOption").text('No option selected.');
+    if (selectedOption == "invoice") {
+      $paymentTypeModal.hide();
+      $invoicePaymentType.show();
     }
-    $modal1.hide();
 
-    $modal2.show(); // Close the modal
+    if (selectedOption == "contact") {
+      $paymentTypeModal.hide();
+      $invoicePaymentType.show();
+    }
+
+    if (selectedOption == "offer") {
+      $paymentTypeModal.hide();
+      $invoicePaymentType.show();
+    }
+    
   });
 
 
-  $("#myModal2").on("click", "#submitOption2", function () {
+  $("#invoicePaymentType").on("click", "#submitInvoice", function () {
     console.log("Submit clicked")
     const invoice = $("#requestInvoice").val().trim();
     let amountSat =  $("#requestInvoiceAmount").val();
@@ -191,13 +196,13 @@ $(document).ready(function () {
         console.log(response.json());
       })
 
-    $modal2.hide();
-    $modal3.show(); // Close the modal
+    $invoicePaymentType.hide();
+    $successfulPaymentModal.show(); // Close the modal
   });
 
-  $("#myModal3").on("click", "#submitOption3", function () {
+  $("#successfulPaymentModal").on("click", "#submitPaymentSuccess", function () {
     console.log("Submit clicked")
-    $modal3.hide(); // Close the modal
+    $successfulPaymentModal.hide(); // Close the modal
   });
 
 })
