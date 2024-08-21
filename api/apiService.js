@@ -25,8 +25,11 @@ const payInvoice = async (amountSat, invoice) => {
   const url = new URL(path, baseUrl).href;
 
   const data = new URLSearchParams();
-  data.append('amountSat', amountSat);
+  if (amountSat) {
+    data.append('amountSat', amountSat);
+  }
   data.append('invoice', invoice);
+
 
   try {
     const response = await axios.post(url, data.toString(), { headers });
