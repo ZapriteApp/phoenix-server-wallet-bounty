@@ -170,7 +170,7 @@ $(document).ready(function () {
 
   $("#myModal2").on("click", "#submitOption2", function () {
     console.log("Submit clicked")
-    const invoice = $("#requestInvoice").val();
+    const invoice = $("#requestInvoice").val().trim();
     let amountSat =  $("#requestInvoiceAmount").val();
     amountSat = parseInt(amountSat)
     console.log(invoice);
