@@ -129,7 +129,19 @@ const payOffer = async (amountSat, offer, message) => {
   }
 };
 
+const getOffer = async () => {
+  path = '/getoffer';
+  url = new URL(path, baseUrl).href;
+  try {
+    const response = await axios.get(url, { headers });
+    return response.data;
+  } catch (error) {
+    console.error('Error getting data', error);
+    throw error;
+  }
+}
+
 module.exports = {
   getBalance, payInvoice, getNodeInfo, createInvoice,
-  getIncomingPayments, getOutgoingPayments, payOffer
+  getIncomingPayments, getOutgoingPayments, payOffer, getOffer
 };
