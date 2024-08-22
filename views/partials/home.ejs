@@ -1,26 +1,139 @@
+<style>
+    .balanceRow {
+        display: flex;
+        /* Use flexbox to align items in a row */
+        justify-content: space-between;
+        /* Equal space between elements */
+        align-items: center;
+        /* Vertically center items */
+        padding: 10px;
+        /* Padding inside the row */
+        background-color: #f0f0f0;
+        /* Background color for the row */
+    }
+
+    .balanceCol {
+        flex: 1;
+        /* Each column takes equal space */
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #e0e0e0;
+        /* Background color for the column */
+        padding: 10px;
+        margin: 5px;
+        /* Space between columns */
+        border-radius: 5px;
+        /* Rounded corners for the boxes */
+    }
+
+    .balanceItem {
+        display: flex;
+        flex-direction: column;
+        /* Arrange items vertically */
+        align-items: center;
+        /* Center items horizontally */
+        justify-content: center;
+        /* Center items vertically */
+    }
+
+    .balanceValue {
+        font-weight: bold;
+        /* margin-bottom: 5px; */
+        /* Space between the value and the label */
+    }
+
+    .stringBox {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        /* Make the box fit the entire width of the parent column */
+        padding: 10px;
+        /* Optional padding inside the box */
+        background-color: #e0e0e0;
+        /* Background color of the box */
+        border: 1px solid #ccc;
+        /* Optional border for the box */
+        border-radius: 5px;
+        /* Optional rounded corners */
+        box-sizing: border-box;/
+    }
+
+
+    .text-content {
+        flex: 1;
+        /* Take up available space */
+        white-space: nowrap;
+        /* Prevents text from wrapping to the next line */
+        overflow: hidden;
+        /* Hide any overflow content */
+        text-overflow: ellipsis;
+        /* Shows '...' at the end if the text is too long */
+        margin-right: 10px;
+        /* Space between the text and icons */
+    }
+
+    .icons {
+        display: flex;
+        gap: 10px;
+        /* Space between icons */
+    }
+
+    .icon {
+        font-size: 18px;
+        /* Adjust icon size */
+        cursor: pointer;
+        /* Optional: change cursor to pointer for clickability */
+    }
+</style>
+
 <div class="heading-home">Home</div>
-<div class="row">
-    <div class="col">
-        <div class="heading">Balance</div>
-        <p  class="balance">Balance</p>
+<div class="heading">Balance</div>
+<div class="row balanceRow">
+    <div class="col balanceCol">
+
         <button id="sendButton">Send -></button>
+        <p class="balance">Balance</p>
         <button id="receiveButton">Recieve </button>
     </div>
 </div>
-<div class="row">
-    <div class="col">
-        <div class="heading">Liquidity</div>
-        <p>Outbound</p><p class="outbound"></p>
-        <p>Acinq</p><p class="acinq"></p>
 
-        <p>Inbound</p><p class="inbound"></p>
+
+<div class="heading">Liquidity</div>
+<div class="row balanceRow">
+    <div class="col balanceCol">
+        <div class="balanceItem">
+            <p class="balanceValue outbound"></p>
+            <p>Outbound</p>
+        </div>
+
+        <div class="balanceValue balanceItem">
+            <p class="acinq"></p>
+            <p>Acinq</p>
+        </div>
+
+        <div class="balanceValue balanceItem">
+            <p class="inbound"></p>
+            <p>Inbound</p>
+        </div>
     </div>
 </div>
+
+
 <div class="row">
     <div class="col">
         <div class="heading">Offers</div>
         <p>This is your node's Bolt12 offer. A static and reusable payment request that does not expire</p>
-        <p style="word-wrap: break-word;" id="bolt12Offer"></p>
+        <div class="stringBox">
+            <span
+                class="text-content">lno1zrxq8pjw7qjlm68mtp7e3yvxee4y5xrgjhhyf2fxhlphpckrvevh50u0qdlt5q9wt4tn8eqvrnlzhjvkadjwewrud8n0udqql4fyy0cyan9juqsz025qmsmd3l5alglmxztdl97rk3k5z5gphsjvevrwkae3ph8akm5qqv6wxggqutv55sx0prpgvat4eu3d0l3n7p9nmyg9pdjyydugeqyklrz58surrvrxv5aeptqy6k08u6c98t36qdzrz9qckkcdhj8sjh6l5hc4kp33a49f0ctyfyv22es96h4wjaq0xqqs2j8a0l9vg4qv3l9qyv687hh48y
+            </span>
+            <span class="icons">
+                <i class="icon icon-1">🔍</i>
+                <i class="icon icon-2">✏️</i>
+                <i class="icon icon-3">❌</i>
+            </span>
+        </div>
+        <!-- <p style="word-wrap: break-word;" id="bolt12Offer"></p> -->
     </div>
 </div>
-

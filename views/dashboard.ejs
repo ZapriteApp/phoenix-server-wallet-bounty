@@ -11,18 +11,68 @@
 
     <style>
         body {
-            background-color: black;
+            background-color: #000000;
             color: white;
         }
 
         .side-panel {
             height: 100vh;
             /* Full height */
-            background-color: #333;
+            background-color: #000000;
             /* Darker background for side panel */
             padding: 20px;
             border-right: 1px solid yellow;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
             /* Border separating the panels */
+        }
+
+        .menu {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .menu-item {
+            padding: 10px 0;
+            color: yellow;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .menu-item:not(:last-child) {
+            margin-bottom: 15px;
+        }
+
+        .menu-item:hover,
+        .menu-item:focus,
+        .menu-item.active {
+            background-color: #333;
+            /* Lighter shade of black */
+        }
+
+        .footer {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .footer-item {
+            padding: 10px 0;
+            color: yellow;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .footer-item:not(:last-child) {
+            margin-bottom: 15px;
+        }
+
+        .footer-item:hover,
+        .footer-item:focus {
+            background-color: #333;
+            /* Lighter shade of black */
         }
 
         .main-content {
@@ -33,35 +83,6 @@
             font-size: 1.5rem;
             color: yellow;
             margin-bottom: 20px;
-        }
-
-        .menu-item {
-            color: yellow;
-            margin-bottom: 10px;
-            display: block;
-            text-decoration: none;
-        }
-
-        .menu-item:hover {
-            text-decoration: underline;
-        }
-
-        .logout-button {
-            position: absolute;
-            bottom: 20px;
-            width: 100%;
-            background-color: red;
-            color: white;
-            border: none;
-            padding: 10px;
-            cursor: pointer;
-        }
-
-        .version-icon,
-        .sponsors-badge {
-            display: block;
-            margin-top: 20px;
-            color: yellow;
         }
 
         .row {
@@ -143,12 +164,18 @@
             <!-- Side Panel -->
             <div class="col-md-3 side-panel">
                 <div class="app-name">Phoenixd Wallet</div>
-                <a href="#" class="menu-item" id="home">Dashboard</a>
-                <a href="#" class="menu-item" id="transactions">Transactions</a>
-                <a href="#" class="menu-item">Contacts</a>
-                <button class="logout-button">Log out</button>
-                <div class="version-icon">Version 1.0.0</div>
-                <div class="sponsors-badge"></div>
+                <div class="menu">
+                    <a href="#" class="menu-item" style="text-decoration: none;" id="home">Dashboard</a>
+                    <a href="#" class="menu-item" style="text-decoration: none;" id="transactions">Transactions</a>
+                    <a href="#" class="menu-item" style="text-decoration: none;">Contacts</a>
+                    <a href="#" class="menu-item" style="text-decoration: none;">Settings</a>
+                </div>
+
+                <div class="footer">
+                    <a href="#" class="footer-item" style="text-decoration: none;" id="home">Zaprite</a>
+                    <a href="#" class="footer-item" style="text-decoration: none;" id="home">Log Out</a>
+                    <a href="#" class="footer-item" style="text-decoration: none;" id="home">Version 0.1.0</a>
+                </div>
             </div>
 
             <!-- Main Content -->
@@ -204,8 +231,7 @@
                     <input type="text" id="requestOffer" name="requestOffer" class="form-control"
                         placeholder="Enter Request Offer">
                     <label for="offerAmount">Amount:</label>
-                    <input type="text" id="offerAmount" name="offerAmount" class="form-control"
-                        placeholder="100,000">
+                    <input type="text" id="offerAmount" name="offerAmount" class="form-control" placeholder="100,000">
                     <label for="offerDesription">Desription:</label>
                     <input type="text" id="offerDesription" name="offerDesription" class="form-control"
                         placeholder="Payment to demo@zaprite.com">
