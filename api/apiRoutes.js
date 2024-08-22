@@ -62,7 +62,7 @@ router.get('/incoming-payments', async(req, res) => {
 })
 
 router.post('/pay-offer', async(req, res) => {
-    const { amountSat, invoice } = req.body;
+    const { amountSat, offer, message } = req.body;
     try {
         const data = await apiService.payOffer(amountSat, offer, message);
         res.json(data);

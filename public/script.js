@@ -156,7 +156,7 @@ $(document).ready(function () {
     console.log("Payment offer selected")
     var selectedOption = $("#paymentOptions").val();
     console.log(selectedOption);
-    
+
     if (selectedOption == "invoice") {
       $paymentTypeModal.hide();
       $invoicePaymentType.show();
@@ -170,8 +170,8 @@ $(document).ready(function () {
     if (selectedOption == "offer") {
       $paymentTypeModal.hide();
       $offerPaymentType.show();
-    }    
-    
+    }
+
     $("#paymentOptions").val('');
 
   });
@@ -180,7 +180,7 @@ $(document).ready(function () {
   $("#invoicePaymentType").on("click", "#submitInvoice", function () {
     console.log("Submit clicked")
     const invoice = $("#requestInvoice").val().trim();
-    let amountSat =  $("#requestInvoiceAmount").val();
+    let amountSat = $("#requestInvoiceAmount").val();
     amountSat = parseInt(amountSat)
     console.log(invoice);
     console.log(amountSat);
@@ -191,7 +191,7 @@ $(document).ready(function () {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ invoice })
+      body: JSON.stringify({ amountSat, invoice })
     })
       .then(response => {
         if (!response.ok) {
@@ -201,12 +201,46 @@ $(document).ready(function () {
       })
 
     $invoicePaymentType.hide();
-    $successfulPaymentModal.show(); // Close the modal
+    $successfulPaymentModal.show();
   });
+
+  $("#offerPaymentType").on("click", "#submitOffer", function () {
+    console.log("Offer button clicked")
+    const offer = $("#requestOffer").val().trim();
+    const amountSat = parseInt($("#offerAmount").val());
+    const message = $("#offerDesription").val().trim();
+    console.log(offer);
+    console.log(amountSat);
+    console.log(message);
+
+    fetch('/api/pay-offer', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ amountSat, offer, message })
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok ' + response.statusText);
+        }
+        console.log(response.json());
+      })
+
+    $offerPaymentType.hide();
+    $successfulPaymentModal.show();
+
+    $("#requestOffer").val("");
+    $("#offerAmount").val("");
+    $("#offerDesription").val("");
+  });
+
+
+
 
   $("#successfulPaymentModal").on("click", "#submitPaymentSuccess", function () {
     console.log("Submit clicked")
-    $successfulPaymentModal.hide(); // Close the modal
+    $successfulPaymentModal.hide();
   });
 
 })
