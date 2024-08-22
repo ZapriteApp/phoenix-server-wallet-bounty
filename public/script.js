@@ -4,6 +4,7 @@ $(document).ready(function () {
       url: 'views/partials/home.ejs',
       method: 'GET',
       success: function (html) {
+        location.reload();
         $('#rightPanel').html(html);
       },
       error: function (xhr, status, error) {
