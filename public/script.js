@@ -338,6 +338,24 @@ $(document).ready(function () {
 
 })
 
+$(document).ready(function () {
+  let balance;
+  fetch('/api/get-offer')
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok ' + response.statusText);
+      }
+      return response.json();
+    })
+    .then(data => {
+      $('#bolt12Offer').html(`${data}`);
+      // console.log(data);
+    })
+    .catch(error => {
+      console.error('Error fetching offer:', error);
+    });
+});
+
 document.querySelectorAll('.load-partial').forEach(link => {
   link.addEventListener('click', function (event) {
     event.preventDefault();
