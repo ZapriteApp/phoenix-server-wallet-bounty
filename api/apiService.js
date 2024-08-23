@@ -141,7 +141,28 @@ const getOffer = async () => {
   }
 }
 
+const listIncomingAndOutgoing = async () => {
+  path1 = '/payments/incoming?all=true&limit=1000000';
+  path2 = '/payments/outgoing?all=true&limit=1000000';
+
+  url1 = new URL(path1, baseUrl).href;
+  url2 = new URL(path2, baseUrl).href;
+
+  try {
+    const response1 = await axios.get(url1, { headers });
+    const response2 = await axios.get(url2, { headers });
+
+    return { ...response1.data, ...response2.data };
+    // return response1.data;
+  } catch (error) {
+    console.error('Error getting data', error);
+    throw error;
+  }
+
+}
+
 module.exports = {
   getBalance, payInvoice, getNodeInfo, createInvoice,
-  getIncomingPayments, getOutgoingPayments, payOffer, getOffer
+  getIncomingPayments, getOutgoingPayments, payOffer, getOffer,
+  listIncomingAndOutgoing
 };

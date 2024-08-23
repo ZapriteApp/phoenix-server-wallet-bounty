@@ -81,4 +81,13 @@ router.get('/get-offer', async (req, res) => {
     }
 });
 
+router.get('/list-incoming-and-outgoing', async (req, res) => {
+    try  {
+        const data = await apiService.listIncomingAndOutgoing();
+        res.json(data);
+    }
+    catch(error) {
+        res.status(500).json({ message: 'Error retreving offer'});
+    }
+});
 module.exports = router;
