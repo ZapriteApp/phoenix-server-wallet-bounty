@@ -1,5 +1,5 @@
 require('dotenv').config();
-
+const apiService = require('./apiService');
 const fs = require('fs');
 const path = require('path');
 
@@ -15,5 +15,19 @@ function saveToEnvFile(key, value) {
     }
   });
 }
+
+function isBolt11(value){
+  if (typeof offer !== 'string') {
+    return False;
+  }
+
+  
+
+}
+
+
+
+
+
 
 module.exports = { saveToEnvFile };

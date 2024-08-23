@@ -87,7 +87,29 @@ router.get('/list-incoming-and-outgoing', async (req, res) => {
         res.json(data);
     }
     catch(error) {
-        res.status(500).json({ message: 'Error retreving offer'});
+        res.status(500).json({ message: 'Error retreving transactions'});
+    }
+});
+
+router.post('/decode-offer', async (req, res) => {
+    const { invoice } = req.body;    
+    try  {
+        const data = await apiService.decodeOffer(invoice);
+        res.json(data);
+    }
+    catch(error) {
+        res.status(500).json({ message: 'Error decoding offer'});
+    }
+});
+
+router.post('/decode-invoice', async (req, res) => {
+    const { invoice } = req.body;
+    try  {
+        const data = await apiService.decodeInvoice(invoice);
+        res.json(data);
+    }
+    catch(error) {
+        res.status(500).json({ message: 'Error decoding invoice'});
     }
 });
 module.exports = router;

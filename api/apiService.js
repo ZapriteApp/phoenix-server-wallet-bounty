@@ -151,8 +151,14 @@ const listIncomingAndOutgoing = async () => {
   try {
     const response1 = await axios.get(url1, { headers });
     const response2 = await axios.get(url2, { headers });
+    // const date = new Date(response1.data[0].createdAt);
+    // return date.toString();
+    
+    // return [ ...response1.data, ...response2.data ]
 
-    return { ...response1.data, ...response2.data };
+    data = [ ...response1.data, ...response2.data ];
+
+    return data.sort((a,b) => b.createdAt - a.createdAt)
     // return response1.data;
   } catch (error) {
     console.error('Error getting data', error);
@@ -161,8 +167,34 @@ const listIncomingAndOutgoing = async () => {
 
 }
 
+const decodeOffer = async () => {
+  path = '/decodeoffer';
+  url = new URL(path, baseUrl).href;
+  try {
+    const response = await axios.post(url, { headers });
+    return response.data;
+  } catch (error) {
+    console.error('Error decoding offer', error);
+    throw error;
+  }
+}
+
+const decodeInvoice = async () => {
+  path = '/decodeinvoice';
+  url = new URL(path, baseUrl).href;
+  try {
+    const response = await axios.post(url, { headers });
+    return response.data;
+  } catch (error) {
+    console.error('Error decoding offer', error);
+    throw error;
+  }
+}
+
+
+
 module.exports = {
   getBalance, payInvoice, getNodeInfo, createInvoice,
   getIncomingPayments, getOutgoingPayments, payOffer, getOffer,
-  listIncomingAndOutgoing
+  listIncomingAndOutgoing, decodeInvoice, decodeOffer
 };
