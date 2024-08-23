@@ -167,11 +167,13 @@ const listIncomingAndOutgoing = async () => {
 
 }
 
-const decodeOffer = async () => {
+const decodeOffer = async (offer) => {
   path = '/decodeoffer';
   url = new URL(path, baseUrl).href;
+  const data = new URLSearchParams();
+  data.append('offer', offer);
   try {
-    const response = await axios.post(url, { headers });
+    const response = await axios.post(url, data.toString(), { headers });
     return response.data;
   } catch (error) {
     console.error('Error decoding offer', error);
@@ -179,11 +181,13 @@ const decodeOffer = async () => {
   }
 }
 
-const decodeInvoice = async () => {
+const decodeInvoice = async (invoice) => {
   path = '/decodeinvoice';
   url = new URL(path, baseUrl).href;
+  const data = new URLSearchParams();
+  data.append('invoice', invoice);
   try {
-    const response = await axios.post(url, { headers });
+    const response = await axios.post(url, data.toString(), { headers });
     return response.data;
   } catch (error) {
     console.error('Error decoding offer', error);

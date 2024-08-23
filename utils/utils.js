@@ -16,18 +16,46 @@ function saveToEnvFile(key, value) {
   });
 }
 
-function isBolt11(value){
+function isBolt11(value) {
   if (typeof offer !== 'string') {
     return False;
   }
 
-  
+  fetch('/api/decode-invoice')
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok ' + response.statusText);
+      }
+      return response.json();
+    })
+    .then(data => {
+      return data
+    })
+    .catch(error => {
+      console.error('Error decoding invoice:', error);
+    });
+}
 
+function isBolt12(value) {
+  if (typeof offer !== 'string') {
+    return False;
+  }
+
+  fetch('/api/decode-offer')
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok ' + response.statusText);
+      }
+      return response.json();
+    })
+    .then(data => {
+      return data
+    })
+    .catch(error => {
+      console.error('Error decoding offer:', error);
+    });
 }
 
 
 
-
-
-
-module.exports = { saveToEnvFile };
+module.exports = { saveToEnvFile, isBolt11, isBolt12 };

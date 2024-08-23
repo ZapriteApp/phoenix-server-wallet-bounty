@@ -92,9 +92,9 @@ router.get('/list-incoming-and-outgoing', async (req, res) => {
 });
 
 router.post('/decode-offer', async (req, res) => {
-    const { invoice } = req.body;    
+    const { offer } = req.body;    
     try  {
-        const data = await apiService.decodeOffer(invoice);
+        const data = await apiService.decodeOffer(offer);
         res.json(data);
     }
     catch(error) {
