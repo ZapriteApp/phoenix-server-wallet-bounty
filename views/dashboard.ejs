@@ -153,6 +153,25 @@
             text-decoration: none;
             cursor: pointer;
         }
+
+        .payment-button-group {
+            display: flex;
+            flex-direction: column;
+            /* gap: 10px; */
+        }
+
+        .paymentOption {
+            padding: 10px;
+            width: 100%;
+            border: 1px solid #ccc;
+            background-color: #f8f8f8;
+            cursor: pointer;
+        }
+
+        .paymentOption.selected {
+            background-color: #ccc;
+            font-weight: bold;
+        }
     </style>
     <link rel="stylesheet" href="public/font-awesome-4.7.0/css/font-awesome.min.css">
 
@@ -191,7 +210,15 @@
         <div class="modal-content">
             <span class="close">&times;</span>
             <h2>Payment type</h2>
-            <form id="">
+            <form id="paymentForm">
+                <div class="payment-button-group">
+                    <button type="button" class="paymentOption" data-value="contact" id="contactPaymentOption">Contact</button>
+                    <button type="button" class="paymentOption" data-value="invoice" id="invoicePaymentOption">Invoice</button>
+                    <button type="button" class="paymentOption" data-value="offer" id="offerPaymentOption">Offer</button>
+                </div>
+                <button type="button" id="cancelSendRequest">Cancel</button>
+            </form>
+            <!-- <form id="">
 
                 <select id="paymentOptions" name="paymentOptions">
                     <option value="contact">Contact</option>
@@ -199,7 +226,7 @@
                     <option value="offer">Offer</option>
                 </select>
                 <button type="button" id="submitPaymentType">Submit</button>
-            </form>
+            </form> -->
         </div>
 
     </div>

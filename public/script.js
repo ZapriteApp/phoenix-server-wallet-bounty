@@ -153,30 +153,30 @@ $(document).ready(function () {
     }
   });
 
-  $("#paymentTypeModal").on("click", "#submitPaymentType", function () {
-    console.log("Payment offer selected")
-    var selectedOption = $("#paymentOptions").val();
-    console.log(selectedOption);
-
-    if (selectedOption == "invoice") {
-      $paymentTypeModal.hide();
-      $invoicePaymentType.show();
-    }
-
-    if (selectedOption == "contact") {
-      $paymentTypeModal.hide();
-      $invoicePaymentType.show();
-    }
-
-    if (selectedOption == "offer") {
-      $paymentTypeModal.hide();
-      $offerPaymentType.show();
-    }
-
-    $("#paymentOptions").val('');
-
+  $("#invoicePaymentOption").click(function() {
+    var value = $(this).data("value");
+    console.log(value); 
+    $paymentTypeModal.hide();
+    $invoicePaymentType.show();
   });
 
+  $("#contactPaymentOption").click(function() {
+    var value = $(this).data("value");
+    console.log(value);
+    $paymentTypeModal.hide();
+    $invoicePaymentType.show()
+  });
+
+  $("#offerPaymentOption").click(function() {
+    var value = $(this).data("value");
+    console.log(value);
+    $paymentTypeModal.hide();
+    $offerPaymentType.show(); 
+  });
+
+  $("#cancelSendRequest").click(function() {
+    $paymentTypeModal.hide();
+  });
 
   $("#invoicePaymentType").on("click", "#submitInvoice", function () {
     console.log("Submit clicked")
