@@ -42,7 +42,7 @@ $(document).ready(function () {
 
   const queryString = new URLSearchParams(params).toString();
 
-  fetch(`/api/outgoing-payments?${queryString}`)
+  fetch(`/api/list-incoming-and-outgoing`)
     .then(response => {
       if (!response.ok) {
         throw new Error('Network response was not ok ' + response.statusText);
@@ -52,19 +52,17 @@ $(document).ready(function () {
     })
     .then(data => {
       const $tableBody = $('#paymentsTable tbody');
-      console.log(data[0].paymentId);
+      console.log(!data[0].receivedSat);
       data.forEach(function (payment) {
         const row = `
             <tr>
-                <td>${payment.paymentId}</td>
-                <td>${payment.paymentHash}</td>
-                <td>${payment.preimage}</td>
-                <td>${payment.isPaid ? 'Yes' : 'No'}</td>
-                <td>${payment.sent}</td>
-                <td>${payment.fees}</td>
-                <td>${payment.invoice}</td>
-                <td>${formatTimestamp(payment.completedAt)}</td>
-                <td>${formatTimestamp(payment.createdAt)}</td>
+                <td>${ payment.hasOwnProperty("receivedSat")?  "Payment" : "Transfer"}</td>
+                <td>${ payment.hasOwnProperty("receivedSat")?  "Payment" : "Transfer"}</td>
+                <td>${ payment.hasOwnProperty("description") ? payment.receivedSat : "Label"}</td>
+                <td>${payment.hasOwnProperty("receivedSat")?  payment.receivedSat : -payment.sent}</td>
+                <td>${ payment.hasOwnProperty("receivedSat")?  "Payment" : "Transfer"}</td>
+                <td>${payment.isPaid ? 'Completed' : 'Uncompleted'}</td>
+                <td>Actions</td>
             </tr>
         `;
         $tableBody.append(row);
