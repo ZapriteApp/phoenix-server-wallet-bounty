@@ -26,6 +26,34 @@ $(document).ready(function () {
       }
     });
   });
+
+  $('#home-page').on('click', '#contacts', function () {
+    $.ajax({
+      url: 'views/partials/contacts.ejs',
+      method: 'GET',
+      success: function (html) {
+        $('#rightPanel').html(html);
+
+      },
+      error: function (xhr, status, error) {
+        console.error('Error loading partial:', error);
+      }
+    });
+  });
+
+  $('#home-page').on('click', '#settings', function () {
+    $.ajax({
+      url: 'views/partials/settings.ejs',
+      method: 'GET',
+      success: function (html) {
+        $('#rightPanel').html(html);
+
+      },
+      error: function (xhr, status, error) {
+        console.error('Error loading partial:', error);
+      }
+    });
+  });
 });
 
 $(document).ready(function () {
