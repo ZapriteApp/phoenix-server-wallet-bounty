@@ -52,15 +52,17 @@ $(document).ready(function () {
       const $tableBody = $('#paymentsTable tbody');
       console.log(!data[0].receivedSat);
       data.forEach(function (payment) {
+        transferITag=`<i class="bi bi-arrow-down-left"></i>`
+        paymentITag=`<i class="bi bi-arrow-up-right"></i>`
         const row = `
             <tr>
-                <td>${ payment.hasOwnProperty("receivedSat")?  "Payment" : "Transfer"}</td>
+                <td>${ payment.hasOwnProperty("receivedSat")?  paymentITag : transferITag }</td>
                 <td>${ formatTimestamp(payment.createdAt)}</td>
                 <td>${ payment.hasOwnProperty("description") ? payment.description : "Label"}</td>
                 <td>${payment.hasOwnProperty("receivedSat")?  payment.receivedSat : -payment.sent}</td>
                 <td>${ payment.hasOwnProperty("receivedSat")?  "Payment" : "Transfer"}</td>
                 <td>${payment.isPaid ? 'Completed' : 'Uncompleted'}</td>
-                <td>Actions</td>
+                <td><i class="bi bi-three-dots-vertical"></i></td>
             </tr>
         `;
         $tableBody.append(row);

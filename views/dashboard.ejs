@@ -7,6 +7,7 @@
     <title>Dashboard</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
 
     <style>
@@ -184,16 +185,16 @@
             <div class="col-md-3 side-panel">
                 <div class="app-name">Phoenixd Wallet</div>
                 <div class="menu">
-                    <a href="#" class="menu-item" style="text-decoration: none;" id="home">Dashboard</a>
-                    <a href="#" class="menu-item" style="text-decoration: none;" id="transactions">Transactions</a>
-                    <a href="#" class="menu-item" style="text-decoration: none;">Contacts</a>
-                    <a href="#" class="menu-item" style="text-decoration: none;">Settings</a>
+                    <a href="#" class="menu-item" style="text-decoration: none;" id="home"><i class="bi bi-grid"></i>Dashboard</a>
+                    <a href="#" class="menu-item" style="text-decoration: none;" id="transactions"><i class="bi bi-lightning-charge"></i>Transactions</a>
+                    <a href="#" class="menu-item" style="text-decoration: none;"><i class="bi bi-person-lines-fill"></i>Contacts</a>
+                    <a href="#" class="menu-item" style="text-decoration: none;"><i class="bi bi-gear"></i>Settings</a>
                 </div>
 
                 <div class="footer">
                     <a href="#" class="footer-item" style="text-decoration: none;" id="home">Zaprite</a>
-                    <a href="#" class="footer-item" style="text-decoration: none;" id="home">Log Out</a>
-                    <a href="#" class="footer-item" style="text-decoration: none;" id="home">Version 0.1.0</a>
+                    <a href="#" class="footer-item" style="text-decoration: none;" id="home"><i class="bi bi-box-arrow-right"></i>Log Out</a>
+                    <a href="#" class="footer-item" style="text-decoration: none;" id="home">Version 0.1.0 <i class="bi bi-github"></i></a>
                 </div>
             </div>
 
@@ -212,21 +213,12 @@
             <h2>Payment type</h2>
             <form id="paymentForm">
                 <div class="payment-button-group">
-                    <button type="button" class="paymentOption" data-value="contact" id="contactPaymentOption">Contact</button>
-                    <button type="button" class="paymentOption" data-value="invoice" id="invoicePaymentOption">Invoice</button>
-                    <button type="button" class="paymentOption" data-value="offer" id="offerPaymentOption">Offer</button>
+                    <button type="button" class="paymentOption" data-value="contact" id="contactPaymentOption">Contact <i class="bi bi-arrow-right"></i></button>
+                    <button type="button" class="paymentOption" data-value="invoice" id="invoicePaymentOption">Invoice <i class="bi bi-arrow-right"></i></button>
+                    <button type="button" class="paymentOption" data-value="offer" id="offerPaymentOption">Offer <i class="bi bi-arrow-right"></i></button>
                 </div>
-                <button type="button" id="cancelSendRequest">Cancel</button>
+                <button type="button" id="cancelSendRequest">Cancel <i class="bi bi-x"></i></button>
             </form>
-            <!-- <form id="">
-
-                <select id="paymentOptions" name="paymentOptions">
-                    <option value="contact">Contact</option>
-                    <option value="invoice">Invoice</option>
-                    <option value="offer">Offer</option>
-                </select>
-                <button type="button" id="submitPaymentType">Submit</button>
-            </form> -->
         </div>
 
     </div>
@@ -243,7 +235,8 @@
                         placeholder="Enter Request Invoice ">
                 </div>
             </form>
-            <button class="btn btn-primary" type="button" id="submitInvoice">Send</button>
+            <button class="btn btn-primary" type="button" id="backToPaymentType"><i class="bi bi-arrow-left"> </i>Back</button>
+            <button class="btn btn-primary" type="button" id="submitInvoice">Send <i class="bi bi-check2"></i></button>
         </div>
     </div>
 
@@ -262,7 +255,8 @@
                     <input type="text" id="offerDescription" name="offerDescription" class="form-control" placeholder="Payment to demo@zaprite.com">
                 </div>
             </form>
-            <button class="btn btn-primary" type="button" id="submitOffer">Send</button>
+            <button class="btn btn-primary" type="button" id="backToPaymentType"><i class="bi bi-arrow-left"> </i>Back</button>
+            <button class="btn btn-primary" type="button" id="submitOffer">Send <i class="bi bi-check2"></i></button>
         </div>
     </div>
 
@@ -271,8 +265,8 @@
         <div class="modal-content">
             <span class="close" data-modal="successfulPaymentModal">&times;</span>
             <h2>Success</h2>
-            <i class="fa fa-check fa-5x text-primary" aria-hidden="true"></i>
-            <button class="btn btn-primary" type="button" id="submitPaymentSuccess">Submit</button>
+            <i class="bi bi-check-circle"></i>
+            <button class="btn btn-primary" type="button" id="submitPaymentSuccess">OK <i class="bi bi-check2"></i></button>
         </div>
     </div>
 
@@ -294,8 +288,8 @@
                 </div>
             </form>
             <div>
-                <button class="btn btn-primary" type="button" id="cancelPaymentRequest">Cancel</button>
-                <button class="btn btn-primary" type="button" id="nextToSharePaymentRequest">Next</button>
+                <button class="btn btn-primary" type="button" id="cancelPaymentRequest"> <i class="bi bi-x"></i> Cancel</button>
+                <button class="btn btn-primary" type="button" id="nextToSharePaymentRequest">Next <i class="bi bi-arrow-right"></i></button>
             </div>
 
         </div>
@@ -308,8 +302,8 @@
             <h2>Share Payment Request</h2>
             <i class="fa fa-barcode fa-5x text-primary" aria-hidden="true"></i>
             <p class="invoice text-primary" style="word-wrap: break-word;"></p>
-            <button class="btn btn-primary" type="button" id="closeSharePaymentRequest">Close</button>
-            <button class="btn btn-primary" type="button" id="doneSharePaymentRequest">Done</button>
+            <button class="btn btn-primary" type="button" id="closeSharePaymentRequest"><i class="bi bi-x"></i>Close</button>
+            <button class="btn btn-primary" type="button" id="doneSharePaymentRequest">Done  <i class="bi bi-check2"></i></button>
         </div>
     </div>
 
@@ -320,6 +314,7 @@
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
 </body>
 
 </html>
