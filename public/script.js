@@ -29,9 +29,7 @@ $(document).ready(function () {
 });
 
 $(document).ready(function () {
-  function formatTimestamp(timestamp) {
-    return new Date(timestamp).toLocaleString();
-  }
+  
   const transactions = "Some transactions";
 
   const params = {
@@ -57,8 +55,8 @@ $(document).ready(function () {
         const row = `
             <tr>
                 <td>${ payment.hasOwnProperty("receivedSat")?  "Payment" : "Transfer"}</td>
-                <td>${ payment.hasOwnProperty("receivedSat")?  "Payment" : "Transfer"}</td>
-                <td>${ payment.hasOwnProperty("description") ? payment.receivedSat : "Label"}</td>
+                <td>${ formatTimestamp(payment.createdAt)}</td>
+                <td>${ payment.hasOwnProperty("description") ? payment.description : "Label"}</td>
                 <td>${payment.hasOwnProperty("receivedSat")?  payment.receivedSat : -payment.sent}</td>
                 <td>${ payment.hasOwnProperty("receivedSat")?  "Payment" : "Transfer"}</td>
                 <td>${payment.isPaid ? 'Completed' : 'Uncompleted'}</td>
@@ -229,9 +227,9 @@ $(document).ready(function () {
     $offerPaymentType.hide();
     $successfulPaymentModal.show();
 
-    $("#requestOffer").val("");
-    $("#offerAmount").val("");
-    $("#offerDesription").val("");
+    $("#requestOffer").val(" ");
+    $("#offerAmount").val(" ");
+    $("#offerDesription").val(" ");
   });
 
 
@@ -376,6 +374,19 @@ function loadPartial(url) {
       document.getElementById('content').innerHTML = data;
     })
     .catch(error => console.error('Error loading partial:', error));
+}
+
+function formatTimestamp(timestamp) {
+  const date = new Date(timestamp);
+
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1 < 11 ? `0${date.getMonth() + 1}` : date.getMonth() + 1;
+  const day = date.getDate() < 10 ? `0${date.getDate()}` : date.getDate();
+  
+  const hours = date.getHours() < 10 ? `0${date.getHours()}` : date.getHours();
+  const minutes = date.getMinutes().toString().padStart(2, '0');
+
+  return `${year}-${month}-${day}, ${hours}:${minutes}`;
 }
 
 
