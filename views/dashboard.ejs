@@ -22,7 +22,7 @@
             background-color: #000000;
             /* Darker background for side panel */
             padding: 20px;
-            border-right: 1px solid yellow;
+            border-right: 1px solid white;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -37,7 +37,7 @@
 
         .menu-item {
             padding: 10px 0;
-            color: yellow;
+            color: white;
             text-decoration: none;
             cursor: pointer;
             transition: background-color 0.3s ease;
@@ -61,7 +61,7 @@
 
         .footer-item {
             padding: 10px 0;
-            color: yellow;
+            color: white;
             text-decoration: none;
             cursor: pointer;
         }
@@ -82,7 +82,7 @@
 
         .app-name {
             font-size: 1.5rem;
-            color: yellow;
+            color: white;
             margin-bottom: 20px;
         }
 
@@ -94,7 +94,7 @@
         .row .heading {
             font-size: 1.5rem;
             /* Heading size */
-            color: yellow;
+            color: #f09026;
             margin-bottom: 10px;
             /* Space below the heading */
         }
@@ -102,7 +102,7 @@
         .heading-home {
             font-size: 2rem;
             /* Larger heading size for Home */
-            color: yellow;
+            color: #f19528;
             margin-bottom: 20px;
         }
     </style>
@@ -183,12 +183,14 @@
         <div class="row">
             <!-- Side Panel -->
             <div class="col-md-3 side-panel">
-                <div class="app-name">Phoenixd Wallet</div>
+                <div class="app-name">
+                    <h2>Phoneixd Wallet</h2>
+                </div>
                 <div class="menu">
-                    <a href="#" class="menu-item" style="text-decoration: none;" id="home"><i class="bi bi-grid"></i>Dashboard</a>
-                    <a href="#" class="menu-item" style="text-decoration: none;" id="transactions"><i class="bi bi-lightning-charge"></i>Transactions</a>
-                    <a href="#" class="menu-item" style="text-decoration: none;" id="contacts"><i class="bi bi-person-lines-fill"></i>Contacts</a>
-                    <a href="#" class="menu-item" style="text-decoration: none;" id="settings"><i class="bi bi-gear"></i>Settings</a>
+                    <a href="#" class="menu-item" style="text-decoration: none;" id="home"><i class="bi bi-grid">  </i>Dashboard</a>
+                    <a href="#" class="menu-item" style="text-decoration: none;" id="transactions"><i class="bi bi-lightning-charge">  </i>Transactions</a>
+                    <a href="#" class="menu-item" style="text-decoration: none;" id="contacts"><i class="bi bi-person-lines-fill">  </i>Contacts</a>
+                    <a href="#" class="menu-item" style="text-decoration: none;" id="settings"><i class="bi bi-gear">  </i>Settings</a>
                 </div>
 
                 <div class="footer">

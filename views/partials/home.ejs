@@ -8,7 +8,8 @@
         /* Vertically center items */
         padding: 10px;
         /* Padding inside the row */
-        background-color: #f0f0f0;
+        /* background-color: #666666; */
+        background-color: #111111;
         /* Background color for the row */
     }
 
@@ -18,7 +19,8 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        background-color: #e0e0e0;
+        /* background-color: #666666; */
+        background-color: #111111;
         /* Background color for the column */
         padding: 10px;
         margin: 5px;
@@ -50,9 +52,9 @@
         /* Make the box fit the entire width of the parent column */
         padding: 10px;
         /* Optional padding inside the box */
-        background-color: #e0e0e0;
+        background-color: #111111;
         /* Background color of the box */
-        border: 1px solid #ccc;
+        border: none;
         /* Optional border for the box */
         border-radius: 5px;
         /* Optional rounded corners */
@@ -85,16 +87,46 @@
         cursor: pointer;
         /* Optional: change cursor to pointer for clickability */
     }
+
+    #sendButton {
+        background-color:  white;
+        color: #f09125;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+    }
+
+    #receiveButton {
+        background-color: #f09125 ;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+    
+    }
+
+    .balance {
+        font-weight: bold;
+        padding: 10px;
+        display: inline-block;
+        background-color: #222222;
+        align-items: center;
+    
+    }
 </style>
 
-<div class="heading-home">Home</div>
-<div class="heading">Balance</div>
+<div class="heading-home">
+    Home
+</div>
+<div class="heading">
+    Balance
+</div>
 <div class="row balanceRow">
     <div class="col balanceCol">
 
         <button id="sendButton">Send <i class="bi bi-arrow-up-right"></i></button>
-        <p class="balance">Balance</p>
-        <button id="receiveButton">Recieve <i class="bi bi-arrow-down-left"></i> </button>
+        <p class="balance"></p>
+        <button id="receiveButton"><i class="bi bi-arrow-down-left"></i> Recieve</button>
     </div>
 </div>
 

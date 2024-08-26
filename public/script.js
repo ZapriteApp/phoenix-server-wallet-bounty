@@ -112,7 +112,7 @@ $(document).ready(function () {
       return response.json();
     })
     .then(data => {
-      $('.balance').html(`Balance: ${data.balanceSat} sats`);
+      $('.balance').html(`${data.balanceSat} sats`);
     })
     .catch(error => {
       console.error('Error fetching balance:', error);
