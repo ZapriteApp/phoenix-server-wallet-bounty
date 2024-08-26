@@ -48,10 +48,17 @@
         }
 
         .menu-item:hover,
-        .menu-item:focus,
-        .menu-item.active {
-            background-color: #333;
-            /* Lighter shade of black */
+        .menu-item:focus{
+            background-color: #222222;
+            color: white;
+        }
+        .menu-item:active {
+            background-color: #111111;
+            color: #f09026;
+        }
+        .menu-item.selected {
+            background-color: #111111;
+            color: #f09026;
         }
 
         .footer {
@@ -187,7 +194,7 @@
                     <h2>Phoneixd Wallet</h2>
                 </div>
                 <div class="menu">
-                    <a href="#" class="menu-item" style="text-decoration: none;" id="home"><i class="bi bi-grid">  </i>Dashboard</a>
+                    <a href="#" class="menu-item selected" style="text-decoration: none;" id="home"><i class="bi bi-grid">  </i>Dashboard</a>
                     <a href="#" class="menu-item" style="text-decoration: none;" id="transactions"><i class="bi bi-lightning-charge">  </i>Transactions</a>
                     <a href="#" class="menu-item" style="text-decoration: none;" id="contacts"><i class="bi bi-person-lines-fill">  </i>Contacts</a>
                     <a href="#" class="menu-item" style="text-decoration: none;" id="settings"><i class="bi bi-gear">  </i>Settings</a>

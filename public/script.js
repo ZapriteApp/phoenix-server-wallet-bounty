@@ -383,6 +383,16 @@ $(document).ready(function () {
     });
 });
 
+$(document).ready(function() {
+  $('.menu-item').click(function(e) {
+    e.preventDefault();
+
+    $('.menu-item').removeClass('selected');
+
+    $(this).addClass('selected');
+  });
+})
+
 document.querySelectorAll('.load-partial').forEach(link => {
   link.addEventListener('click', function (event) {
     event.preventDefault();
