@@ -190,7 +190,7 @@ $(document).ready(function () {
     var value = $(this).data("value");
     console.log(value);
     $paymentTypeModal.hide();
-    $invoicePaymentType.show()
+    $contactPaymentType.show()
   });
 
   $("#offerPaymentOption").click(function() {
