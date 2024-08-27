@@ -51,18 +51,23 @@
         display: flex;
         align-items: center;
         width: 100%;
-        /* Make the box fit the entire width of the parent column */
         padding: 10px;
-        /* Optional padding inside the box */
         background-color: #111111;
-        /* Background color of the box */
         border: none;
-        /* Optional border for the box */
         border-radius: 5px;
-        /* Optional rounded corners */
-        box-sizing: border-box;/
+        box-sizing: border-box;
+        overflow: hidden; /* Hides any content that overflows */
+        text-overflow: ellipsis; /* Adds ellipsis (...) at the end of the overflowing content */
+        white-space: nowrap;
     }
-
+    
+    .bolt12Offer {
+        flex-grow: 1; 
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        margin-right: 10px;
+    }
 
     .text-content {
         flex: 1;
@@ -162,8 +167,7 @@
         <p>This is your node's Bolt12 offer. A static and reusable payment request that does not expire</p>
         <div class="stringBox">
             <span
-                class="text-content">lno1zrxq8pjw7qjlm68mtp7e3yvxee4y5xrgjhhyf2fxhlphpckrvevh50u0qdlt5q9wt4tn8eqvrnlzhjvkadjwewrud8n0udqql4fyy0cyan9juqsz025qmsmd3l5alglmxztdl97rk3k5z5gphsjvevrwkae3ph8akm5qqv6wxggqutv55sx0prpgvat4eu3d0l3n7p9nmyg9pdjyydugeqyklrz58surrvrxv5aeptqy6k08u6c98t36qdzrz9qckkcdhj8sjh6l5hc4kp33a49f0ctyfyv22es96h4wjaq0xqqs2j8a0l9vg4qv3l9qyv687hh48y
-            </span>
+                class="bolt12Offer" id="bolt12Offer"></span>
             <span class="icons">
                 <i class="bi bi-copy"></i>
                 <i class="bi bi-qr-code"></i>
