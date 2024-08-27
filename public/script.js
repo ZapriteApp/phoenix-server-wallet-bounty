@@ -327,7 +327,15 @@ $(document).ready(function () {
         return response.json();
       }).then(data => {
         $paymentRequestModal.hide();
-        $('.invoice').html(`${data.serialized}`);
+        var invoiceString = data.serialized;
+        $("#invoiceString").val(invoiceString);
+        // // $('.invoice').html(`${data.serialized}`);
+        new QRCode($("#barcode")[0], {
+          text: invoiceString,
+          width: 256,
+          height: 256
+        });
+
         $sharePaymentRequestModal.show();
         console.log(data);
         $("#requestInvoiceAmount").val(" ");
@@ -427,6 +435,13 @@ function formatTimestamp(timestamp) {
   const minutes = date.getMinutes().toString().padStart(2, '0');
 
   return `${year}-${month}-${day}, ${hours}:${minutes}`;
+}
+
+function copyInvoice() {
+  var $copyText = $("#invoiceString");
+  $copyText.select();
+  $copyText[0].setSelectionRange(0, 99999); // For mobile devices
+  document.execCommand("copy");
 }
 
 

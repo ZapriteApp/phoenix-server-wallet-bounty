@@ -317,6 +317,45 @@
             font-weight: bold;
         }
 
+
+        .barcode {
+            justify-content: center;
+            align-items: center;
+            margin: 20px auto;
+            width: 256px;
+            height: 256px;
+        }
+
+        .string-box {
+            display: flex;
+            align-items: center;
+            margin: 15px 0;
+        }
+
+        .invoice-string {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .copy-btn {
+            margin-left: 10px;
+            padding: 10px;
+            border: none;
+            background-color: #222222;
+            color: white;
+            cursor: pointer;
+        }
+
+        .copy-btn i {
+            font-size: 18px;
+        }
+
+        .copy-btn:hover {
+            background-color: #0056b3;
+        }
               
         .decode-invoice {
             background-color: #222222;
@@ -373,8 +412,42 @@
             cursor: pointer;
             border: 1px solid #f09026;
         }
+
+        #closeSharePaymentRequest {
+            background-color: #000000;
+            color: #f09026;
+            font-size: 16px;
+            padding: 10px;
+            position: absolute;
+            bottom: 10px;
+            left: 20px;
+            cursor: pointer;
+            text-align: center;
+            border: 1px solid #f09026;
+
+        }
+
+        #doneSharePaymentRequest {
+            background-color: #f09026;
+            color: white;
+            font-size: 16px;
+            padding: 10px;
+            position: absolute;
+            bottom: 10px;
+            right: 20px;
+            text-align: center;
+            cursor: pointer;
+            border: 1px solid #f09026;
+        }
+        #sharePaymentRequestModal .modal-content {
+            width: 500px;
+            height: 500px;
+        }
+
     </style>
     <link rel="stylesheet" href="public/font-awesome-4.7.0/css/font-awesome.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
 
 </head>
 
@@ -557,17 +630,19 @@
         <div class="modal-content">
             <span class="close" data-modal="sharePaymentRequestModal">&times;</span>
             <h2>Share Payment Request</h2>
-            <i class="fa fa-barcode fa-5x text-primary" aria-hidden="true"></i>
-            <p class="invoice text-primary" style="word-wrap: break-word;"></p>
-            <button class="btn btn-primary" type="button" id="closeSharePaymentRequest"><i
+            <div id="barcode" class="barcode"></div>
+
+            <div class="string-box">
+                <input type="text" id="invoiceString" class="invoice-string" readonly>
+                <button class="copy-btn" onclick="copyInvoice()"><i class="fa fa-copy"></i></button>
+            </div>
+
+            <button class="" type="button" id="closeSharePaymentRequest"><i
                     class="bi bi-x"></i>Close</button>
-            <button class="btn btn-primary" type="button" id="doneSharePaymentRequest">Done <i
+            <button class="" type="button" id="doneSharePaymentRequest">Done <i
                     class="bi bi-check2"></i></button>
         </div>
     </div>
-
-
-    <p id="selectedOption"></p>
     <script src="/public/script.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
