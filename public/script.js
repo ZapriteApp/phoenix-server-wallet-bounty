@@ -204,6 +204,8 @@ $(document).ready(function () {
     $paymentTypeModal.hide();
   });
 
+ 
+
   $("#invoicePaymentType").on("click", "#submitInvoice", function () {
     console.log("Submit clicked")
     const invoice = $("#requestInvoice").val().trim();
@@ -231,6 +233,11 @@ $(document).ready(function () {
     $successfulPaymentModal.show();
   });
 
+  $("#invoicePaymentType").on("click", "#backToPaymentType", function () {
+      $invoicePaymentType.hide();
+      $paymentTypeModal.show()
+  })
+  
   $("#offerPaymentType").on("click", "#submitOffer", function () {
     console.log("Offer button clicked")
     const offer = $("#requestOffer").val().trim();
@@ -261,6 +268,23 @@ $(document).ready(function () {
     $("#offerAmount").val(" ");
     $("#offerDesription").val(" ");
   });
+
+  $("#offerPaymentType").on("click", "#backToPaymentType", function () {
+    $offerPaymentType.hide();
+    $paymentTypeModal.show()
+    
+  })
+
+  $("#contactPaymentType").on("click", "#submitContact", function () {
+    
+  })
+
+  $("#contactPaymentType").on("click", "#backToPaymentType", function () {
+    $contactPaymentType.hide();
+    $paymentTypeModal.show()
+    
+  })
+
 
 
 
