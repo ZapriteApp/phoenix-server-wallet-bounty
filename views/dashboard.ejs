@@ -257,6 +257,19 @@
             border: 1px solid #f09026;
         }
 
+        #submitPaymentSuccess {
+            background-color: #f09026;
+            color: white;
+            font-size: 16px;
+            padding: 10px;
+            position: absolute;
+            bottom: 10px;
+            right: 20px;
+            text-align: center;
+            cursor: pointer;
+            border: 1px solid #f09026;
+        }
+
         #submitContact {
             background-color: #f09026;
             color: white;
@@ -342,19 +355,19 @@
 
         .copy-btn {
             margin-left: 10px;
-            padding: 10px;
+            padding: 1px;
             border: none;
-            background-color: #222222;
+            background-color: #111111;
             color: white;
             cursor: pointer;
         }
 
-        .copy-btn i {
+        /* .copy-btn i {
             font-size: 18px;
-        }
+        } */
 
         .copy-btn:hover {
-            background-color: #0056b3;
+            background-color: #222222;
         }
               
         .decode-invoice {
@@ -365,7 +378,6 @@
 
         .decoded-invoice-item {
             display: flex;
-            /* justify-content: space-between; */
             align-items: center; 
             margin-bottom: 10px;
         }
@@ -442,6 +454,16 @@
         #sharePaymentRequestModal .modal-content {
             width: 500px;
             height: 500px;
+        }
+
+        .icon-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .check-icon {
+            font-size: 128px;
+            color:  #f09026;
         }
 
     </style>
@@ -591,8 +613,11 @@
         <div class="modal-content">
             <span class="close" data-modal="successfulPaymentModal">&times;</span>
             <h3>Success</h3>
-            <i class="bi bi-check-circle"></i>
-            <button class="btn btn-primary" type="button" id="submitPaymentSuccess">OK <i
+            <div class="icon-container">
+                <i class="bi bi-check-circle check-icon"></i>
+            </div>
+            
+            <button class="" type="button" id="submitPaymentSuccess">OK <i
                     class="bi bi-check2"></i></button>
         </div>
     </div>

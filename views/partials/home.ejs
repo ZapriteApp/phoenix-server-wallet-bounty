@@ -90,9 +90,7 @@
 
     .icon {
         font-size: 18px;
-        /* Adjust icon size */
         cursor: pointer;
-        /* Optional: change cursor to pointer for clickability */
     }
 
     #sendButton {
@@ -169,9 +167,13 @@
             <span
                 class="bolt12Offer" id="bolt12Offer"></span>
             <span class="icons">
-                <i class="bi bi-copy"></i>
-                <i class="bi bi-qr-code"></i>
-                <i class="bi bi-download"></i>
+                
+                <!-- <i class="bi bi-copy copy-btn" id="copyOffer"></i> -->
+                <button class="copy-btn"><i class="fa fa-copy" id="copyOffer"></i></button>
+                <button id="showOfferQR"class="copy-btn" onclick="copyInvoice()"><i class="bi bi-qr-code copy-btn"></i></button>
+                <button id="downloadQR" class="copy-btn" onclick="copyInvoice()"><i class="bi bi-download copy-btn"></i></button>
+                <!-- <i class="bi bi-qr-code copy-btn"></i>
+                <i class="bi bi-download copy-btn"></i> -->
             </span>
         </div>
         <!-- <p style="word-wrap: break-word;" id="bolt12Offer"></p> -->

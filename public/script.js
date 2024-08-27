@@ -57,7 +57,7 @@ $(document).ready(function () {
 });
 
 $(document).ready(function () {
-  
+
   const transactions = "Some transactions";
 
   const params = {
@@ -80,15 +80,15 @@ $(document).ready(function () {
       const $tableBody = $('#paymentsTable tbody');
       console.log(!data[0].receivedSat);
       data.forEach(function (payment) {
-        transferITag=`<i class="bi bi-arrow-down-left"></i>`
-        paymentITag=`<i class="bi bi-arrow-up-right"></i>`
+        transferITag = `<i class="bi bi-arrow-down-left"></i>`
+        paymentITag = `<i class="bi bi-arrow-up-right"></i>`
         const row = `
             <tr>
-                <td>${ payment.hasOwnProperty("receivedSat")?  paymentITag : transferITag }</td>
-                <td>${ formatTimestamp(payment.createdAt)}</td>
-                <td>${ payment.hasOwnProperty("description") ? payment.description : "Label"}</td>
-                <td>${payment.hasOwnProperty("receivedSat")?  payment.receivedSat : -payment.sent}</td>
-                <td>${ payment.hasOwnProperty("receivedSat")?  "Payment" : "Transfer"}</td>
+                <td>${payment.hasOwnProperty("receivedSat") ? paymentITag : transferITag}</td>
+                <td>${formatTimestamp(payment.createdAt)}</td>
+                <td>${payment.hasOwnProperty("description") ? payment.description : "Label"}</td>
+                <td>${payment.hasOwnProperty("receivedSat") ? payment.receivedSat : -payment.sent}</td>
+                <td>${payment.hasOwnProperty("receivedSat") ? "Payment" : "Transfer"}</td>
                 <td>${payment.isPaid ? 'Completed' : 'Uncompleted'}</td>
                 <td><i class="bi bi-three-dots-vertical"></i></td>
             </tr>
@@ -179,28 +179,28 @@ $(document).ready(function () {
     }
   });
 
-  $("#invoicePaymentOption").click(function() {
+  $("#invoicePaymentOption").click(function () {
     var value = $(this).data("value");
-    console.log(value); 
+    console.log(value);
     $paymentTypeModal.hide();
     $invoicePaymentType.show();
   });
 
-  $("#contactPaymentOption").click(function() {
+  $("#contactPaymentOption").click(function () {
     var value = $(this).data("value");
     console.log(value);
     $paymentTypeModal.hide();
     $contactPaymentType.show()
   });
 
-  $("#offerPaymentOption").click(function() {
+  $("#offerPaymentOption").click(function () {
     var value = $(this).data("value");
     console.log(value);
     $paymentTypeModal.hide();
-    $offerPaymentType.show(); 
+    $offerPaymentType.show();
   });
 
-  $("#cancelSendRequest").click(function() {
+  $("#cancelSendRequest").click(function () {
     $paymentTypeModal.hide();
   });
 
@@ -374,6 +374,7 @@ $(document).ready(function () {
 })
 
 $(document).ready(function () {
+  $('#copyOffer').click(copyInvoice);
   let balance;
   fetch('/api/get-offer')
     .then(response => {
@@ -391,8 +392,8 @@ $(document).ready(function () {
     });
 });
 
-$(document).ready(function() {
-  $('.menu-item').click(function(e) {
+$(document).ready(function () {
+  $('.menu-item').click(function (e) {
     e.preventDefault();
 
     $('.menu-item').removeClass('selected');
@@ -430,7 +431,7 @@ function formatTimestamp(timestamp) {
   const year = date.getFullYear();
   const month = date.getMonth() + 1 < 11 ? `0${date.getMonth() + 1}` : date.getMonth() + 1;
   const day = date.getDate() < 10 ? `0${date.getDate()}` : date.getDate();
-  
+
   const hours = date.getHours() < 10 ? `0${date.getHours()}` : date.getHours();
   const minutes = date.getMinutes().toString().padStart(2, '0');
 
@@ -442,6 +443,15 @@ function copyInvoice() {
   $copyText.select();
   $copyText[0].setSelectionRange(0, 99999); // For mobile devices
   document.execCommand("copy");
+}
+
+function copyOffer() {
+      var $copyText = $("#copyOffer").text();
+      var $tempInput = $("<input>");
+      $("body").append($tempInput);
+      $tempInput.val($copyText).select();
+      document.execCommand("copy");
+      $tempInput.remove();
 }
 
 
