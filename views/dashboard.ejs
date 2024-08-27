@@ -165,9 +165,31 @@
 
         .modal-content h3 {
             color: #f09026;
-            ;
             padding-left: 0%;
 
+        }
+
+        .modal-content input[type="text"] {
+            background-color: #000;
+            color: white;
+            /* border: 1px solid #888; */
+            padding: 10px;
+            width: 100%;
+            box-sizing: border-box;
+            outline: none;
+        }
+
+        .modal-content input[type="text"]::placeholder {
+            color: #666; 
+            opacity: 1;
+        }
+
+        .modal-content input[type="text"]:hover {
+            background-color: #000;
+        }
+
+        .modal-content input[type="text"]:hover::placeholder {
+            color: white;
         }
 
         .payment-button-group {
@@ -325,6 +347,32 @@
         .decode-invoice p {
             font-size: 16px;
         }
+
+        #cancelPaymentRequest {
+            background-color: #000000;
+            color: #f09026;
+            font-size: 16px;
+            padding: 10px;
+            position: absolute;
+            bottom: 10px;
+            left: 20px;
+            cursor: pointer;
+            text-align: center;
+            border: 1px solid #f09026;
+        }
+
+        #nextToSharePaymentRequest {
+            background-color: #f09026;
+            color: white;
+            font-size: 16px;
+            padding: 10px;
+            position: absolute;
+            bottom: 10px;
+            right: 20px;
+            text-align: center;
+            cursor: pointer;
+            border: 1px solid #f09026;
+        }
     </style>
     <link rel="stylesheet" href="public/font-awesome-4.7.0/css/font-awesome.min.css">
 
@@ -480,6 +528,7 @@
     <div id="paymentRequestModal" class="modal">
         <div class="modal-content">
             <span class="close" data-modal="paymentRequestModal">&times;</span>
+            <h2>Receive</h2>
             <h3>Payment request</h3>
             <form>
                 <div class="form-group">
@@ -489,18 +538,17 @@
                     <label for="requestInvoiceName">Your name(Optional)</label>
                     <input type="text" id="requestInvoiceName" name="requestInvoiceName" class="form-control"
                         placeholder="Name">
-                    <label for="requestInvoiceDescription">Desription</label>
+                    <label for="requestInvoiceDescription">Description</label>
                     <input type="text" id="requestInvoiceDescription" name="requestInvoiceDescription"
                         class="form-control" placeholder="Sample description">
                 </div>
             </form>
             <div>
-                <button class="btn btn-primary" type="button" id="cancelPaymentRequest"> <i class="bi bi-x"></i>
+                <button class="" type="button" id="cancelPaymentRequest"> <i class="bi bi-x"></i>
                     Cancel</button>
-                <button class="btn btn-primary" type="button" id="nextToSharePaymentRequest">Next <i
+                <button class="" type="button" id="nextToSharePaymentRequest">Next <i
                         class="bi bi-arrow-right"></i></button>
             </div>
-
         </div>
     </div>
 
