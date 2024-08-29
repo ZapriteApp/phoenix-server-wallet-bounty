@@ -19,7 +19,7 @@ $(document).ready(function () {
       method: 'GET',
       success: function (html) {
         $('#rightPanel').html(html);
-        const itemsPerPage = 10;
+        const itemsPerPage = 8;
         let currentPage = 1;
         let paymentsData = [];
 
@@ -38,7 +38,7 @@ $(document).ready(function () {
                     <td>${payment.hasOwnProperty("receivedSat") ? paymentITag : transferITag}</td>
                     <td>${formatTimestamp(payment.createdAt)}</td>
                     <td>${payment.hasOwnProperty("description") ? payment.description : "Label"}</td>
-                    <td>${payment.hasOwnProperty("receivedSat") ? payment.receivedSat : -payment.sent}</td>
+                    <td>${payment.hasOwnProperty("receivedSat") ? payment.receivedSat : payment.sent}</td>
                     <td>${payment.hasOwnProperty("receivedSat") ? "Payment" : "Transfer"}</td>
                     <td>${payment.isPaid ? 'Completed' : 'Uncompleted'}</td>
                     <td><i class="bi bi-three-dots-vertical"></i></td>
@@ -144,41 +144,6 @@ $(document).ready(function () {
     });
   });
 });
-
-// $(document).ready(function () {
-//   fetch(`/api/list-incoming-and-outgoing`)
-//     .then(response => {
-//       if (!response.ok) {
-//         throw new Error('Network response was not ok ' + response.statusText);
-//       }
-
-//       return response.json();
-//     })
-//     .then(data => {
-//       const $tableBody = $('#paymentsTable tbody');
-//       console.log(!data[0].receivedSat);
-//       data.forEach(function (payment) {
-//         transferITag = `<i class="bi bi-arrow-up-right"></i>`
-//         paymentITag = `<i class="bi bi-arrow-down-left"></i>`
-//         const row = `
-//             <tr>
-//                 <td>${payment.hasOwnProperty("receivedSat") ? paymentITag : transferITag}</td>
-//                 <td>${formatTimestamp(payment.createdAt)}</td>
-//                 <td>${payment.hasOwnProperty("description") ? payment.description : "Label"}</td>
-//                 <td>${payment.hasOwnProperty("receivedSat") ? payment.receivedSat : -payment.sent}</td>
-//                 <td>${payment.hasOwnProperty("receivedSat") ? "Payment" : "Transfer"}</td>
-//                 <td>${payment.isPaid ? 'Completed' : 'Uncompleted'}</td>
-//                 <td><i class="bi bi-three-dots-vertical"></i></td>
-//             </tr>
-//         `;
-//         $tableBody.append(row);
-//       });
-//     })
-//     .catch(error => {
-//       console.error('Error fetching balance:', error);
-//     });
-// })
-
 
 $(document).ready(function () {
   let balance;
@@ -555,5 +520,51 @@ function copyOffer() {
   document.execCommand("copy");
   $tempInput.remove();
 }
+
+$('#exportCsv').on('click', () => {
+  const csvRows = [];
+  const headers = ['Payment Type', 'TimeStamp', 'Label', 'Amount', 'Type', 'Status', 'Actions'];
+  csvRows.push(headers.join(','));
+  let paymenytsData = [];
+  fetch(`/api/list-incoming-and-outgoing`)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok ' + response.statusText);
+      }
+      return response.json();
+    })
+    .then(data => {
+      paymentsData = data;
+    })
+    .catch(error => {
+      console.error('Error fetching balance:', error);
+    });
+  paymenytsData.forEach(payment => {
+    const transferITag = payment.hasOwnProperty("receivedSat") ? 'Arrow-Up-Right' : 'Arrow-Down-Left';
+    const paymentITag = payment.hasOwnProperty("receivedSat") ? 'Payment' : 'Transfer';
+    const status = payment.isPaid ? 'Completed' : 'Uncompleted';
+    const row = [
+      transferITag,
+      formatTimestamp(payment.createdAt),
+      payment.hasOwnProperty("description") ? payment.description : "Label",
+      payment.hasOwnProperty("receivedSat") ? payment.receivedSat : -payment.sent,
+      paymentITag,
+      status,
+      'Three-Dots-Vertical' // Placeholder for Actions icon
+    ];
+    csvRows.push(row.join(','));
+  });
+
+  const csvString = csvRows.join('\n');
+  const blob = new Blob([csvString], { type: 'text/csv' });
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'transactions.csv';
+  a.click();
+  URL.revokeObjectURL(url);
+});
+
 
 
