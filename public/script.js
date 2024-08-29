@@ -57,17 +57,6 @@ $(document).ready(function () {
 });
 
 $(document).ready(function () {
-
-  const transactions = "Some transactions";
-
-  const params = {
-    all: true,
-    limit: 3,
-    offset: 2
-  }
-
-  const queryString = new URLSearchParams(params).toString();
-
   fetch(`/api/list-incoming-and-outgoing`)
     .then(response => {
       if (!response.ok) {
@@ -80,8 +69,8 @@ $(document).ready(function () {
       const $tableBody = $('#paymentsTable tbody');
       console.log(!data[0].receivedSat);
       data.forEach(function (payment) {
-        transferITag = `<i class="bi bi-arrow-down-left"></i>`
-        paymentITag = `<i class="bi bi-arrow-up-right"></i>`
+        transferITag = `<i class="bi bi-arrow-up-right"></i>`
+        paymentITag = `<i class="bi bi-arrow-down-left"></i>`
         const row = `
             <tr>
                 <td>${payment.hasOwnProperty("receivedSat") ? paymentITag : transferITag}</td>
