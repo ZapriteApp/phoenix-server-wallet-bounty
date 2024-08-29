@@ -69,22 +69,40 @@
         }
 
         .footer-item {
+            display: flex;
             padding: 10px 0;
             color: white;
+            align-items: center;
             text-decoration: none;
             cursor: pointer;
+            box-sizing: border-box;
+            border-top: 1px solid #333333;
         }
 
         .footer-item:not(:last-child) {
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
 
         .footer-item:hover,
         .footer-item:focus {
-            background-color: #333;
-            /* Lighter shade of black */
+            background-color: #222222;
+            color: white;
         }
 
+        .footer-icon-right {
+            margin-left: auto; 
+            padding-right: 40px;
+        }
+
+        .footer-icon {
+            margin-right: 10px;
+        }
+
+        .footer-text {
+            color: white;
+        /* margin-left: 34px; Align text with the starting point of other icons */ 
+            flex-grow: 1;
+        }
         .main-content {
             padding: 20px;
         }
@@ -96,7 +114,7 @@
         }
 
         .row {
-            margin-bottom: 20px;
+            margin-bottom: 10px;
             /* Space between rows */
         }
 
@@ -105,12 +123,11 @@
             /* Heading size */
             color: #f09026;
             margin-bottom: 10px;
-            /* Space below the heading */
+
         }
 
         .heading-home {
             font-size: 2rem;
-            /* Larger heading size for Home */
             color: #f19528;
             margin-bottom: 20px;
         }
@@ -440,6 +457,9 @@
             border: 1px solid #f09026;
         }
 
+        #cancelPaymentRequest:hover {
+            background-color: #111111;
+        }
         
 
         #nextToSharePaymentRequest {
@@ -537,11 +557,21 @@
                 </div>
 
                 <div class="footer">
-                    <a href="#" class="footer-item" style="text-decoration: none;" id="home">Zaprite</a>
-                    <a href="#" class="footer-item" style="text-decoration: none;" id="home"><i
-                            class="bi bi-box-arrow-right"></i>Log Out</a>
-                    <a href="#" class="footer-item" style="text-decoration: none;" id="home">Version 0.1.0 <i
-                            class="bi bi-github"></i></a>
+                    <div class="footer-item">
+                        <a href="#"  style="text-decoration: none;" id="home"> <span class="footer-text">Zaprite</span></a>
+                        <i class="bi bi-arrow-up footer-icon-right"></i>
+                    </div>
+                    <div class="footer-item">
+                        <i class="bi bi-box-arrow-right footer-icon"></i>
+                        <a href="#" style="text-decoration: none;" id="home"><span class="footer-text">Log Out</span></a>
+                        
+                    </div>
+                    <div class="footer-item">
+                        <a href="#" style="text-decoration: none;" id="home">  <span class="footer-text" style="color: #444444;">Version 0.1.0</span></a>
+                        <i class="bi bi-github footer-icon-right"></i>
+                    </div>
+                   
+                    
                 </div>
             </div>
 
