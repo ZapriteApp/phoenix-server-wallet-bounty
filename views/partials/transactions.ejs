@@ -1,9 +1,99 @@
 <body>
+    <head>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            background-color: #000000;
+            color: #ffffff;
+            margin: 0;
+            padding: 0
+        }
+
+        thead {
+            background-color: #000000;
+            color: #333333;
+        }
+
+        th, td {
+            border: none;
+            padding: 10px;
+            text-align: left;
+            font-size: 0.75em; 
+        }
+
+        tbody tr {
+            border-bottom: 1px solid #333333;
+        }
+
+        tbody tr:last-child {
+            border-bottom: none;
+        }
+
+        td:last-child {
+            text-align: center;
+        }
+
+        .bi-arrow-down-left {
+            color: green; 
+        }
+
+        .bi-arrow-up-right {
+            color:red; 
+
+        }
+
+        h3 {
+            color: #f19528; 
+            margin-top: 20px;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .pagination-controls {
+            display: flex;
+            align-items: center;
+        }
+
+        .pagination-button {
+            margin: 0 5px;
+            padding: 5px 10px;
+            background-color: #333333;
+            color: #ffffff;
+            border: none;
+            cursor: pointer;
+        }
+
+        .pagination-button:disabled {
+            background-color: #555555;
+            cursor: not-allowed;
+        }
+
+        .export-button {
+            background-color: #4CAF50;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        .export-button:hover {
+            background-color: #45a049; 
+        }
+    </style>
+</head>
     <h2>Transactions</h2>
-    <table border="1" id="paymentsTable">
+    <h3> Activity</h3>
+    <p> Your full activity history for this account.</p>
+    <table id="paymentsTable">
         <thead>
             <tr>
-                <th>Payment Type</th>
+                <th></th>
                 <th>TimeStamp   </th>
                 <th>Label</th>
                 <th>Amount</th>
@@ -16,6 +106,16 @@
             <!-- Table rows will be inserted here by JavaScript -->
         </tbody>
     </table>
+    <div class="pagination">
+        <div class="pagination-controls">
+            <button id="prevPage" class="pagination-button" disabled>Previous</button>
+            <span id="pageInfo"></span>
+            <button id="nextPage" class="pagination-button">Next</button>
+        </div>
+        <button id="exportCsv" class="export-button">Export CSV</button>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/public/script.js"></script>
 </body>
 
 
