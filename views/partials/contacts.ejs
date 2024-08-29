@@ -1,1 +1,141 @@
-<h1>Contacts</h1>
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        background-color: #000000;
+        color: #ffffff;
+        margin: 0;
+        padding: 0
+    }
+
+    thead {
+        background-color: #000000;
+        color: #333333;
+    }
+
+    th,
+    td {
+        border: none;
+        padding: 10px;
+        text-align: left;
+        font-size: 0.75em;
+    }
+
+    tbody tr {
+        border-bottom: 1px solid #333333;
+    }
+
+    tbody tr:last-child {
+        border-bottom: none;
+    }
+
+    td:last-child {
+        text-align: center;
+    }
+
+    .bi-arrow-down-left {
+        color: green;
+    }
+
+    .bi-arrow-up-right {
+        color: red;
+
+    }
+
+    h3 {
+        color: #f19528;
+        margin-top: 20px;
+    }
+
+    .pagination {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 20px;
+    }
+
+    .pagination-controls {
+        display: flex;
+        align-items: center;
+    }
+
+    .pagination-button {
+        margin: 0 5px;
+        padding: 5px 10px;
+        background-color: #111111;
+        color: #ffffff;
+        border: none;
+        cursor: pointer;
+    }
+
+    .pagination-button:disabled {
+        background-color: #333333;
+        cursor: not-allowed;
+    }
+
+    .pagination-button:hover {
+        background-color: #222222;
+    }
+
+    .contacts-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 20px;
+    }
+
+    .contacts-header h3 {
+        color: #f19528;
+        margin: 0;
+    }
+
+    .import-button {
+        background-color: #f19528;
+        color: #ffffff;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+    }
+
+    .import-button:hover {
+        background-color: #d97d1e;
+    }
+</style>
+
+</style>
+</head>
+<h2>Contacts</h2>
+<div  class="contacts-header">
+    <h3> Address Book</h3>
+    <button id="importCsv" class="import-button">Import <i class="bi bi-file-earmark-arrow-down"></i></button>
+</div>
+
+<p> Manage your contacts </p>
+<table id="contactsTable">
+    <thead>
+        <tr>
+            <th>Date Added</th>
+            <th>Label </th>
+            <th>Offer</th>
+            <th>Lightning Address</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Table rows will be inserted here by JavaScript -->
+    </tbody>
+</table>
+<div class="pagination">
+    <div class="pagination-controls">
+        <button id="prevPage" class="pagination-button" disabled>Previous</button>
+        <span id="pageInfo"></span>
+        <button id="nextPage" class="pagination-button">Next</button>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</body>
+
+
+
+<script src="/public/script.js"></script>
