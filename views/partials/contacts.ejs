@@ -100,14 +100,86 @@
     .import-button:hover {
         background-color: #d97d1e;
     }
+
+    .new-contact-button {
+        background-color: #f19528;
+        ;
+        color: #ffffff;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+    }
+
+    .new-contact-button:hover {
+        background-color: #d97d1e;
+    }
+
+    #cancelAddContact {
+        background-color: #000000;
+        color: #f09026;
+        font-size: 16px;
+        padding: 10px;
+        position: absolute;
+        bottom: 10px;
+        left: 20px;
+        cursor: pointer;
+        text-align: center;
+        border: 1px solid #f09026;
+    }
+    #importContactModal .modal-content {
+        width: 500px;
+        height: 500px;
+
+    }
+
+    #addContact {
+        background-color: #f09026;
+        color: white;
+        font-size: 16px;
+        padding: 10px;
+        position: absolute;
+        bottom: 10px;
+        right: 20px;
+        text-align: center;
+        cursor: pointer;
+        border: 1px solid #f09026;
+    }
+
+    #doneImportContactModal {
+        background-color: #f09026;
+        color: white;
+        font-size: 16px;
+        padding: 10px;
+        position: absolute;
+        bottom: 10px;
+        right: 20px;
+        text-align: center;
+        cursor: pointer;
+        border: 1px solid #f09026;
+    }
+
+    #closeContactModal {
+        background-color: #000000;
+        color: #f09026;
+        font-size: 16px;
+        padding: 10px;
+        position: absolute;
+        bottom: 10px;
+        left: 20px;
+        cursor: pointer;
+        text-align: center;
+        border: 1px solid #f09026;
+    }
+
+
 </style>
 
 </style>
 </head>
 <h2>Contacts</h2>
-<div  class="contacts-header">
+<div class="contacts-header">
     <h3> Address Book</h3>
-    <button id="importCsv" class="import-button">Import <i class="bi bi-file-earmark-arrow-down"></i></button>
+    <button id="importContact" class="import-button">Import <i class="bi bi-file-earmark-arrow-down"></i></button>
 </div>
 
 <p> Manage your contacts </p>
@@ -132,10 +204,49 @@
         <span id="pageInfo"></span>
         <button id="nextPage" class="pagination-button">Next</button>
     </div>
+    <button id="newContact" class="new-contact-button">New Contact <i class="bi bi-plus-lg"></i></button>
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </body>
 
 
+<div id="addContactModal" class="modal">
+    <div class="modal-content">
+        <span class="close" data-modal="addContactModal">&times;</span>
+        <h2>New Contact</h2>
+        <h3>Contact Information</h3>
+        <form>
+            <div class="form-group">
+                <label for="addContactName">Name*:</label>
+                <input type="text" id="addContactName" name="addContactName" class="form-control"
+                    placeholder="Satoshi Nakamoto ">
+                <label for="addContactOffer">Offer:</label>
+                <input type="text" id="addContactOffer" name="addContactOffer" class="form-control"
+                    placeholder="lno1zrxq8pjw7qjlm68mtp7e3yvxee4y5xrgj ">
+                <label for="addContactAddress">Lightning Address:</label>
+                <input type="text" id="addContactAddress" name="addContactAddress" class="form-control"
+                    placeholder="Paste a lightning address ">
+            </div>
+        </form>
+        <button class="" type="button" id="cancelAddContact"><i class="bi bi-arrow-left"> </i>Cancel</button>
+        <button class="" type="button" id="addContact">Add Contact <i class="bi bi-check2"></i></button>
+    </div>
+</div>
+
+<div id="importContactModal" class="modal">
+    <div class="modal-content">
+        <span class="close" data-modal="importContactModal">&times;</span>
+        <h2>Import Contacts</h2>
+        <h3>Scan the QR code to import contacts</h3>
+        
+        <div id="barcode" class="barcode"></div>
+        <button class="" type="button" id="closeContactModal"><i class="bi bi-x"></i>Close</button>
+        <button class="" type="button" id="doneImportContactModal">Done <i class="bi bi-check2"></i></button>
+    </div>
+</div>
+
 
 <script src="/public/script.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"
+integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>

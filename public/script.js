@@ -328,10 +328,6 @@ $(document).ready(function () {
 
   })
 
-
-
-
-
   $("#successfulPaymentModal").on("click", "#submitPaymentSuccess", function () {
     console.log("Submit clicked")
     $successfulPaymentModal.hide();
@@ -468,6 +464,34 @@ $(document).ready(function () {
     $(this).addClass('selected');
   });
 })
+
+$(document).ready(function () {
+  var $addContactModal = $("#addContactModal");
+  var $importContactModal = $("#importContactModal");
+
+  $("#importContact").click(function () {
+    console.log("Add contact modal clicked")
+    $importContactModal.show();
+  });
+
+  $(".pagination").on("click", "#newContact", function () {
+    console.log("Add contact modal clicked");
+    $addContactModal.show();
+  })
+
+
+  $("#cancelAddContact").click(function () {
+    $addContactModal.hide();
+  });
+
+  $('#closeContactModal').click(function () {
+    $importContactModal.hide();
+  });
+
+  $("#doneImportContactModal").click(function () {
+    $importContactModal.hide();
+  });
+});
 
 document.querySelectorAll('.load-partial').forEach(link => {
   link.addEventListener('click', function (event) {
