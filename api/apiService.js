@@ -1,5 +1,6 @@
-const axios = require('axios');
-require('dotenv').config();
+import axios from 'axios';
+import dotenv from 'dotenv';
+dotenv.config();
 
 let baseUrl = process.env.PHOENIX_API_URL
 const username = '';
@@ -8,19 +9,20 @@ const headers = {
   'Authorization': 'Basic ' + Buffer.from(`${username}:${httpPassword}`).toString('base64')
 };
 
-const getBalance = async () => {
-  path = '/getbalance';
-  url = new URL(path, baseUrl).href;
+export const getBalance = async () => {
+  const path = '/getbalance';
+  const url = new URL(path, baseUrl).href;
   try {
     const response = await axios.get(url, { headers });
     return response.data;
   } catch (error) {
+    console.log(error)
     console.error('Error fetching data', error);
     throw error;
   }
 }
 
-const payInvoice = async (amountSat, invoice) => {
+export const payInvoice = async (amountSat, invoice) => {
   const path = '/payinvoice';
   const url = new URL(path, baseUrl).href;
 
@@ -41,9 +43,9 @@ const payInvoice = async (amountSat, invoice) => {
   }
 }
 
-const getNodeInfo = async () => {
-  path = '/getinfo';
-  url = new URL(path, baseUrl).href;
+export const getNodeInfo = async () => {
+  const path = '/getinfo';
+  const url = new URL(path, baseUrl).href;
   try {
     const response = await axios.get(url, { headers });
     return response.data;
@@ -53,9 +55,9 @@ const getNodeInfo = async () => {
   }
 }
 
-const createInvoice = async (description, amountSat, externalId, webhookUrl) => {
-  path = '/createinvoice';
-  url = new URL(path, baseUrl).href;
+export const createInvoice = async (description, amountSat, externalId, webhookUrl) => {
+  const path = '/createinvoice';
+  const url = new URL(path, baseUrl).href;
 
   const data = new URLSearchParams();
   data.append('description', description);
@@ -71,9 +73,9 @@ const createInvoice = async (description, amountSat, externalId, webhookUrl) => 
   }
 }
 
-const getIncomingPayments = async (from, to, limit, offset, all) => {
-  path = '/payments/incoming';
-  url = new URL(path, baseUrl).href;
+export const getIncomingPayments = async (from, to, limit, offset, all) => {
+  const path = '/payments/incoming';
+  const url = new URL(path, baseUrl).href;
 
   const params = {
     from: from,
@@ -92,9 +94,9 @@ const getIncomingPayments = async (from, to, limit, offset, all) => {
 }
 
 
-const getOutgoingPayments = async (from, to, limit, offset, all) => {
-  path = '/payments/outgoing';
-  url = new URL(path, baseUrl).href;
+export const getOutgoingPayments = async (from, to, limit, offset, all) => {
+  const path = '/payments/outgoing';
+  const url = new URL(path, baseUrl).href;
   const params = {
     from: from,
     to: to,
@@ -112,11 +114,11 @@ const getOutgoingPayments = async (from, to, limit, offset, all) => {
 
 }
 
-const payOffer = async (amountSat, offer, message) => {
+export const payOffer = async (amountSat, offer, message) => {
   const path = '/payoffer';
   const url = new URL(path, baseUrl).href;
 
-  const data = new URLSearchParams();
+  let data = new URLSearchParams();
   data.append('amountSat', amountSat);
   data.append('offer', offer);
   data.append('message', message);
@@ -129,9 +131,9 @@ const payOffer = async (amountSat, offer, message) => {
   }
 };
 
-const getOffer = async () => {
-  path = '/getoffer';
-  url = new URL(path, baseUrl).href;
+export const getOffer = async () => {
+  const path = '/getoffer';
+  const url = new URL(path, baseUrl).href;
   try {
     const response = await axios.get(url, { headers });
     return response.data;
@@ -141,12 +143,12 @@ const getOffer = async () => {
   }
 }
 
-const listIncomingAndOutgoing = async () => {
-  path1 = '/payments/incoming?all=true&limit=1000000';
-  path2 = '/payments/outgoing?all=true&limit=1000000';
+export const listIncomingAndOutgoing = async () => {
+  const path1 = '/payments/incoming?all=true&limit=1000000';
+  const path2 = '/payments/outgoing?all=true&limit=1000000';
 
-  url1 = new URL(path1, baseUrl).href;
-  url2 = new URL(path2, baseUrl).href;
+  const url1 = new URL(path1, baseUrl).href;
+  const url2 = new URL(path2, baseUrl).href;
 
   try {
     const response1 = await axios.get(url1, { headers });
@@ -156,7 +158,7 @@ const listIncomingAndOutgoing = async () => {
     
     // return [ ...response1.data, ...response2.data ]
 
-    data = [ ...response1.data, ...response2.data ];
+    let data = [ ...response1.data, ...response2.data ];
 
     return data.sort((a,b) => b.createdAt - a.createdAt)
     // return response1.data;
@@ -167,10 +169,10 @@ const listIncomingAndOutgoing = async () => {
 
 }
 
-const decodeOffer = async (offer) => {
-  path = '/decodeoffer';
-  url = new URL(path, baseUrl).href;
-  const data = new URLSearchParams();
+export const decodeOffer = async (offer) => {
+  const path = '/decodeoffer';
+  const url = new URL(path, baseUrl).href;
+  let data = new URLSearchParams();
   data.append('offer', offer);
   try {
     const response = await axios.post(url, data.toString(), { headers });
@@ -181,10 +183,10 @@ const decodeOffer = async (offer) => {
   }
 }
 
-const decodeInvoice = async (invoice) => {
-  path = '/decodeinvoice';
-  url = new URL(path, baseUrl).href;
-  const data = new URLSearchParams();
+export const decodeInvoice = async (invoice) => {
+  const path = '/decodeinvoice';
+  const url = new URL(path, baseUrl).href;
+  let data = new URLSearchParams();
   data.append('invoice', invoice);
   try {
     const response = await axios.post(url, data.toString(), { headers });
@@ -194,11 +196,3 @@ const decodeInvoice = async (invoice) => {
     throw error;
   }
 }
-
-
-
-module.exports = {
-  getBalance, payInvoice, getNodeInfo, createInvoice,
-  getIncomingPayments, getOutgoingPayments, payOffer, getOffer,
-  listIncomingAndOutgoing, decodeInvoice, decodeOffer
-};

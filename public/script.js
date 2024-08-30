@@ -491,6 +491,9 @@ $(document).ready(function () {
   $("#doneImportContactModal").click(function () {
     $importContactModal.hide();
   });
+
+  
+
 });
 
 document.querySelectorAll('.load-partial').forEach(link => {

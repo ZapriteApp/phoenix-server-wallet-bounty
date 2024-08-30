@@ -1,16 +1,15 @@
-const express = require('express');
-const axios = require('axios');
-const cors = require('cors');
+import express from 'express';
+import cors from 'cors';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import router from './api/apiRoutes.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 const app = express();
-const port = 3000;
-const { Buffer } = require('buffer')
-require('dotenv').config();
-const path = require('path');
-const apiRoutes = require('./api/apiRoutes')
-require('dotenv').config();
-
 let url = process.env.PHOENIX_API_URL
-
+const port = 3000;
 const corsOptions = {
   origin: url, 
   methods: 'GET,POST,OPTIONS',
@@ -40,7 +39,7 @@ app.get('/home', (req, res) => {
   res.render('dashboard');
 });
 
-app.use('/api', apiRoutes);
+app.use('/api', router);
 
 app.listen(port, () => {
   console.log(`Lightning wallet UI app listening at http://localhost:${port}`);

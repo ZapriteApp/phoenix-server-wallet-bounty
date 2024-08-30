@@ -1,6 +1,6 @@
-const express = require('express');
+import express from 'express';
+import * as apiService from './apiService.js';
 const router = express.Router();
-const apiService = require('./apiService');
 
 router.get('/get-balance', async (req, res) => {
     try  {
@@ -8,6 +8,7 @@ router.get('/get-balance', async (req, res) => {
         res.json(data);
     }
     catch(error) {
+        console.log("error happened here")
         res.status(500).json({ message: 'Error retreving balance'});
     }
 });
@@ -112,4 +113,5 @@ router.post('/decode-invoice', async (req, res) => {
         res.status(500).json({ message: 'Error decoding invoice'});
     }
 });
-module.exports = router;
+
+export default router;
