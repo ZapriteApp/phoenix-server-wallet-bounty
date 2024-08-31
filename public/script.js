@@ -1,3 +1,4 @@
+
 $(document).ready(function () {
   $('#home-page').on('click', '#home', function () {
     $.ajax({
@@ -484,7 +485,7 @@ $(document).ready(function () {
     $addContactModal.hide();
   });
 
-  $('#closeContactModal').click(function () {
+  $('#closeContactModal').on("click", function () {
     $importContactModal.hide();
   });
 
@@ -492,7 +493,42 @@ $(document).ready(function () {
     $importContactModal.hide();
   });
 
-  
+  $("#addContact").on('click', function () {
+    const name = $("#addContactName").val().trim();
+    const offer = $("#addContactOffer").val().trim();
+    const address = $("#addContactAddress").val().trim();
+
+    const contactData = {
+      name: name,
+      offer: offer,
+      address: address
+    }
+
+    fetch('/api/save-contact', { 
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(contactData)
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Contact saved:', data);
+      })
+      .catch(error => {
+        console.error('Error saving contact:', error);
+      });
+
+    console.log(contactData)
+
+    $addContactModal.hide();
+
+  });
+
+
+
+
+
 
 });
 

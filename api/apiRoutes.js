@@ -1,5 +1,7 @@
 import express from 'express';
 import * as apiService from './apiService.js';
+import * as utils from '../utils/utils.js'
+import db from '../utils/db.js'
 const router = express.Router();
 
 router.get('/get-balance', async (req, res) => {
@@ -111,6 +113,21 @@ router.post('/decode-invoice', async (req, res) => {
     }
     catch(error) {
         res.status(500).json({ message: 'Error decoding invoice'});
+    }
+});
+
+router.post('/save-contact', async (req, res) => {
+    const { name, offer, address } = req.body;
+    const newContactsId = utils.getId()
+    console.log(newContactsId)
+    try  {
+        db.data.contacts.push({id: newContactsId, name:name, offer: offer, address: address})
+        await db.write()
+        res.json({message: "Contact saved successfully"});
+    }
+    catch(error) {
+        console.log(error)
+        res.status(500).json({ "message": error});
     }
 });
 

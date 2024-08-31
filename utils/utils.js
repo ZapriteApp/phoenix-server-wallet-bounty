@@ -1,9 +1,13 @@
-require('dotenv').config();
-const apiService = require('./apiService');
-const fs = require('fs');
-const path = require('path');
+import dotenv from 'dotenv';
+dotenv.config();
+import * as apiService from '../api/apiService.js';
+import fs from 'fs'
+import db from './db.js'
+import lodash from 'lodash'
+import path  from 'path';
+import { v4 as uuidv4 } from 'uuid'
 
-function saveToEnvFile(key, value) {
+export function saveToEnvFile(key, value) {
   const envVar = `${key}=${value}\n`;
   const envFilePath = path.resolve(__dirname, '.env');
 
@@ -16,7 +20,7 @@ function saveToEnvFile(key, value) {
   });
 }
 
-function isBolt11(value) {
+export function isBolt11(value) {
   if (typeof offer !== 'string') {
     return False;
   }
@@ -36,7 +40,7 @@ function isBolt11(value) {
     });
 }
 
-function isBolt12(value) {
+export function isBolt12(value) {
   if (typeof offer !== 'string') {
     return False;
   }
@@ -56,6 +60,6 @@ function isBolt12(value) {
     });
 }
 
-
-
-module.exports = { saveToEnvFile, isBolt11, isBolt12 };
+export function getId() {
+  return uuidv4();
+}
