@@ -24,33 +24,7 @@ $(document).ready(function () {
         let currentPage = 1;
         let paymentsData = [];
 
-        function renderTablePage(page) {
-          const $tableBody = $('#paymentsTable tbody');
-          $tableBody.empty();
-          const startIndex = (page - 1) * itemsPerPage;
-          const endIndex = startIndex + itemsPerPage;
-          const pageData = paymentsData.slice(startIndex, endIndex);
-
-          pageData.forEach(function (payment) {
-            const transferITag = `<i class="bi bi-arrow-up-right"></i>`;
-            const paymentITag = `<i class="bi bi-arrow-down-left"></i>`;
-            const row = `
-                <tr>
-                    <td>${payment.hasOwnProperty("receivedSat") ? paymentITag : transferITag}</td>
-                    <td>${formatTimestamp(payment.createdAt)}</td>
-                    <td>${payment.hasOwnProperty("description") ? payment.description : "Label"}</td>
-                    <td>${payment.hasOwnProperty("receivedSat") ? payment.receivedSat : payment.sent}</td>
-                    <td>${payment.hasOwnProperty("receivedSat") ? "Payment" : "Transfer"}</td>
-                    <td>${payment.isPaid ? 'Completed' : 'Uncompleted'}</td>
-                    <td><i class="bi bi-three-dots-vertical"></i></td>
-                </tr>
-            `;
-            $tableBody.append(row);
-          });
-
-          updatePaginationControls(page);
-        }
-
+        
         function updatePaginationControls(page) {
           const totalPages = Math.ceil(paymentsData.length / itemsPerPage);
           $('#prevPage').prop('disabled', page <= 1);
@@ -91,7 +65,33 @@ $(document).ready(function () {
             .catch(error => {
               console.error('Error fetching balance:', error);
             });
+        function renderTablePage(page) {
+          const $tableBody = $('#paymentsTable tbody');
+          $tableBody.empty();
+          const startIndex = (page - 1) * itemsPerPage;
+          const endIndex = startIndex + itemsPerPage;
+          const pageData = paymentsData.slice(startIndex, endIndex);
+
+          pageData.forEach(function (payment) {
+            const transferITag = `<i class="bi bi-arrow-up-right"></i>`;
+            const paymentITag = `<i class="bi bi-arrow-down-left"></i>`;
+            const row = `
+                <tr>
+                    <td>${payment.hasOwnProperty("receivedSat") ? paymentITag : transferITag}</td>
+                    <td>${formatTimestamp(payment.createdAt)}</td>
+                    <td>${payment.hasOwnProperty("description") ? payment.description : "Label"}</td>
+                    <td>${payment.hasOwnProperty("receivedSat") ? payment.receivedSat : payment.sent}</td>
+                    <td>${payment.hasOwnProperty("receivedSat") ? "Payment" : "Transfer"}</td>
+                    <td>${payment.isPaid ? 'Completed' : 'Uncompleted'}</td>
+                    <td><i class="bi bi-three-dots-vertical"></i></td>
+                </tr>
+            `;
+            $tableBody.append(row);
+          });
+
+          updatePaginationControls(page);
         }
+}
 
         $('#prevPage').click(function () {
           if (currentPage > 1) {
@@ -123,6 +123,92 @@ $(document).ready(function () {
       method: 'GET',
       success: function (html) {
         $('#rightPanel').html(html);
+        const itemsPerPage = 8;
+        let currentPage = 1;
+        let contactsData = [];
+
+              
+        function updatePaginationControls(page) {
+          const totalPages = Math.ceil(contactsData.length / itemsPerPage);
+          $('#prevPage').prop('disabled', page <= 1);
+          $('#nextPage').prop('disabled', page >= totalPages);
+
+          const $pageInfo = $('#pageInfo');
+          $pageInfo.text(`Page ${page} of ${totalPages}`);
+
+          const $pageNumbers = $('#pageNumbers');
+          $pageNumbers.empty();
+
+          for (let i = 1; i <= totalPages; i++) {
+            const pageButton = $('<button>')
+              .text(i)
+              .addClass('page-number-button')
+              .prop('disabled', i === page)
+              .click(function () {
+                currentPage = i;
+                renderTablePage(currentPage);
+              });
+
+            $pageNumbers.append(pageButton);
+          }
+        }
+
+        function fetchData() {
+          fetch(`/api/get-contacts`)
+            .then(response => {
+              if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+              }
+              return response.json();
+            })
+            .then(data => {
+              contactsData = data.contacts;
+              renderTablePage(currentPage);
+            })
+            .catch(error => {
+              console.error('Error fetching balance:', error);
+            });
+        function renderTablePage(page) {
+          const $tableBody = $('#contactsTable tbody');
+          $tableBody.empty();
+          const startIndex = (page - 1) * itemsPerPage;
+          const endIndex = startIndex + itemsPerPage;
+          const pageData = contactsData.slice(startIndex, endIndex);
+
+          pageData.forEach(function (contact) {
+            const row = `
+                <tr>
+                    <td>${new Date().toLocaleDateString()}</td>
+                    <td>${contact.name}</td>
+                    <td>${contact.offer}</td>
+                    <td>${contact.address}</td>
+                    <td>Active</td>
+                    <td><i class="bi bi-three-dots-vertical"></i></td>
+                </tr>
+            `;
+            $tableBody.append(row);
+          });
+
+          updatePaginationControls(page);
+        }
+}
+
+        $('#prevPage').click(function () {
+          if (currentPage > 1) {
+            currentPage--;
+            renderTablePage(currentPage);
+          }
+        });
+
+        $('#nextPage').click(function () {
+          const totalPages = Math.ceil(contactsData.length / itemsPerPage);
+          if (currentPage < totalPages) {
+            currentPage++;
+            renderTablePage(currentPage);
+          }
+        });
+
+        fetchData();
 
       },
       error: function (xhr, status, error) {
