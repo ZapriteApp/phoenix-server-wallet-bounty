@@ -118,12 +118,22 @@ router.post('/decode-invoice', async (req, res) => {
 
 router.post('/save-contact', async (req, res) => {
     const { name, offer, address } = req.body;
-    const newContactsId = utils.getId()
-    console.log(newContactsId)
+    const newContactsId = utils.getId();
     try  {
         db.data.contacts.push({id: newContactsId, name:name, offer: offer, address: address})
         await db.write()
         res.json({message: "Contact saved successfully"});
+    }
+    catch(error) {
+        console.log(error)
+        res.status(500).json({ "message": error});
+    }
+});
+
+router.get('/get-contacts', async (req, res) => {
+    try  {
+        const { contacts } = db.data
+        res.json( { contacts } );
     }
     catch(error) {
         console.log(error)
