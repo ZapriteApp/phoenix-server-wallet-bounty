@@ -24,7 +24,7 @@ $(document).ready(function () {
         let currentPage = 1;
         let paymentsData = [];
 
-        
+
         function updatePaginationControls(page) {
           const totalPages = Math.ceil(paymentsData.length / itemsPerPage);
           $('#prevPage').prop('disabled', page <= 1);
@@ -65,17 +65,17 @@ $(document).ready(function () {
             .catch(error => {
               console.error('Error fetching balance:', error);
             });
-        function renderTablePage(page) {
-          const $tableBody = $('#paymentsTable tbody');
-          $tableBody.empty();
-          const startIndex = (page - 1) * itemsPerPage;
-          const endIndex = startIndex + itemsPerPage;
-          const pageData = paymentsData.slice(startIndex, endIndex);
+          function renderTablePage(page) {
+            const $tableBody = $('#paymentsTable tbody');
+            $tableBody.empty();
+            const startIndex = (page - 1) * itemsPerPage;
+            const endIndex = startIndex + itemsPerPage;
+            const pageData = paymentsData.slice(startIndex, endIndex);
 
-          pageData.forEach(function (payment) {
-            const transferITag = `<i class="bi bi-arrow-up-right"></i>`;
-            const paymentITag = `<i class="bi bi-arrow-down-left"></i>`;
-            const row = `
+            pageData.forEach(function (payment) {
+              const transferITag = `<i class="bi bi-arrow-up-right"></i>`;
+              const paymentITag = `<i class="bi bi-arrow-down-left"></i>`;
+              const row = `
                 <tr>
                     <td>${payment.hasOwnProperty("receivedSat") ? paymentITag : transferITag}</td>
                     <td>${formatTimestamp(payment.createdAt)}</td>
@@ -86,12 +86,12 @@ $(document).ready(function () {
                     <td><i class="bi bi-three-dots-vertical"></i></td>
                 </tr>
             `;
-            $tableBody.append(row);
-          });
+              $tableBody.append(row);
+            });
 
-          updatePaginationControls(page);
+            updatePaginationControls(page);
+          }
         }
-}
 
         $('#prevPage').click(function () {
           if (currentPage > 1) {
@@ -127,7 +127,7 @@ $(document).ready(function () {
         let currentPage = 1;
         let contactsData = [];
 
-              
+
         function updatePaginationControls(page) {
           const totalPages = Math.ceil(contactsData.length / itemsPerPage);
           $('#prevPage').prop('disabled', page <= 1);
@@ -168,15 +168,15 @@ $(document).ready(function () {
             .catch(error => {
               console.error('Error fetching balance:', error);
             });
-        function renderTablePage(page) {
-          const $tableBody = $('#contactsTable tbody');
-          $tableBody.empty();
-          const startIndex = (page - 1) * itemsPerPage;
-          const endIndex = startIndex + itemsPerPage;
-          const pageData = contactsData.slice(startIndex, endIndex);
+          function renderTablePage(page) {
+            const $tableBody = $('#contactsTable tbody');
+            $tableBody.empty();
+            const startIndex = (page - 1) * itemsPerPage;
+            const endIndex = startIndex + itemsPerPage;
+            const pageData = contactsData.slice(startIndex, endIndex);
 
-          pageData.forEach(function (contact) {
-            const row = `
+            pageData.forEach(function (contact) {
+              const row = `
                 <tr>
                     <td>${new Date().toLocaleDateString()}</td>
                     <td>${contact.name}</td>
@@ -186,12 +186,12 @@ $(document).ready(function () {
                     <td><i class="bi bi-three-dots-vertical"></i></td>
                 </tr>
             `;
-            $tableBody.append(row);
-          });
+              $tableBody.append(row);
+            });
 
-          updatePaginationControls(page);
+            updatePaginationControls(page);
+          }
         }
-}
 
         $('#prevPage').click(function () {
           if (currentPage > 1) {
@@ -209,6 +209,8 @@ $(document).ready(function () {
         });
 
         fetchData();
+
+
 
       },
       error: function (xhr, status, error) {
@@ -372,7 +374,7 @@ $(document).ready(function () {
     console.log("Offer button clicked")
     const offer = $("#requestOffer").val().trim();
     const amountSat = parseInt($("#offerAmount").val());
-    const message = $("#offerDesription").val().trim();
+    const message = $("#offerDescription").val().trim();
     console.log(offer);
     console.log(amountSat);
     console.log(message);
@@ -405,7 +407,42 @@ $(document).ready(function () {
 
   })
 
-  $("#contactPaymentType").on("click", "#submitContact", function () {
+  $("#contactPaymentType").on("click", "#submitContact", async function () {
+    console.log("Pay contact button clicked")
+    let contactOffer;
+    const contactId = $("#paymentContact").val().trim();
+    const amountSat = parseInt($("#contactPaymentAmount").val());
+    const message = $("#contactPaymentDescription").val().trim();
+    console.log(contactId);
+    console.log(amountSat);
+    console.log(message);
+
+    offer = await getContactOffer(contactId)
+
+    console.log(contactOffer);
+    console.log(amountSat);
+    console.log(message);
+
+    fetch('/api/pay-offer', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ amountSat, offer, message })
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok ' + response.statusText);
+        }
+        console.log(response.json());
+      })
+
+    $contactPaymentType.hide();
+    $successfulPaymentModal.show();
+
+    $("#contactPaymentDescription").val(" ");
+    $("#contactPaymentAmount").val(" ");
+    $("#paymentContact").val(" ");
 
   })
 
@@ -590,7 +627,7 @@ $(document).ready(function () {
       address: address
     }
 
-    fetch('/api/save-contact', { 
+    fetch('/api/save-contact', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -610,12 +647,26 @@ $(document).ready(function () {
     $addContactModal.hide();
 
   });
+});
 
-
-
-
-
-
+$(document).ready(function () {
+  fetch(`/api/get-contacts`)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok ' + response.statusText);
+      }
+      return response.json();
+    })
+    .then(data => {
+      $.each(data.contacts, function (index, contact) {
+        $('#paymentContact').append(
+          $('<option></option>').val(contact.id).text(contact.name)
+        );
+      });
+    })
+    .catch(error => {
+      console.error('Error fetching contacts:', error);
+    });
 });
 
 document.querySelectorAll('.load-partial').forEach(link => {
@@ -653,6 +704,7 @@ function formatTimestamp(timestamp) {
 
   return `${year}-${month}-${day}, ${hours}:${minutes}`;
 }
+
 
 function copyInvoice() {
   var $copyText = $("#invoiceString");
@@ -715,5 +767,18 @@ $('#exportCsv').on('click', () => {
   URL.revokeObjectURL(url);
 });
 
-
+async function getContactOffer(contactId) {
+  try {
+    const response = await fetch('/api/get-contacts');
+    if (!response.ok) {
+      throw new Error('Network response was not ok ' + response.statusText);
+    }
+    const data = await response.json();
+    const contactOffer = data.contacts.find(i => i.id == contactId)?.offer;
+    return contactOffer;
+  } catch (error) {
+    console.error('Error fetching contacts:', error);
+    return null;
+  }
+}
 
