@@ -189,7 +189,7 @@
         .modal-content input[type="text"] {
             background-color: #000;
             color: white;
-            /* border: 1px solid #888; */
+            border: 1px solid #888;
             padding: 10px;
             width: 100%;
             box-sizing: border-box;
@@ -207,6 +207,16 @@
 
         .modal-content input[type="text"]:hover::placeholder {
             color: white;
+        }
+
+        #contactPaymentType select {
+            background-color: #000;;
+            color: #ffff;
+        }
+
+        #contactPaymentType option {
+            background-color: #000000;;
+            color: #ffff;
         }
 
         .payment-button-group {
@@ -268,6 +278,8 @@
             cursor: pointer;
             border: 1px solid #f09026;
         }
+
+
 
         #backToPaymentType:hover {
             background-color: #111111;
@@ -643,15 +655,19 @@
             <h3>Pay contact</h3>
             <form>
                 <div class="form-group">
-                    <label for="requestContact">Contact*:</label>
-                    <input type="text" id="requestContact" name="requestContact" class="form-control"
-                        placeholder="Choose contact ">
-                    <label for="requestContact">Amount:</label>
-                    <input type="text" id="requestContact" name="requestContact" class="form-control"
-                        placeholder="Enter Request Contact ">
-                    <label for="requestContact">Desription:</label>
-                    <input type="text" id="requestContact" name="requestContact" class="form-control"
-                        placeholder="Enter Request Contact ">
+                    <label for="paymentContact">Contact*:</label>
+                    <select id="paymentContact" name="paymentContact" class="form-control">
+                        <option value="" disabled selected>Choose contact</option>
+                        <option value="contact1">Contact 1</option>
+                        <option value="contact2">Contact 2</option>
+                        <option value="contact3">Contact 3</option>
+                    </select>
+                    <label for="contactPaymentAmount">Amount:</label>
+                    <input type="text" id="contactPaymentAmount" name="contactPaymentAmount" class="form-control"
+                        placeholder="Add an amount in sats..">
+                    <label for="contactPaymentDescription">Desription:</label>
+                    <input type="text" id="contactPaymentDescription" name="contactPaymentDescription" class="form-control"
+                        placeholder="Optional">
                 </div>
             </form>
             <button class="" type="button" id="backToPaymentType"><i class="bi bi-arrow-left"> </i>Back</button>
