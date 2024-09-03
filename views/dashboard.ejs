@@ -526,6 +526,32 @@
             background-color: #d97d1e;
         }
 
+        #closeShowPaymentOffer {
+            background-color: #000000;
+            color: #f09026;
+            font-size: 16px;
+            padding: 10px;
+            position: absolute;
+            bottom: 10px;
+            left: 20px;
+            cursor: pointer;
+            text-align: center;
+            border: 1px solid #f09026;
+        }
+
+        #doneShowPaymentOffer {
+            background-color: #f09026;
+            color: white;
+            font-size: 16px;
+            padding: 10px;
+            position: absolute;
+            bottom: 10px;
+            right: 20px;
+            text-align: center;
+            cursor: pointer;
+            border: 1px solid #f09026;
+        }
+
         
         #sharePaymentRequestModal .modal-content {
             width: 500px;
@@ -755,6 +781,18 @@
                     class="bi bi-check2"></i></button>
         </div>
     </div>
+
+    <div id="offerQRModal" class="modal">
+        <div class="modal-content">
+            <span class="close" data-modal="offerQRModal">&times;</span>
+            <h2>Bol12 Offer QR-Code</h2>         
+            
+            <div id="offerQRBarcode" class="barcode"></div>
+            <button class="" type="button" id="closeShowPaymentOffer"><i class="bi bi-x"></i>Close</button>
+            <button class="" type="button" id="doneShowPaymentOffer">Done <i class="bi bi-check2"></i></button>
+        </div>
+    </div>
+
     <script src="/public/script.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>

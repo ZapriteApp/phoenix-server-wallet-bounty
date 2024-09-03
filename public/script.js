@@ -669,6 +669,41 @@ $(document).ready(function () {
     });
 });
 
+$(document).ready(function () {
+
+  $(".main-content").on("click", '#showOfferQR', function () {
+    const offerText = $('#bolt12Offer').text().trim();
+    var $offerQRModal = $("#offerQRModal");
+    $offerQRModal.show();
+    new QRCode($("#offerQRBarcode")[0], {
+      text: offerText,
+      width: 256,
+      height: 256
+    });
+
+    $("#doneShowPaymentOffer").click(function () {      
+      $offerQRModal.hide();
+      $("#offerQRBarcode").empty();
+      
+    });
+
+    $("#closeShowPaymentOffer").click(function () {      
+      $offerQRModal.hide();
+      $("#offerQRBarcode").empty();
+      
+    });
+
+    $(".close").click(function () {      
+      $offerQRModal.hide();
+      $("#offerQRBarcode").empty();
+      
+    });
+
+    
+  })
+
+})
+
 document.querySelectorAll('.load-partial').forEach(link => {
   link.addEventListener('click', function (event) {
     event.preventDefault();
@@ -767,33 +802,33 @@ $('#exportCsv').on('click', () => {
   URL.revokeObjectURL(url);
 });
 
-$('#downloadOffer').on('click', function() {
+$('#downloadOffer').on('click', function () {
   const offerText = $('#bolt12Offer').text().trim();
   if (offerText) {
-      const blob = new Blob([offerText], { type: 'text/plain' });
-      const url = window.URL.createObjectURL(blob);
-      const a = $('<a>').attr({
-          href: url,
-          download: 'bolt12_offer.txt'
-      }).appendTo('body');
-      a[0].click();
-      a.remove();
-      window.URL.revokeObjectURL(url);
+    const blob = new Blob([offerText], { type: 'text/plain' });
+    const url = window.URL.createObjectURL(blob);
+    const a = $('<a>').attr({
+      href: url,
+      download: 'bolt12_offer.txt'
+    }).appendTo('body');
+    a[0].click();
+    a.remove();
+    window.URL.revokeObjectURL(url);
   } else {
-      alert('No offer available to download.');
+    alert('No offer available to download.');
   }
 });
 
-$('#copyOffer').on('click', function() {
+$('#copyOffer').on('click', function () {
   const offerText = $('#bolt12Offer').text().trim();
   if (offerText) {
-      const tempInput = $('<input>');
-      $('body').append(tempInput);
-      tempInput.val(offerText).select();
-      document.execCommand('copy');
-      tempInput.remove();
+    const tempInput = $('<input>');
+    $('body').append(tempInput);
+    tempInput.val(offerText).select();
+    document.execCommand('copy');
+    tempInput.remove();
   } else {
-      alert('No offer available to copy.');
+    alert('No offer available to copy.');
   }
 });
 
