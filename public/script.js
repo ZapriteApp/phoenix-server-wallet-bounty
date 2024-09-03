@@ -767,6 +767,23 @@ $('#exportCsv').on('click', () => {
   URL.revokeObjectURL(url);
 });
 
+$('#downloadOffer').on('click', function() {
+  const offerText = $('#bolt12Offer').text().trim();
+  if (offerText) {
+      const blob = new Blob([offerText], { type: 'text/plain' });
+      const url = window.URL.createObjectURL(blob);
+      const a = $('<a>').attr({
+          href: url,
+          download: 'bolt12_offer.txt'
+      }).appendTo('body');
+      a[0].click();
+      a.remove();
+      window.URL.revokeObjectURL(url);
+  } else {
+      alert('No offer available to download.');
+  }
+});
+
 async function getContactOffer(contactId) {
   try {
     const response = await fetch('/api/get-contacts');
