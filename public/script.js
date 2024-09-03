@@ -784,6 +784,19 @@ $('#downloadOffer').on('click', function() {
   }
 });
 
+$('#copyOffer').on('click', function() {
+  const offerText = $('#bolt12Offer').text().trim();
+  if (offerText) {
+      const tempInput = $('<input>');
+      $('body').append(tempInput);
+      tempInput.val(offerText).select();
+      document.execCommand('copy');
+      tempInput.remove();
+  } else {
+      alert('No offer available to copy.');
+  }
+});
+
 async function getContactOffer(contactId) {
   try {
     const response = await fetch('/api/get-contacts');
