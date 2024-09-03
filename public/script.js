@@ -261,13 +261,25 @@ $(document).ready(function () {
       return response.json();
     })
     .then(data => {
-      inboundLiquiditySat = data.channels[0].inboundLiquiditySat;
-      capacitySat = data.channels[0].capacitySat;
-      balanceSat = data.channels[0].balanceSat;
+      let inboundLiquiditySat = data.channels[0].inboundLiquiditySat;
+      let capacitySat = data.channels[0].capacitySat;
+      let balanceSat = data.channels[0].balanceSat;
 
-      $('.inbound').html(`${inboundLiquiditySat} sats`);
+      $('.inbound').html(`${inboundLiquiditySat}`);
       $('.acinq').html(`${capacitySat} sats`);
-      $('.outbound').html(`${balanceSat} sats`);
+      $('.outbound').html(`${balanceSat}`);
+
+      inboundLiquiditySat = parseInt(inboundLiquiditySat)
+      capacitySat= parseInt(capacitySat)
+      balanceSat = parseInt(balanceSat)
+
+      let total = inboundLiquiditySat + balanceSat;
+      let inboundPercentage = 100 - (inboundLiquiditySat / total) * 100;
+      
+
+      $('#progressBar').css('width', inboundPercentage + '%');
+      
+
     })
     .catch(error => {
       console.error('Error fetching balance:', error);

@@ -2,43 +2,31 @@
 
 <style>
     .balanceRow {
+        width: 100%;
         display: flex;
-        /* Use flexbox to align items in a row */
+        flex-direction: column;
         justify-content: space-between;
-        /* Equal space between elements */
         align-items: center;
-        /* Vertically center items */
-        padding: 0 5px;
-        /* Padding inside the row */
-        /* background-color: #666666; */
+        padding: 10px 5px;
         background-color: #111111;
-        /* Background color for the row */
     }
 
     .balanceCol {
         flex: 1;
-        /* Each column takes equal space */
         display: flex;
         justify-content: space-between;
         align-items: center;
-        /* background-color: #666666; */
         background-color: #111111;
-        /* Background color for the column */
-        padding: 10px;
-        margin: 5px;
-        /* Space between columns */
-        border-radius: 5px;
-        /* Rounded corners for the boxes */
+        /* padding: 10px; */
+        margin: 2px;
+        /* border-radius: 5px; */
     }
 
     .balanceItem {
         display: flex;
         flex-direction: column;
-        /* Arrange items vertically */
         align-items: center;
-        /* Center items horizontally */
         justify-content: center;
-        /* Center items vertically */
     }
 
     .balanceValue {
@@ -56,8 +44,8 @@
         border: none;
         border-radius: 5px;
         box-sizing: border-box;
-        overflow: hidden; /* Hides any content that overflows */
-        text-overflow: ellipsis; /* Adds ellipsis (...) at the end of the overflowing content */
+        overflow: hidden; 
+        text-overflow: ellipsis;
         white-space: nowrap;
     }
     
@@ -71,21 +59,15 @@
 
     .text-content {
         flex: 1;
-        /* Take up available space */
         white-space: nowrap;
-        /* Prevents text from wrapping to the next line */
         overflow: hidden;
-        /* Hide any overflow content */
         text-overflow: ellipsis;
-        /* Shows '...' at the end if the text is too long */
         margin-right: 10px;
-        /* Space between the text and icons */
     }
 
     .icons {
         display: flex;
         gap: 10px;
-        /* Space between icons */
     }
 
     .icon {
@@ -99,7 +81,7 @@
         border: none;
         padding: 8px 12px;
         cursor: pointer;
-        /* transition: background-color 0.3s, box-shadow 0.3s; */
+        transition: background-color 0.3s, box-shadow 0.3s;
     }
 
     #sendButton:hover {
@@ -128,6 +110,24 @@
         align-items: center;
     
     }
+
+    .progressBarContainer {
+        width: 100%;
+        background-color: white;
+        height: 20px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        overflow: hidden;
+    }
+
+    #progressBar {
+        background-color:  #f09125;
+        height: 100%;
+        width: 0%;
+        border-radius: 5px;
+    }
+
 </style>
 
 <div class="heading-home">
@@ -148,21 +148,27 @@
 
 <div class="heading">Liquidity</div>
 <div class="row balanceRow">
+
+    <div class="progressBarContainer">
+        <div id="progressBar"></div>
+    </div>
+
     <div class="col balanceCol">
-        <div class="balanceItem">
-            <p class="balanceValue outbound"></p>
+        <div class="balanceValue balanceItem">
             <p>Outbound <i class="bi bi-arrow-right"></i></p>
+            <p class="outbound"></p>           
             <p> You can send $43</p>
         </div>
 
         <div class="balanceValue balanceItem">
-            <p class="acinq"></p>
             <p>Acinq</p>
+            <p class="acinq"></p>
+            
         </div>
 
         <div class="balanceValue balanceItem">
-            <p class="inbound"></p>
             <p> <i class="bi bi-arrow-left"></i> Inbound</i></p>
+            <p class="inbound"></p>           
             <p> You can recieve $43</p>
         </div>
     </div>
