@@ -264,10 +264,12 @@ $(document).ready(function () {
       let inboundLiquiditySat = data.channels[0].inboundLiquiditySat;
       let capacitySat = data.channels[0].capacitySat;
       let balanceSat = data.channels[0].balanceSat;
+      let channelId = data.channels[0].channelId;
 
       $('.inbound').html(`${inboundLiquiditySat}`);
       $('.acinq').html(`${capacitySat} sats`);
       $('.outbound').html(`${balanceSat}`);
+      $('.channelIdString').html(`${channelId}`);
 
       inboundLiquiditySat = parseInt(inboundLiquiditySat)
       capacitySat= parseInt(capacitySat)
@@ -841,6 +843,19 @@ $('#copyOffer').on('click', function () {
     tempInput.remove();
   } else {
     alert('No offer available to copy.');
+  }
+});
+
+$('#copyChannelIdIcon').on('click', function () {
+  const channelIdText = $('.channelIdString').text().trim();
+  if (channelIdText) {
+    const tempInput = $('<input>');
+    $('body').append(tempInput);
+    tempInput.val(channelIdText).select();
+    document.execCommand('copy');
+    tempInput.remove();
+  } else {
+    alert('No Id available to copy.');
   }
 });
 
