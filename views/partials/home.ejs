@@ -6,7 +6,7 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        align-items: center;
+        /* align-items: center; */
         padding: 10px 5px;
         background-color: #111111;
     }
@@ -113,8 +113,8 @@
 
     .progressBarContainer {
         width: 100%;
-        background-color: white;
-        height: 20px;
+        background-color: #f09125;
+        height: 15px;
         margin-top: 10px;
         margin-bottom: 10px;
         border-radius: 5px;
@@ -122,10 +122,27 @@
     }
 
     #progressBar {
-        background-color:  #f09125;
+        background-color: white;
         height: 100%;
         width: 0%;
         border-radius: 5px;
+    }
+
+    .inbound-styling {
+        color: #f09125;
+    }
+
+    .channelId {
+        display: flex;
+        align-items: center;
+    }
+    .channelIdString {
+        display: inline-block;
+        max-width: 12ch;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin-right: 5px; 
     }
 
 </style>
@@ -163,12 +180,16 @@
         <div class="balanceValue balanceItem">
             <p>Acinq</p>
             <p class="acinq"></p>
+            <span class="channelId" id="channelId">
+                <span class="channelIdString"></span>
+                <button class="copy-btn" id="copyChannelIdIcon"> <i class="bi bi-copy" ></i></button>
+            </span>
             
         </div>
 
-        <div class="balanceValue balanceItem">
-            <p> <i class="bi bi-arrow-left"></i> Inbound</i></p>
-            <p class="inbound"></p>           
+        <div class="balanceValue balanceItem ">
+            <p class="inbound-styling"> <i class="bi bi-arrow-left "></i> Inbound</i></p>
+            <p class=" inbound-styling inbound"></p>           
             <p> You can recieve $43</p>
         </div>
     </div>
@@ -183,7 +204,7 @@
             <span
                 class="bolt12Offer" id="bolt12Offer"></span>
             <span class="icons">
-                <button id="copyOffer" class="copy-btn"><i class="fa fa-copy" ></i></button>
+                <button id="copyOffer" class="copy-btn"><i class="bi bi-copy" ></i></button>
                 <button id="showOfferQR"class="copy-btn" onclick=""><i class="bi bi-qr-code copy-btn"></i></button>
                 <button id="downloadOffer" class="copy-btn" onclick=""><i class="bi bi-download copy-btn"></i></button>
               
