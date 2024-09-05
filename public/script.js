@@ -23,7 +23,33 @@ $(document).ready(function () {
         const itemsPerPage = 8;
         let currentPage = 1;
         let paymentsData = [];
+        
+        function renderTablePage(page) {
+          const $tableBody = $('#paymentsTable tbody');
+          $tableBody.empty();
+          const startIndex = (page - 1) * itemsPerPage;
+          const endIndex = startIndex + itemsPerPage;
+          const pageData = paymentsData.slice(startIndex, endIndex);
 
+          pageData.forEach(function (payment) {
+            const transferITag = `<i class="bi bi-arrow-up-right"></i>`;
+            const paymentITag = `<i class="bi bi-arrow-down-left"></i>`;
+            const row = `
+              <tr>
+                  <td>${payment.hasOwnProperty("receivedSat") ? paymentITag : transferITag}</td>
+                  <td>${formatTimestamp(payment.createdAt)}</td>
+                  <td>${payment.hasOwnProperty("description") ? truncateText(payment.description) : "-"}</td>
+                  <td>${payment.hasOwnProperty("receivedSat") ? payment.receivedSat : payment.sent}</td>
+                  <td>${payment.hasOwnProperty("receivedSat") ? "Payment" : "Transfer"}</td>
+                  <td>${payment.isPaid ? 'Completed' : 'Uncompleted'}</td>
+                  <td><i class="bi bi-three-dots-vertical"></i></td>
+              </tr>
+          `;
+            $tableBody.append(row);
+          });
+
+          updatePaginationControls(page);
+        }
 
         function updatePaginationControls(page) {
           const totalPages = Math.ceil(paymentsData.length / itemsPerPage);
@@ -65,32 +91,6 @@ $(document).ready(function () {
             .catch(error => {
               console.error('Error fetching balance:', error);
             });
-          function renderTablePage(page) {
-            const $tableBody = $('#paymentsTable tbody');
-            $tableBody.empty();
-            const startIndex = (page - 1) * itemsPerPage;
-            const endIndex = startIndex + itemsPerPage;
-            const pageData = paymentsData.slice(startIndex, endIndex);
-
-            pageData.forEach(function (payment) {
-              const transferITag = `<i class="bi bi-arrow-up-right"></i>`;
-              const paymentITag = `<i class="bi bi-arrow-down-left"></i>`;
-              const row = `
-                <tr>
-                    <td>${payment.hasOwnProperty("receivedSat") ? paymentITag : transferITag}</td>
-                    <td>${formatTimestamp(payment.createdAt)}</td>
-                    <td>${payment.hasOwnProperty("description") ? payment.description : "Label"}</td>
-                    <td>${payment.hasOwnProperty("receivedSat") ? payment.receivedSat : payment.sent}</td>
-                    <td>${payment.hasOwnProperty("receivedSat") ? "Payment" : "Transfer"}</td>
-                    <td>${payment.isPaid ? 'Completed' : 'Uncompleted'}</td>
-                    <td><i class="bi bi-three-dots-vertical"></i></td>
-                </tr>
-            `;
-              $tableBody.append(row);
-            });
-
-            updatePaginationControls(page);
-          }
         }
 
         $('#prevPage').click(function () {
@@ -179,9 +179,9 @@ $(document).ready(function () {
               const row = `
                 <tr>
                     <td>${new Date().toLocaleDateString()}</td>
-                    <td>${contact.name}</td>
-                    <td>${contact.offer}</td>
-                    <td>${contact.address}</td>
+                    <td>${truncateText(contact.name, 15)}</td>
+                    <td>${truncateText(contact.offer, 20)}</td>
+                    <td>${truncateText(contact.address, 20)}</td>
                     <td>Active</td>
                     <td><i class="bi bi-three-dots-vertical"></i></td>
                 </tr>
@@ -272,15 +272,15 @@ $(document).ready(function () {
       $('.channelIdString').html(`${channelId}`);
 
       inboundLiquiditySat = parseInt(inboundLiquiditySat)
-      capacitySat= parseInt(capacitySat)
+      capacitySat = parseInt(capacitySat)
       balanceSat = parseInt(balanceSat)
 
       let total = inboundLiquiditySat + balanceSat;
       let inboundPercentage = 100 - (inboundLiquiditySat / total) * 100;
-      
+
 
       $('#progressBar').css('width', inboundPercentage + '%');
-      
+
 
     })
     .catch(error => {
@@ -695,25 +695,25 @@ $(document).ready(function () {
       height: 256
     });
 
-    $("#doneShowPaymentOffer").click(function () {      
+    $("#doneShowPaymentOffer").click(function () {
       $offerQRModal.hide();
       $("#offerQRBarcode").empty();
-      
+
     });
 
-    $("#closeShowPaymentOffer").click(function () {      
+    $("#closeShowPaymentOffer").click(function () {
       $offerQRModal.hide();
       $("#offerQRBarcode").empty();
-      
+
     });
 
-    $(".close").click(function () {      
+    $(".close").click(function () {
       $offerQRModal.hide();
       $("#offerQRBarcode").empty();
-      
+
     });
 
-    
+
   })
 
 })
@@ -770,6 +770,10 @@ function copyOffer() {
   document.execCommand("copy");
   $tempInput.remove();
 }
+
+function truncateText(text, maxLength) {
+  return text.length > maxLength ? text.substring(0, maxLength) + "..." : text;
+};
 
 $('#exportCsv').on('click', () => {
   const csvRows = [];
