@@ -23,7 +23,7 @@ $(document).ready(function () {
         const itemsPerPage = 8;
         let currentPage = 1;
         let paymentsData = [];
-        
+
         function renderTablePage(page) {
           const $tableBody = $('#paymentsTable tbody');
           $tableBody.empty();
@@ -350,6 +350,45 @@ $(document).ready(function () {
     $paymentTypeModal.hide();
   });
 
+  $('#requestInvoice').on('input', function () {
+    var invoice = $(this).val().trim();
+
+    if (invoice !== "") {
+      fetch('/api/decode-invoice', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ invoice: invoice })
+      })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.json();
+        })
+        .then(data => {
+
+          if (data.description) {
+            $('.decode-invoice .memo').eq(1).text(truncateText(`Payment to ${data.description}`));
+          }
+
+          if (data.amount) {
+            $('.decode-invoice .invoiceAmount').eq(1).text(`${data.amount / 1000} sats`);
+          }
+
+          // if (data.extrahops[0][0]) {
+          //   $('.decode-invoice .fees').eq(1).text(`${data.extraHops[0][0].feeBase / 1000} sats`);
+          // }else{
+          //   $('.decode-invoice .fees').eq(1).text(`- sats`);
+          // }
+          $('.decode-invoice').show();
+        })
+        .catch(error => {
+          console.error('There was a problem with the fetch operation:', error);
+        });
+    }
+  });
 
 
   $("#invoicePaymentType").on("click", "#submitInvoice", function () {
@@ -377,6 +416,8 @@ $(document).ready(function () {
 
     $invoicePaymentType.hide();
     $successfulPaymentModal.show();
+    $("#requestInvoice").val("");
+    $('.decode-invoice').show();
   });
 
   $("#invoicePaymentType").on("click", "#backToPaymentType", function () {
@@ -712,8 +753,6 @@ $(document).ready(function () {
       $("#offerQRBarcode").empty();
 
     });
-
-
   })
 
 })
