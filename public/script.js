@@ -391,15 +391,39 @@ $(document).ready(function () {
   });
 
 
-  $("#invoicePaymentType").on("click", "#submitInvoice", function () {
+  $("#invoicePaymentType").on("click", "#submitInvoice", async function () {
     console.log("Submit clicked")
     const invoice = $("#requestInvoice").val().trim();
     let amountSat = $("#requestInvoiceAmount").val();
+    let errorMessage = $('#invoice-error-message');
     amountSat = parseInt(amountSat)
     console.log(invoice);
     console.log(amountSat);
-    $("#requestInvoice").val(" ");
+    // $("#requestInvoice").val(" ");   
+  
+    if (invoice === "") {
+        errorMessage.text("The request invoice cannot be empty.");
+        errorMessage.show();
+        return
+    }
 
+    try {
+      let response = await fetch('/api/decode-invoice', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ invoice: invoice })
+      });
+
+      if (!response.ok) {
+          throw new Error('Network response was not ok');
+      }
+
+      let data = await response.json();
+
+      if (data.amount) {
+          
     fetch('/api/pay-invoice', {
       method: 'POST',
       headers: {
@@ -418,6 +442,17 @@ $(document).ready(function () {
     $successfulPaymentModal.show();
     $("#requestInvoice").val("");
     $('.decode-invoice').show();
+      } else {
+          errorMessage.text("The request invoice is not decodable.");
+          errorMessage.show();
+          return false; 
+      }
+  } catch (error) {
+      errorMessage.text("An error occurred while validating the invoice.");
+      errorMessage.show();
+      return false;
+  }
+
   });
 
   $("#invoicePaymentType").on("click", "#backToPaymentType", function () {
@@ -901,6 +936,19 @@ $('#copyChannelIdIcon').on('click', function () {
     alert('No Id available to copy.');
   }
 });
+
+async function validateInput() {
+  let requestInvoice = $('#requestInvoice').val().trim();
+  let errorMessage = $('#error-message');
+
+  if (requestInvoice === "") {
+      errorMessage.text("The request invoice cannot be empty.");
+      errorMessage.show();
+      return false;
+  }
+
+ 
+}
 
 async function getContactOffer(contactId) {
   try {
