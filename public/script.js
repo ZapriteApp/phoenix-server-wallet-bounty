@@ -399,59 +399,61 @@ $(document).ready(function () {
     amountSat = parseInt(amountSat)
     console.log(invoice);
     console.log(amountSat);
-    // $("#requestInvoice").val(" ");   
-  
+ 
+
     if (invoice === "") {
-        errorMessage.text("The request invoice cannot be empty.");
-        errorMessage.show();
-        return
+      errorMessage.text("The request invoice cannot be empty.");
+      errorMessage.show();
+      return
     }
 
     try {
       let response = await fetch('/api/decode-invoice', {
-          method: 'POST',
-          headers: {
-              'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ invoice: invoice })
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ invoice: invoice })
       });
 
       if (!response.ok) {
-          throw new Error('Network response was not ok');
+        throw new Error('Network response was not ok');
       }
 
       let data = await response.json();
 
       if (data.amount) {
-          
-    fetch('/api/pay-invoice', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ amountSat, invoice })
-    })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok ' + response.statusText);
-        }
-        console.log(response.json());
-      })
 
-    $invoicePaymentType.hide();
-    $successfulPaymentModal.show();
-    $("#requestInvoice").val("");
-    $('.decode-invoice').show();
+        fetch('/api/pay-invoice', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ amountSat, invoice })
+        })
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('Network response was not ok ' + response.statusText);
+            }
+            console.log(response.json());
+          })
+
+        $invoicePaymentType.hide();
+        $successfulPaymentModal.show();
+        $("#requestInvoice").val("");
+        $('.decode-invoice').show();
       } else {
-          errorMessage.text("The request invoice is not decodable.");
-          errorMessage.show();
-          return false; 
+        errorMessage.text("The request invoice is not decodable.");
+        errorMessage.show();
+        return false;
       }
-  } catch (error) {
+    } catch (error) {
       errorMessage.text("An error occurred while validating the invoice.");
       errorMessage.show();
       return false;
-  }
+    }
+
+    $("#requestInvoice").val(" ");  
 
   });
 
@@ -460,35 +462,83 @@ $(document).ready(function () {
     $paymentTypeModal.show()
   })
 
-  $("#offerPaymentType").on("click", "#submitOffer", function () {
+  $("#offerPaymentType").on("click", "#submitOffer", async function () {
     console.log("Offer button clicked")
     const offer = $("#requestOffer").val().trim();
+    const rawAmount = $("#offerAmount").val().trim();
     const amountSat = parseInt($("#offerAmount").val());
     const message = $("#offerDescription").val().trim();
+    let errorMessage = $('#offer-error-message');
     console.log(offer);
     console.log(amountSat);
     console.log(message);
 
-    fetch('/api/pay-offer', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ amountSat, offer, message })
-    })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok ' + response.statusText);
-        }
-        console.log(response.json());
-      })
+
+    if (rawAmount === "") {
+      errorMessage.text("Amount cannot be empty.");
+      errorMessage.show();
+      return
+    }
+
+    if (typeof rawAmount !== "number") {
+      errorMessage.text("Amount should be number.");
+      errorMessage.show();
+      return
+    }
+
+    if (offer === "") {
+      errorMessage.text("Offer cannot be empty.");
+      errorMessage.show();
+      return
+    }
+
+    try {
+      let response = await fetch('/api/decode-offer', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ offer: offer })
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      let data = await response.json();
+
+      if (data.chain) {
+        fetch('/api/pay-offer', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ amountSat, offer, message })
+        })
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('Network response was not ok ' + response.statusText);
+            }
+            console.log(response.json());
+          })
+
+      } else {
+        errorMessage.text("The request offer is not decodable.");
+        errorMessage.show();
+        return false;
+      }
+    } catch (error) {
+      errorMessage.text("An error occurred while decoding the invoice.");
+      errorMessage.show();
+      return false;
+    }
 
     $offerPaymentType.hide();
     $successfulPaymentModal.show();
 
-    $("#requestOffer").val(" ");
-    $("#offerAmount").val(" ");
-    $("#offerDesription").val(" ");
+    $("#requestOffer").val("");
+    $("#offerAmount").val("");
+    $("#offerDesription").val("");
   });
 
   $("#offerPaymentType").on("click", "#backToPaymentType", function () {
@@ -792,19 +842,6 @@ $(document).ready(function () {
 
 })
 
-document.querySelectorAll('.load-partial').forEach(link => {
-  link.addEventListener('click', function (event) {
-    event.preventDefault();
-    const url = this.getAttribute('href');
-
-    fetch(url)
-      .then(response => response.text())
-      .then(data => {
-        document.getElementById('partialContainer').innerHTML = data;
-      })
-      .catch(error => console.error('Error loading partial:', error));
-  });
-});
 
 function loadPartial(url) {
   fetch(url)
@@ -937,18 +974,6 @@ $('#copyChannelIdIcon').on('click', function () {
   }
 });
 
-async function validateInput() {
-  let requestInvoice = $('#requestInvoice').val().trim();
-  let errorMessage = $('#error-message');
-
-  if (requestInvoice === "") {
-      errorMessage.text("The request invoice cannot be empty.");
-      errorMessage.show();
-      return false;
-  }
-
- 
-}
 
 async function getContactOffer(contactId) {
   try {
