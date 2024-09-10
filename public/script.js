@@ -466,7 +466,7 @@ $(document).ready(function () {
     console.log("Offer button clicked")
     const offer = $("#requestOffer").val().trim();
     const rawAmount = $("#offerAmount").val().trim();
-    const amountSat = parseInt($("#offerAmount").val());
+    const amountSat = $("#offerAmount").val().trim();
     const message = $("#offerDescription").val().trim();
     let errorMessage = $('#offer-error-message');
     console.log(offer);
@@ -480,7 +480,7 @@ $(document).ready(function () {
       return
     }
 
-    if (typeof rawAmount !== "number") {
+    if (!/^\d+$/.test(rawAmount)) {
       errorMessage.text("Amount should be number.");
       errorMessage.show();
       return
@@ -498,7 +498,7 @@ $(document).ready(function () {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ offer: offer })
+        body: JSON.stringify({ offer: offer, message:message })
       });
 
       if (!response.ok) {
@@ -549,17 +549,47 @@ $(document).ready(function () {
 
   $("#contactPaymentType").on("click", "#submitContact", async function () {
     console.log("Pay contact button clicked")
+    const contactIdRaw = $("#paymentContact").val();
+    let errorMessage = $('#contact-error-message');
     let contactOffer;
+    if (contactIdRaw == null) {
+      errorMessage.text("You have not selected a contact.");
+      errorMessage.show();
+      return
+    }
+  
     const contactId = $("#paymentContact").val().trim();
-    const amountSat = parseInt($("#contactPaymentAmount").val());
+    
+    let rawAmount = $("#contactPaymentAmount").val().trim();
+   
     const message = $("#contactPaymentDescription").val().trim();
+   
     console.log(contactId);
-    console.log(amountSat);
+    console.log(` Raw amount is ${rawAmount}`);
     console.log(message);
 
     offer = await getContactOffer(contactId)
 
-    console.log(contactOffer);
+    if (contactId === "") {
+      errorMessage.text("You have not selected a contact.");
+      errorMessage.show();
+      return
+    }
+    
+    if (rawAmount === "") {
+      errorMessage.text("Amount cannot be empty.");
+      errorMessage.show();
+      return
+    }
+   
+    if (!/^\d+$/.test(rawAmount)) {
+      errorMessage.text("Amount should be number.");
+      errorMessage.show();
+      return
+    }
+    const amountSat = parseInt(rawAmount);
+    console.log(` Amount sat is ${amountSat}`);
+
     console.log(amountSat);
     console.log(message);
 
