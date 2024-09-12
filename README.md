@@ -2,11 +2,15 @@
 
 <img width="1478" alt="phoenix-server-wallet-dashboard" src="https://github.com/ZapriteApp/phoenix-server-wallet-bounty/assets/12265052/a50fa592-8188-40a0-b854-d877c575fbff">
 
-## ℹ️ Claimed [2024-07-30]
+## History
+
+#### ℹ️ Claimed [2024-07-30]
 The bounty has been claimed. More details to follow. We will close this for now and open again if things change.
 
-## ℹ️ Available [2024-09-12]
+#### ℹ️ Available [2024-09-12]
 The bounty is available again for anyone who may be interested.
+
+---
 
 This document serves as the summary description of the bounty, and includes a brief outline of the minimum requirements and bounty conditions.
 
