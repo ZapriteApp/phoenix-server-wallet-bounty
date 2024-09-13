@@ -660,15 +660,30 @@ $(document).ready(function () {
 
   $("#paymentRequestModal").on("click", "#nextToSharePaymentRequest", function () {
     console.log("Next to share payment button clicked")
-    var amountSat = parseInt($("#requestInvoiceAmount").val());
-    var requestInvoiceName = $("#requestInvoiceName").val();
-    var requestInvoiceDescription = $("#requestInvoiceDescription").val();
+    var amountSat = parseInt($("#requestInvoiceAmount").val().trim());
+    var rawAmount = $("#requestInvoiceAmount").val().trim()
+    var requestInvoiceName = $("#requestInvoiceName").val().trim();
+    var requestInvoiceDescription = $("#requestInvoiceDescription").val().trim();
     const description = `${requestInvoiceName} - ${requestInvoiceDescription}`
     const webhookUrl = '';
     const externalId = '';
 
+    let errorMessage = $('#payment-request-error-message');
+
     console.log(amountSat);
     console.log(description);
+    
+    if (rawAmount === "") {
+      errorMessage.text("The request amount cannot be empty.");
+      errorMessage.show();
+      return
+    }
+
+    if (!/^\d+$/.test(rawAmount)) {
+      errorMessage.text("Amount should be number.");
+      errorMessage.show();
+      return
+    }
 
     fetch('/api/create-invoice', {
       method: 'POST',
@@ -695,9 +710,9 @@ $(document).ready(function () {
 
         $sharePaymentRequestModal.show();
         console.log(data);
-        $("#requestInvoiceAmount").val(" ");
-        $("#requestInvoiceName").val(" ");
-        $("#requestInvoiceName").val(" ");
+        $("#requestInvoiceAmount").val("");
+        $("#requestInvoiceName").val("");
+        $("#requestInvoiceName").val("");
 
       })
   });
