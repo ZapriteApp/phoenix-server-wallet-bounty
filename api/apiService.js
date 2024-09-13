@@ -1,5 +1,6 @@
 import axios from 'axios';
 import dotenv from 'dotenv';
+import { response } from 'express';
 dotenv.config();
 
 let baseUrl = process.env.PHOENIX_API_URL
@@ -179,7 +180,7 @@ export const decodeOffer = async (offer) => {
     return response.data;
   } catch (error) {
     console.error('Error decoding offer', error);
-    throw error;
+    return response.data;
   }
 }
 

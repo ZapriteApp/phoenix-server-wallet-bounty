@@ -498,7 +498,7 @@ $(document).ready(function () {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ offer: offer, message:message })
+        body: JSON.stringify({ offer: offer})
       });
 
       if (!response.ok) {
@@ -786,16 +786,38 @@ $(document).ready(function () {
     $importContactModal.hide();
   });
 
-  $("#addContact").on('click', function () {
+  $("#addContact").on('click', async function () {
     const name = $("#addContactName").val().trim();
     const offer = $("#addContactOffer").val().trim();
     const address = $("#addContactAddress").val().trim();
+    let errorMessage = $('#add-contact-error-message');
 
+    if (name === "") {
+      errorMessage.text("The contact name cannot be empty.");
+      errorMessage.show();
+      return
+    }
+
+    if (offer === "") {
+      errorMessage.text("The contact offer cannot be empty.");
+      errorMessage.show();
+      return
+    }
+    
+    let isValid = await isOfferValid(offer)
+    if(!isValid){
+      console.log("Contact offer is invalid")
+      errorMessage.text("The contact offer is invalid.");
+      errorMessage.show();
+      return
+    }
     const contactData = {
       name: name,
       offer: offer,
       address: address
     }
+
+
 
     fetch('/api/save-contact', {
       method: 'POST',
@@ -1004,7 +1026,27 @@ $('#copyChannelIdIcon').on('click', function () {
   }
 });
 
+async function isOfferValid(offer) {
+  try {
+      let response = await fetch('/api/decode-offer', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ offer: offer })
+      });
 
+      if (!response.ok) {
+        console.log("false")
+        return false
+      }
+      let data = await response.json();
+      return data.chain ? true : false;
+  } catch (error) {
+      console.error('Error checking offer validity:', error);
+      return false; 
+  }
+}
 async function getContactOffer(contactId) {
   try {
     const response = await fetch('/api/get-contacts');

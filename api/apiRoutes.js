@@ -101,7 +101,13 @@ router.post('/decode-offer', async (req, res) => {
         res.json(data);
     }
     catch(error) {
-        res.status(500).json({ message: 'Error decoding offer'});
+        console.log(error)
+        if (error.res && error.res.status === 400) {
+            res.json({ message: 'Invalid offer data. Please check and try again.' });
+        } else {
+            res.status(500).json({ message: 'An error occurred while decoding the offer.' });
+        }
+
     }
 });
 
