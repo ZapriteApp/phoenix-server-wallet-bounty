@@ -127,7 +127,29 @@ $(document).ready(function () {
         let currentPage = 1;
         let contactsData = [];
 
+        function renderTablePage(page) {
+          const $tableBody = $('#contactsTable tbody');
+          $tableBody.empty();
+          const startIndex = (page - 1) * itemsPerPage;
+          const endIndex = startIndex + itemsPerPage;
+          const pageData = contactsData.slice(startIndex, endIndex);
 
+          pageData.forEach(function (contact) {
+            const row = `
+              <tr>
+                  <td>${new Date().toLocaleDateString()}</td>
+                  <td>${truncateText(contact.name, 15)}</td>
+                  <td>${truncateText(contact.offer, 20)}</td>
+                  <td>${truncateText(contact.address, 20)}</td>
+                  <td>Active</td>
+                  <td><i class="bi bi-three-dots-vertical"></i></td>
+              </tr>
+          `;
+            $tableBody.append(row);
+          });
+
+          updatePaginationControls(page);
+        }
         function updatePaginationControls(page) {
           const totalPages = Math.ceil(contactsData.length / itemsPerPage);
           $('#prevPage').prop('disabled', page <= 1);
@@ -168,29 +190,7 @@ $(document).ready(function () {
             .catch(error => {
               console.error('Error fetching balance:', error);
             });
-          function renderTablePage(page) {
-            const $tableBody = $('#contactsTable tbody');
-            $tableBody.empty();
-            const startIndex = (page - 1) * itemsPerPage;
-            const endIndex = startIndex + itemsPerPage;
-            const pageData = contactsData.slice(startIndex, endIndex);
-
-            pageData.forEach(function (contact) {
-              const row = `
-                <tr>
-                    <td>${new Date().toLocaleDateString()}</td>
-                    <td>${truncateText(contact.name, 15)}</td>
-                    <td>${truncateText(contact.offer, 20)}</td>
-                    <td>${truncateText(contact.address, 20)}</td>
-                    <td>Active</td>
-                    <td><i class="bi bi-three-dots-vertical"></i></td>
-                </tr>
-            `;
-              $tableBody.append(row);
-            });
-
-            updatePaginationControls(page);
-          }
+         
         }
 
         $('#prevPage').click(function () {
