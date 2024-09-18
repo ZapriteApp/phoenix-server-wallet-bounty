@@ -65,7 +65,39 @@
 
     .api-passwords p {
         color: #fff;
-    }    
+    }
+    
+    
+    #doneUpdatePassword {
+        background-color: #f09026;
+        color: white;
+        font-size: 16px;
+        padding: 10px;
+        position: absolute;
+        bottom: 10px;
+        right: 20px;
+        text-align: center;
+        cursor: pointer;
+        border: 1px solid #f09026;
+    }
+
+    #closeUpdatePassword {
+        background-color: #000000;
+        color: #f09026;
+        font-size: 16px;
+        padding: 10px;
+        position: absolute;
+        bottom: 10px;
+        left: 20px;
+        cursor: pointer;
+        text-align: center;
+        border: 1px solid #f09026;
+    }
+
+
+    .required-asterisk {
+        color: red;
+    }
 </style>
 <h2>Settings</h2>
 <div class="heading">Application password</div>
@@ -99,3 +131,27 @@
         </span>
     </div>
 </div>
+
+<div id="updatePasswordModal" class="modal">
+    <div class="modal-content">
+        <span class="close" data-modal="updatePasswordModal">&times;</span>
+        <h2>Password</h2>
+        <h3>Update your password</h3>
+        <form>
+            <div class="form-group">
+                <label for="newPassword">New Password <span class="required-asterisk">*</span></label>
+                <input type="password" id="newPassword" name="newPassword" class="form-control"
+                    placeholder="Add a password... ">
+                <label for="confirmPassword">Confirm New Password <span class="required-asterisk">*</span></label>
+                <input type="password" id="confirmPassword" name="confirmPassword" class="form-control"
+                    placeholder="Confirm the password... ">
+
+            </div>
+            <div id="update-password-error-message" style="color: red; display: none; padding-bottom: 10px;"></div>
+
+        </form>
+        <button class="" type="button" id="closeUpdatePassword"><i class="bi bi-arrow-left"> </i>Cancel</button>
+        <button class="" type="button" id="doneUpdatePassword">Confirm <i class="bi bi-check2"></i></button>
+    </div>
+</div>
+<script src="/public/script.js"></script>

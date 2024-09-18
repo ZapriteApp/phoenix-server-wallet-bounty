@@ -877,6 +877,53 @@ $(document).ready(function () {
 });
 
 $(document).ready(function () {
+  var $updatePasswordModal = $("#updatePasswordModal");
+  let errorMessage = $('#update-password-error-message');
+  
+
+  $("#updatePassword").click(function () {
+    console.log("Update password modal up")
+    $updatePasswordModal.show();
+  });
+
+  $("#doneUpdatePassword").click(function () {
+    var newPassword = $("#newPassword").val();
+    var confirmedPassword = $("#confirmPassword").val();
+
+    console.log("Update password clicked");
+    console.log(confirmedPassword)
+    console.log(newPassword)
+
+    if(newPassword === ""){
+      errorMessage.text("Missing new password!");
+      errorMessage.show();
+      return
+    }
+
+    if(confirmedPassword === ""){
+      errorMessage.text("Missing confirmed password!");
+      errorMessage.show();
+      return
+    }
+
+    if (newPassword !== confirmedPassword) {
+      errorMessage.text("Passwords do not match!");
+      errorMessage.show();
+      return
+    }
+
+    $("#newPassword").val("");
+    $("#confirmPassword").val("");
+
+    $updatePasswordModal.hide();
+   
+  });
+
+  
+  
+})
+
+$(document).ready(function () {
 
   $(".main-content").on("click", '#showOfferQR', function () {
     const offerText = $('#bolt12Offer').text().trim();
