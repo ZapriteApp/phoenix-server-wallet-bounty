@@ -147,4 +147,22 @@ router.get('/get-contacts', async (req, res) => {
     }
 });
 
+
+router.post('/save-password', async (req, res) => {
+    const { password } = req.body;
+    try  {
+        if (db.data.password.length === 0) {
+            db.data.password.push({ password: password });
+          } else {
+            db.data.password[0].password = password;
+        }
+        await db.write()
+        res.json({message: "Password saved successfully"});
+    }
+    catch(error) {
+        console.log(error)
+        res.status(500).json({ "message": error});
+    }
+});
+
 export default router;

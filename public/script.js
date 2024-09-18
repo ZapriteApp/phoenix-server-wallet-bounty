@@ -912,6 +912,26 @@ $(document).ready(function () {
       return
     }
 
+    const password = {
+      password: newPassword
+    }
+
+
+    fetch('/api/save-password', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(password)
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Password saved:', data);
+      })
+      .catch(error => {
+        console.error('Error saving password:', error);
+      });
+
     $("#newPassword").val("");
     $("#confirmPassword").val("");
 
