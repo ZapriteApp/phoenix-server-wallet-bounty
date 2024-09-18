@@ -39,6 +39,10 @@ app.get('/home', (req, res) => {
   res.render('dashboard');
 });
 
+
+app.get('/login', (req, res) => {
+  res.render('login');
+});
 app.use('/api', router);
 
 app.listen(port, () => {

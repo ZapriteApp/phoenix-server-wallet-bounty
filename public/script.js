@@ -190,7 +190,7 @@ $(document).ready(function () {
             .catch(error => {
               console.error('Error fetching balance:', error);
             });
-         
+
         }
 
         $('#prevPage').click(function () {
@@ -399,7 +399,7 @@ $(document).ready(function () {
     amountSat = parseInt(amountSat)
     console.log(invoice);
     console.log(amountSat);
- 
+
 
     if (invoice === "") {
       errorMessage.text("The request invoice cannot be empty.");
@@ -453,7 +453,7 @@ $(document).ready(function () {
       return false;
     }
 
-    $("#requestInvoice").val(" ");  
+    $("#requestInvoice").val(" ");
 
   });
 
@@ -498,7 +498,7 @@ $(document).ready(function () {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ offer: offer})
+        body: JSON.stringify({ offer: offer })
       });
 
       if (!response.ok) {
@@ -557,13 +557,13 @@ $(document).ready(function () {
       errorMessage.show();
       return
     }
-  
+
     const contactId = $("#paymentContact").val().trim();
-    
+
     let rawAmount = $("#contactPaymentAmount").val().trim();
-   
+
     const message = $("#contactPaymentDescription").val().trim();
-   
+
     console.log(contactId);
     console.log(` Raw amount is ${rawAmount}`);
     console.log(message);
@@ -575,13 +575,13 @@ $(document).ready(function () {
       errorMessage.show();
       return
     }
-    
+
     if (rawAmount === "") {
       errorMessage.text("Amount cannot be empty.");
       errorMessage.show();
       return
     }
-   
+
     if (!/^\d+$/.test(rawAmount)) {
       errorMessage.text("Amount should be number.");
       errorMessage.show();
@@ -672,7 +672,7 @@ $(document).ready(function () {
 
     console.log(amountSat);
     console.log(description);
-    
+
     if (rawAmount === "") {
       errorMessage.text("The request amount cannot be empty.");
       errorMessage.show();
@@ -818,9 +818,9 @@ $(document).ready(function () {
       errorMessage.show();
       return
     }
-    
+
     let isValid = await isOfferValid(offer)
-    if(!isValid){
+    if (!isValid) {
       console.log("Contact offer is invalid")
       errorMessage.text("The contact offer is invalid.");
       errorMessage.show();
@@ -879,7 +879,7 @@ $(document).ready(function () {
 $(document).ready(function () {
   var $updatePasswordModal = $("#updatePasswordModal");
   let errorMessage = $('#update-password-error-message');
-  
+
 
   $("#updatePassword").click(function () {
     console.log("Update password modal up")
@@ -894,13 +894,13 @@ $(document).ready(function () {
     console.log(confirmedPassword)
     console.log(newPassword)
 
-    if(newPassword === ""){
+    if (newPassword === "") {
       errorMessage.text("Missing new password!");
       errorMessage.show();
       return
     }
 
-    if(confirmedPassword === ""){
+    if (confirmedPassword === "") {
       errorMessage.text("Missing confirmed password!");
       errorMessage.show();
       return
@@ -934,13 +934,8 @@ $(document).ready(function () {
 
     $("#newPassword").val("");
     $("#confirmPassword").val("");
-
     $updatePasswordModal.hide();
-   
   });
-
-  
-  
 })
 
 $(document).ready(function () {
@@ -976,6 +971,43 @@ $(document).ready(function () {
 
 })
 
+$(document).ready(function () {
+  const errorMessage = $('#login-error-message');
+  $('#login-button').click(function (e) {
+    const password = $('#password').val();
+    console.log(password)
+
+    if (!password) {
+      errorMessage.text('Please enter a password');
+      errorMessage.show();
+      return;
+    }
+
+    fetch('/api/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ password: password }),
+    })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          window.location.href = '/';
+        } else {
+          errorMessage.text('Invalid password. Please try again.');
+          errorMessage.show();
+        }
+      })
+      .catch(error => {
+        // Handle network errors
+        console.error('Error:', error);
+        errorMessage.text('An error occurred. Please try again.');
+        errorMessage.show();
+      });
+
+  });
+})
 
 function loadPartial(url) {
   fetch(url)
@@ -1110,23 +1142,23 @@ $('#copyChannelIdIcon').on('click', function () {
 
 async function isOfferValid(offer) {
   try {
-      let response = await fetch('/api/decode-offer', {
-          method: 'POST',
-          headers: {
-              'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ offer: offer })
-      });
+    let response = await fetch('/api/decode-offer', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ offer: offer })
+    });
 
-      if (!response.ok) {
-        console.log("false")
-        return false
-      }
-      let data = await response.json();
-      return data.chain ? true : false;
+    if (!response.ok) {
+      console.log("false")
+      return false
+    }
+    let data = await response.json();
+    return data.chain ? true : false;
   } catch (error) {
-      console.error('Error checking offer validity:', error);
-      return false; 
+    console.error('Error checking offer validity:', error);
+    return false;
   }
 }
 async function getContactOffer(contactId) {
