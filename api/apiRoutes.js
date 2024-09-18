@@ -2,6 +2,7 @@ import express from 'express';
 import * as apiService from './apiService.js';
 import * as utils from '../utils/utils.js'
 import db from '../utils/db.js'
+import bcrypt from 'bcrypt'
 const router = express.Router();
 
 router.get('/get-balance', async (req, res) => {
@@ -151,10 +152,11 @@ router.get('/get-contacts', async (req, res) => {
 router.post('/save-password', async (req, res) => {
     const { password } = req.body;
     try  {
+        const hashedPassword = await bcrypt.hash(password, 10);
         if (db.data.password.length === 0) {
-            db.data.password.push({ password: password });
+            db.data.password.push({ password: hashedPassword });
           } else {
-            db.data.password[0].password = password;
+            db.data.password[0].password = hashedPassword;
         }
         await db.write()
         res.json({message: "Password saved successfully"});
