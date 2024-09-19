@@ -253,10 +253,10 @@ $(document).ready(function () {
 
 // Update node details
 $(document).ready(function () {
-    let inboundLiquiditySat;
-    let capacitySat;
-    let balanceSat;
-    let channelId;
+  let inboundLiquiditySat;
+  let capacitySat;
+  let balanceSat;
+  let channelId;
 
   fetch('/api/get-node-info')
     .then(response => {
@@ -292,7 +292,7 @@ $(document).ready(function () {
       console.error('Error fetching balance:', error);
     });
 
-    fetch('/api/get-btc-price')
+  fetch('/api/get-btc-price')
     .then(response => {
       if (!response.ok) {
         throw new Error('Network response was not ok ' + response.statusText);
@@ -302,8 +302,8 @@ $(document).ready(function () {
     .then(data => {
 
       btcPrice = parseInt(data.btcPrice);
-      let outBoundVal = balanceSat/100000000 * btcPrice
-      let inBoundVal = inboundLiquiditySat/100000000 * btcPrice
+      let outBoundVal = balanceSat / 100000000 * btcPrice
+      let inBoundVal = inboundLiquiditySat / 100000000 * btcPrice
 
       $('#btcPriceOutbound').html(`You can send $${outBoundVal.toFixed(2)}`);
       $('#btcPriceInbound').html(`You can receive $${inBoundVal.toFixed(2)}`);
@@ -1055,8 +1055,7 @@ $(document).ready(function () {
   });
 })
 
-$(document).ready(function() {
-  
+$(document).ready(function () {
 
   fetch('/api/get-config-info')
     .then(response => {
@@ -1066,16 +1065,24 @@ $(document).ready(function() {
       return response.json();
     })
     .then(data => {
-       let adminPassword = data.config["http-password"]
-       let restrictedPassword = data.config["http-password-limited-access"]
-       $('#adminPassword').html(adminPassword);
-        $('#restrictedPassword').html(restrictedPassword);
+      let adminPassword = data.config["http-password"]
+      let restrictedPassword = data.config["http-password-limited-access"]
+      $('#adminPassword').html(adminPassword);
+      $('#restrictedPassword').html(restrictedPassword);
 
     })
     .catch(error => {
       console.error('Error fetching balance:', error);
     });
 
+  $('#copyAdminPassword').on('click', function () {
+    copyPassword('#adminPassword');
+  });
+
+  // Event listener for restricted password copy button
+  $('#copyRestrictedPassword').on('click', function () {
+    copyPassword('#restrictedPassword');
+  });
 
 })
 
@@ -1245,5 +1252,14 @@ async function getContactOffer(contactId) {
     console.error('Error fetching contacts:', error);
     return null;
   }
+}
+
+function copyPassword(passwordId) {
+  var passwordText = $(passwordId).text();
+  var tempInput = $('<input>');
+  $('body').append(tempInput);
+  tempInput.val(passwordText).select();
+  document.execCommand('copy');
+  tempInput.remove();
 }
 
