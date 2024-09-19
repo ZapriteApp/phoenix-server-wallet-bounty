@@ -1055,6 +1055,30 @@ $(document).ready(function () {
   });
 })
 
+$(document).ready(function() {
+  
+
+  fetch('/api/get-config-info')
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok ' + response.statusText);
+      }
+      return response.json();
+    })
+    .then(data => {
+       let adminPassword = data.config["http-password"]
+       let restrictedPassword = data.config["http-password-limited-access"]
+       $('#adminPassword').html(adminPassword);
+        $('#restrictedPassword').html(restrictedPassword);
+
+    })
+    .catch(error => {
+      console.error('Error fetching balance:', error);
+    });
+
+
+})
+
 
 function loadPartial(url) {
   fetch(url)

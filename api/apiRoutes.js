@@ -206,7 +206,7 @@ router.get('/get-btc-price', async (req, res) => {
 router.get('/get-config-info', async (req, res) => {
     try  {
         const configPath = path.join(process.env.HOME || process.env.USERPROFILE, '.phoenix', 'phoenix.conf');
-        const config = await utils.readConfigFile(configPath);
+        const config = utils.readConfigFile(configPath);
         res.json({ config: config })
     }
     catch(error) {
