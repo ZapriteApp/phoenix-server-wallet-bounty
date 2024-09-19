@@ -131,6 +131,20 @@
             color: #f19528;
             margin-bottom: 20px;
         }
+
+        .zaprite-image {
+            width: 20px;
+            height: 20px;
+            border-radius: 5px; 
+            margin-right: 5px;
+        }
+
+        .side-panel .menu i {
+            margin-right: 5px;
+            
+        }
+
+
     </style>
 
 
@@ -609,32 +623,31 @@
                     <h2>Phoneixd Wallet</h2>
                 </div>
                 <div class="menu">
-                    <a href="#" class="menu-item selected" style="text-decoration: none;" id="home"><i
+                    <a href="#" class="menu-item selected" style="text-decoration: none;" id="home" style="margin-right: 3px;"><i
                             class="bi bi-grid"> </i>Dashboard</a>
                     <a href="#" class="menu-item" style="text-decoration: none;" id="transactions"><i
-                            class="bi bi-lightning-charge"> </i>Transactions</a>
+                            class="bi bi-lightning-charge" > </i>Transactions</a>
                     <a href="#" class="menu-item" style="text-decoration: none;" id="contacts"><i
                             class="bi bi-person-lines-fill"> </i>Contacts</a>
-                    <a href="#" class="menu-item" style="text-decoration: none;" id="settings"><i class="bi bi-gear">
+                    <a href="#" class="menu-item" style="text-decoration: none;" id="settings"><i class="bi bi-gear" style="margin-right: 3px;">
                         </i>Settings</a>
                 </div>
 
                 <div class="footer">
-                    <div class="footer-item">
+                    <div class="footer-item" id="zaprite-link">
+                        <img class="zaprite-image" src="/public/images/zaprite logo.png"> 
                         <a href="https://zaprite.com/"  style="text-decoration: none;" id="home"> <span class="footer-text">Zaprite</span></a>
                         <i class="bi bi-arrow-up footer-icon-right"></i>
                     </div>
-                    <div class="footer-item">
+                    <div class="footer-item" id="log-out-link">
                         <i class="bi bi-box-arrow-right footer-icon"></i>
                         <a href="#" style="text-decoration: none;" id="home"><span class="footer-text">Log Out</span></a>
                         
                     </div>
-                    <div class="footer-item">
+                    <div class="footer-item" id="github-link">
                         <a href="https://github.com/hkarani/phoenix-server-lightning-wallet" style="text-decoration: none;" id="home">  <span class="footer-text" style="color: #444444;">Version 0.1.0</span></a>
                         <i class="bi bi-github footer-icon-right"></i>
-                    </div>
-                   
-                    
+                    </div>    
                 </div>
             </div>
 

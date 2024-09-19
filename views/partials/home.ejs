@@ -7,7 +7,7 @@
         flex-direction: column;
         justify-content: space-between;
         /* align-items: center; */
-        padding: 10px 5px;
+        padding: 15px 10px;
         background-color: #111111;
     }
 
@@ -26,7 +26,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
+        justify-content: space-between;
     }
 
     .balanceValue {
@@ -117,15 +117,13 @@
         height: 15px;
         margin-top: 10px;
         margin-bottom: 10px;
-        border-radius: 5px;
         overflow: hidden;
     }
 
     #progressBar {
         background-color: white;
         height: 100%;
-        width: 0%;
-        border-radius: 5px;
+        /* width: 0%; */
     }
 
     .inbound-styling {
@@ -145,6 +143,24 @@
         margin-right: 5px; 
     }
 
+    #btcPriceInbound {
+        font-size: 0.7 rem;
+        color: grey;
+    }
+
+
+    #btcPriceOutbound {
+        font-size: 0.7 rem;
+        color: grey;
+    }
+
+    .channelId {
+        font-size: 0.7 rem;
+        color: grey;
+    }
+
+
+    
 </style>
 
 <div class="heading-home">
@@ -174,7 +190,7 @@
         <div class="balanceValue balanceItem">
             <p>Outbound <i class="bi bi-arrow-right"></i></p>
             <p class="outbound"></p>           
-            <p id="btcPriceOutbound"> You can send $43</p>
+            <p id="btcPriceOutbound"></p>
         </div>
 
         <div class="balanceValue balanceItem">
@@ -190,7 +206,7 @@
         <div class="balanceValue balanceItem ">
             <p class="inbound-styling"> <i class="bi bi-arrow-left "></i> Inbound</i></p>
             <p class=" inbound-styling inbound"></p>           
-            <p id="btcPriceInbound"> You can recieve $43</p>
+            <p id="btcPriceInbound"></p>
         </div>
     </div>
 </div>
