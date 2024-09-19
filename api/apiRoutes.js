@@ -3,6 +3,8 @@ import * as apiService from './apiService.js';
 import * as utils from '../utils/utils.js'
 import db from '../utils/db.js'
 import bcrypt from 'bcrypt'
+import path from 'path'
+import fs from 'fs'
 
 const router = express.Router();
 
@@ -194,6 +196,18 @@ router.get('/get-btc-price', async (req, res) => {
     try  {
      const btcPrice = await utils.getBitconPrice();
      res.json({ btcPrice: btcPrice })
+    }
+    catch(error) {
+        console.log(error)
+        res.status(500).json({ "message": error});
+    }
+});
+
+router.get('/get-config-info', async (req, res) => {
+    try  {
+        const configPath = path.join(process.env.HOME || process.env.USERPROFILE, '.phoenix', 'phoenix.conf');
+        const config = await utils.readConfigFile(configPath);
+        res.json({ config: config })
     }
     catch(error) {
         console.log(error)
