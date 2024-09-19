@@ -4,8 +4,8 @@ import * as apiService from '../api/apiService.js';
 import fs from 'fs'
 import db from './db.js'
 import lodash from 'lodash'
-import path  from 'path';
-import axios  from 'axios';
+import path from 'path';
+import axios from 'axios';
 import * as cheerio from 'cheerio';
 import { v4 as uuidv4 } from 'uuid'
 
@@ -62,16 +62,37 @@ export function isBolt12(value) {
     });
 }
 
-export async function getBitconPrice(){
+export async function getBitconPrice() {
   try {
     const response = await axios.get('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd');
     const bitcoinPrice = response.data.bitcoin.usd;
     return bitcoinPrice;
 
-} catch (error) {
+  } catch (error) {
     console.error(`Error fetching Bitcoin price: ${error.message}`);
+  }
 }
+
+export function readConfigFile(filePath) {
+    try {
+        const fileContents = fs.readFileSync(filePath, 'utf-8');
+        const config = {};
+        fileContents.split('\n').forEach(line => {
+            const cleanedLine = line.split('#')[0].trim();
+            if (cleanedLine) {
+                const [key, value] = cleanedLine.split('=').map(item => item.trim());
+                if (key && value) {
+                    config[key] = value;
+                }
+            }
+        });
+
+        return config;
+    } catch (err) {
+        console.error('Error reading config file:', err);
+    }
 }
+
 
 export function getId() {
   return uuidv4();
