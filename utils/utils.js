@@ -5,6 +5,8 @@ import fs from 'fs'
 import db from './db.js'
 import lodash from 'lodash'
 import path  from 'path';
+import axios  from 'axios';
+import * as cheerio from 'cheerio';
 import { v4 as uuidv4 } from 'uuid'
 
 export function saveToEnvFile(key, value) {
@@ -58,6 +60,17 @@ export function isBolt12(value) {
     .catch(error => {
       console.error('Error decoding offer:', error);
     });
+}
+
+export async function getBitconPrice(){
+  try {
+    const response = await axios.get('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd');
+    const bitcoinPrice = response.data.bitcoin.usd;
+    return bitcoinPrice;
+
+} catch (error) {
+    console.error(`Error fetching Bitcoin price: ${error.message}`);
+}
 }
 
 export function getId() {

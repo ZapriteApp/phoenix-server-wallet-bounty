@@ -19,9 +19,10 @@
   },
   "homepage": "https://github.com/hkarani/phoenix-server-lightning-wallet#readme",
   "dependencies": {
-    "axios": "^1.7.2",
+    "axios": "^1.7.7",
     "bcrypt": "^5.1.1",
     "bootstrap-icons": "^1.11.3",
+    "cheerio": "^1.0.0",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "ejs": "^3.1.10",
