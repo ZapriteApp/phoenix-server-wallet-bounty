@@ -1041,6 +1041,21 @@ $(document).ready(function () {
   });
 })
 
+$(document).ready(function () {
+  $('#zaprite-link').on('click', function () {
+    window.open("https://zaprite.com/");
+  });
+
+  $('#logout-link').on('click', function () {
+    // window.location.href = url;
+  });
+
+  $('#github-link').on('click', function () {
+    window.open("https://github.com/hkarani/phoenix-server-lightning-wallet")
+  });
+})
+
+
 function loadPartial(url) {
   fetch(url)
     .then(response => response.text())
