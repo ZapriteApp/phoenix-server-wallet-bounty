@@ -4,9 +4,12 @@ import * as utils from '../utils/utils.js'
 import db from '../utils/db.js'
 import bcrypt from 'bcrypt'
 import path from 'path'
-import fs from 'fs'
+import jwt from 'jsonwebtoken'
+import dotenv from 'dotenv';
 
+dotenv.config();
 const router = express.Router();
+const httpPassword = process.env.HTTP_PASSWORD;
 
 router.get('/get-balance', async (req, res) => {
     try  {
@@ -177,7 +180,10 @@ router.post('/login', async (req, res) => {
     try {
         const match = await bcrypt.compare(password, storedPassword);
         if (match) {
-            return res.json({ success: true, message: 'Login successful' });
+
+            const payload = { message: 'Authenticated successfully' };
+            const token = jwt.sign(payload, httpPassword, { expiresIn: '1h' });
+            return res.json({ success: true, message: 'Login successful', token } );
         } else {
             return res.json({ success: false,  message: 'Invalid password' });
         }
@@ -211,6 +217,21 @@ router.get('/get-config-info', async (req, res) => {
         res.status(500).json({ "message": error});
     }
 });
+
+router.get('/authenticate', (req, res) => {
+    console.log("authenticating")
+    const authHeader = req.headers.authorization;
+    if (!authHeader) {
+      return res.status(401).json({ message: 'Token required' });
+    }  
+    const token = authHeader.split(' ')[1];    
+    try {
+      const user = jwt.verify(token, httpPassword);
+      res.status(200).json({ success: true, user });
+    } catch (error) {
+      res.status(401).json({ success: false });
+    }
+  });
 
 
 

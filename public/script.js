@@ -306,8 +306,8 @@ $(document).ready(function () {
         })
         .catch(error => {
           console.error('Error fetching balance:', error);
-          ('#btcPriceOutbound').html(`You can send $ ~`);
-          ('#btcPriceInbound').html(`You can receive $~`);
+          $('#btcPriceOutbound').html(`You can send $ ~`);
+          $('#btcPriceInbound').html(`You can receive $~`);
 
         });
 
@@ -1027,7 +1027,9 @@ $(document).ready(function () {
       .then(response => response.json())
       .then(data => {
         if (data.success) {
-          window.location.href = '/';
+          
+          localStorage.setItem('token', data.token);
+          window.location.href = '';
         } else {
           errorMessage.text('Invalid password. Please try again.');
           errorMessage.show();
@@ -1039,8 +1041,53 @@ $(document).ready(function () {
         errorMessage.text('An error occurred. Please try again.');
         errorMessage.show();
       });
-
   });
+
+
+  $('#log-out').click(function (e) {
+    localStorage.removeItem('token');
+    if (window.location.pathname !== '/login') {
+      window.location.href = '/login';
+    }
+    
+  })
+
+   //Authenticate
+   const token = localStorage.getItem('token');
+   if (!token) {
+     if (window.location.pathname !== '/login') {
+      console.log("Redirecting to home");
+      window.location.href = '/login';
+    }       
+     return;
+   }
+
+   fetch('http://localhost:3000/api/authenticate', {
+     method: 'GET',
+     headers: {
+       'Authorization': `Bearer ${token}`,
+     },
+   })
+   .then(response => {
+     if (!response.ok) {
+      if (window.location.pathname !== '/login') {
+        window.location.href = '/login';
+      }
+       return null
+     }
+     return response.json();
+   })
+   .then(data => {
+    if (data){
+      if (window.location.pathname !== '/') {
+        console.log("Redirecting to home");
+        window.location.href = '/';
+      }
+    }  
+   })
+   .catch(error => {
+    console.log(error)
+   });
 })
 
 $(document).ready(function () {
