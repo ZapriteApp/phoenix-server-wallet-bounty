@@ -286,36 +286,38 @@ $(document).ready(function () {
 
       $('#progressBar').css('width', inboundPercentage + '%');
 
+      fetch('/api/get-btc-price')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
+          }
+          return response.json();
+        })
+        .then(data => {
+
+          btcPrice = parseInt(data.btcPrice);
+          let outBoundVal = (balanceSat / 100000000) * btcPrice
+          let inBoundVal = (inboundLiquiditySat / 100000000) * btcPrice
+
+          $('#btcPriceOutbound').html(`You can send &#8776 $${outBoundVal.toFixed(2)}`);
+          $('#btcPriceInbound').html(`You can receive &#8776 $${inBoundVal.toFixed(2)}`);
+
+
+        })
+        .catch(error => {
+          console.error('Error fetching balance:', error);
+          ('#btcPriceOutbound').html(`You can send $ ~`);
+          ('#btcPriceInbound').html(`You can receive $~`);
+
+        });
+
 
     })
     .catch(error => {
       console.error('Error fetching balance:', error);
     });
 
-  fetch('/api/get-btc-price')
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok ' + response.statusText);
-      }
-      return response.json();
-    })
-    .then(data => {
 
-      btcPrice = parseInt(data.btcPrice);
-      let outBoundVal = balanceSat / 100000000 * btcPrice
-      let inBoundVal = inboundLiquiditySat / 100000000 * btcPrice
-
-      $('#btcPriceOutbound').html(`You can send $${outBoundVal.toFixed(2)}`);
-      $('#btcPriceInbound').html(`You can receive $${inBoundVal.toFixed(2)}`);
-
-
-    })
-    .catch(error => {
-      console.error('Error fetching balance:', error);
-      ('#btcPriceOutbound').html(`You can send $ ~`);
-      ('#btcPriceInbound').html(`You can receive $~`);
-
-    });
 
 
 });

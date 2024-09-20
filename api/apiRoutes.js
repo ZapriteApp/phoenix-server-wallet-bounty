@@ -173,12 +173,9 @@ router.post('/save-password', async (req, res) => {
 router.post('/login', async (req, res) => {
     const { password } = req.body;
     const storedPassword = db.data.password[0].password; 
-    console.log(storedPassword)
 
     try {
         const match = await bcrypt.compare(password, storedPassword);
-        console.log(password)
-
         if (match) {
             return res.json({ success: true, message: 'Login successful' });
         } else {

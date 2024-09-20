@@ -3,7 +3,6 @@ dotenv.config();
 import * as apiService from '../api/apiService.js';
 import fs from 'fs'
 import db from './db.js'
-import lodash from 'lodash'
 import path from 'path';
 import axios from 'axios';
 import * as cheerio from 'cheerio';
@@ -64,33 +63,47 @@ export function isBolt12(value) {
 
 export async function getBitconPrice() {
   try {
+    //Check if the btcPrice is saved
+    if (db?.data?.btcPrice?.[0]?.timeStamp) {
+      const timeDifference = Date.now() - db.data.btcPrice[0].timeStamp;
+      const thirtyMinutes = 30 * 60 * 1000;
+
+      if (timeDifference <= thirtyMinutes) {
+        return db.data.btcPrice[0].btcPrice;
+      }
+    }    
+
     const response = await axios.get('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd');
     const bitcoinPrice = response.data.bitcoin.usd;
+    db.data.btcPrice = []
+    db.data.btcPrice.push({ btcPrice: bitcoinPrice, timeStamp: Date.now() });
+    await db.write()
     return bitcoinPrice;
 
   } catch (error) {
     console.error(`Error fetching Bitcoin price: ${error.message}`);
+    // throw error;
   }
 }
 
 export function readConfigFile(filePath) {
-    try {
-        const fileContents = fs.readFileSync(filePath, 'utf-8');
-        const config = {};
-        fileContents.split('\n').forEach(line => {
-            const cleanedLine = line.split('#')[0].trim();
-            if (cleanedLine) {
-                const [key, value] = cleanedLine.split('=').map(item => item.trim());
-                if (key && value) {
-                    config[key] = value;
-                }
-            }
-        });
+  try {
+    const fileContents = fs.readFileSync(filePath, 'utf-8');
+    const config = {};
+    fileContents.split('\n').forEach(line => {
+      const cleanedLine = line.split('#')[0].trim();
+      if (cleanedLine) {
+        const [key, value] = cleanedLine.split('=').map(item => item.trim());
+        if (key && value) {
+          config[key] = value;
+        }
+      }
+    });
 
-        return config;
-    } catch (err) {
-        console.error('Error reading config file:', err);
-    }
+    return config;
+  } catch (err) {
+    console.error('Error reading config file:', err);
+  }
 }
 
 
