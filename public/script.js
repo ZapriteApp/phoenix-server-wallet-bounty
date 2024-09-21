@@ -1126,6 +1126,22 @@ $(document).ready(function () {
       console.error('Error fetching balance:', error);
     });
 
+    fetch('/api/is-password-set')
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok ' + response.statusText);
+      }
+      return response.json();
+    })
+    .then(data => {
+      if(data.success){
+        $('.passwordSet').html(`Password Set <i class="bi bi-check2"></i>`);
+      }
+    })
+    .catch(error => {
+      console.error('Error fetching balance:', error);
+    });
+
   $('#copyAdminPassword').on('click', function () {
     copyPassword('#adminPassword');
   });

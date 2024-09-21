@@ -211,6 +211,8 @@ router.post('/login', async (req, res) => {
     
 });
 
+
+
 router.get('/get-btc-price', async (req, res) => {
     try  {
      const btcPrice = await utils.getBitconPrice();
@@ -234,6 +236,18 @@ router.get('/get-config-info', async (req, res) => {
     }
 });
 
+router.get('/is-password-set', (req, res) => {  
+    try {
+        const storedPassword = db.data?.password?.[0]?.password;
+        if(!storedPassword){
+            res.status(200).json({ success: false });
+
+        }
+      res.status(200).json({ success: true });
+    } catch (error) {
+      res.status(401).json({ success: false });
+    }
+});
 
 router.get('/authenticate', (req, res) => {
     console.log("authenticating")
