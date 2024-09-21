@@ -133,7 +133,7 @@ router.post('/save-contact', async (req, res) => {
     const { name, offer, address } = req.body;
     const newContactsId = utils.getId();
     try  {
-        db.data.contacts.push({id: newContactsId, name:name, offer: offer, address: address})
+        db.data.contacts.push({id: newContactsId, name:name, offer: offer, address: address, dateAdded: Date.now()})
         await db.write()
         res.json({message: "Contact saved successfully"});
     }

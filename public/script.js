@@ -137,7 +137,7 @@ $(document).ready(function () {
           pageData.forEach(function (contact) {
             const row = `
               <tr>
-                  <td>${new Date().toLocaleDateString()}</td>
+                  <td>${new Date(contact.dateAdded).toLocaleDateString()}</td>
                   <td>${truncateText(contact.name, 15)}</td>
                   <td>${truncateText(contact.offer, 20)}</td>
                   <td>${truncateText(contact.address, 20)}</td>
