@@ -235,16 +235,19 @@ router.get('/get-config-info', async (req, res) => {
 });
 
 
-
-
 router.get('/authenticate', (req, res) => {
     console.log("authenticating")
+    const storedPassword = db.data?.password?.[0]?.password;
     const authHeader = req.headers.authorization;
     if (!authHeader) {
       return res.status(401).json({ message: 'Token required' });
     }  
     const token = authHeader.split(' ')[1];    
     try {
+        if(!storedPassword){
+            res.status(200).json({ success: true });
+
+        }
       const user = jwt.verify(token, httpPassword);
       res.status(200).json({ success: true, user });
     } catch (error) {
