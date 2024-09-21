@@ -173,6 +173,22 @@ router.post('/save-password', async (req, res) => {
     }
 });
 
+router.post('/is-password-set', async (req, res) => {
+    try {
+        const storedPassword = db.data?.password?.[0]?.password;
+        if (match) {
+            return res.json({ success: true, message: 'Password', token } );
+        } else {
+            return res.json({ success: false,  message: 'Password is not set' });
+        }
+
+    }catch(error) {
+        console.error('Error checking password:', error);
+        return res.status(500).json({ success: false, message: 'Server error' });
+    }    
+});
+
+
 router.post('/login', async (req, res) => {
     const { password } = req.body;
     const storedPassword = db.data.password[0].password; 
@@ -217,6 +233,9 @@ router.get('/get-config-info', async (req, res) => {
         res.status(500).json({ "message": error});
     }
 });
+
+
+
 
 router.get('/authenticate', (req, res) => {
     console.log("authenticating")
