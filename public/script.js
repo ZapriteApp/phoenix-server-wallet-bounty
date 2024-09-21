@@ -739,7 +739,9 @@ $(document).ready(function () {
         new QRCode($("#barcode")[0], {
           text: invoiceString,
           width: 256,
-          height: 256
+          height: 256,
+          correctLevel: QRCode.CorrectLevel.H,
+          render: "svg"
         });
 
         $sharePaymentRequestModal.show();
