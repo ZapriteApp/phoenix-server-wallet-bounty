@@ -147,10 +147,9 @@
 
         #barcodeContainer {
             border: 2px solid #000000;
-            padding: 3px;
+            padding: 4px;
             display: inline-block;
             background-color: #f9f9f9;
-            border-radius: 10px;
         }
     </style>
 
@@ -821,7 +820,7 @@
     <!-- Share payment request Modal -->
     <div id="sharePaymentRequestModal" class="modal">
         <div class="modal-content">
-            <span class="close" data-modal="sharePaymentRequestModal">&times;</span>
+            <span id="xsharePaymentRequestModal"class="close" data-modal="sharePaymentRequestModal">&times;</span>
             <h2>Share Payment Request</h2>
             <div id="barcodeContainer" class="barcode">
                 <div id="barcode"></div>
@@ -839,7 +838,7 @@
 
     <div id="offerQRModal" class="modal">
         <div class="modal-content">
-            <span class="close" data-modal="offerQRModal">&times;</span>
+            <span id="xShowPaymentOffer" class="close" data-modal="offerQRModal">&times;</span>
             <h2>Bol12 Offer QR-Code</h2>
             <div id="barcodeContainer" class="barcode">
                 <div id="offerQRBarcode"></div>

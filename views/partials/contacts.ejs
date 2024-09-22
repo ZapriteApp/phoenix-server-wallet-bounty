@@ -126,11 +126,11 @@
         text-align: center;
         border: 1px solid #f09026;
     }
-    #importContactModal .modal-content {
+    /* #importContactModal .modal-content {
         width: 500px;
         height: 500px;
 
-    }
+    } */
 
     #addContact {
         background-color: #f09026;
@@ -169,6 +169,14 @@
         cursor: pointer;
         text-align: center;
         border: 1px solid #f09026;
+    }
+
+    #barcodeContainer {
+        border: 2px solid #000000;
+        padding: 3px;
+        display: inline-block;
+        background-color: #f9f9f9;
+        border-radius: 10px;
     }
 
 
@@ -237,11 +245,12 @@
 
 <div id="importContactModal" class="modal">
     <div class="modal-content">
-        <span class="close" data-modal="importContactModal">&times;</span>
+        <span id="ximportContactModal" class="close" data-modal="importContactModal">&times;</span>
         <h2>Import Contacts</h2>
-        <h3>Scan the QR code to import contacts</h3>
-        
-        <div id="barcode" class="barcode"></div>
+        <h3>Scan the QR code to import wallet contacts</h3>
+        <div id="barcodeContainer" class="barcode">
+            <div id="importContactQRCode"></div>
+        </div>
         <button class="" type="button" id="closeContactModal"><i class="bi bi-x"></i>Close</button>
         <button class="" type="button" id="doneImportContactModal">Done <i class="bi bi-check2"></i></button>
     </div>

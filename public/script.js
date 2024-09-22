@@ -673,6 +673,9 @@ $(document).ready(function () {
   $(".close").on("click", function () {
     var modalId = $(this).data('modal');
     $("#" + modalId).hide();
+    $("#offerQRBarcode").empty();
+    $("#barcode").empty();
+    $("#importContactQRCode").empty();
   });
 
   $(".main-content").on("click", '#receiveButton', function () {
@@ -742,7 +745,7 @@ $(document).ready(function () {
           height: 245,
           colorDark : "#000000",
           colorLight : "#ffffff",
-          correctLevel: QRCode.CorrectLevel.H,
+          correctLevel: QRCode.CorrectLevel.M,
         });
 
         $sharePaymentRequestModal.show();
@@ -777,6 +780,13 @@ $(document).ready(function () {
 
   $("#sharePaymentRequestModal").on("click", "#closeSharePaymentRequest", function () {
     console.log("Share Payment Request Modal closed")
+    $("#barcode").empty();
+    $sharePaymentRequestModal.hide();
+  });
+
+  $("#sharePaymentRequestModal").on("click", "#xSharePaymentRequest", function () {
+    console.log("Share Payment Request Modal closed")
+    $("#barcode").empty();
     $sharePaymentRequestModal.hide();
   });
 
@@ -815,10 +825,35 @@ $(document).ready(function () {
 $(document).ready(function () {
   var $addContactModal = $("#addContactModal");
   var $importContactModal = $("#importContactModal");
+  let contacts = []
 
   $("#importContact").click(function () {
     console.log("Add contact modal clicked")
+
+    fetch('/api/get-offer')
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok ' + response.statusText);
+      }
+      return response.json();
+    })
+    .then(data => {
+      new QRCode($("#importContactQRCode")[0], {
+        text: data,
+        width: 245,
+        height: 245,
+        colorDark : "#000000",
+        colorLight : "#ffffff",
+        correctLevel: QRCode.CorrectLevel.M,
+      });
+    })
+    .catch(error => {
+      console.error('Error fetching offer:', error);
+    });
+    
     $importContactModal.show();
+
+  
   });
 
   $(".pagination").on("click", "#newContact", function () {
@@ -832,11 +867,24 @@ $(document).ready(function () {
   });
 
   $('#closeContactModal').on("click", function () {
+    $("#importContactQRCode").empty();
+    contacts = []
     $importContactModal.hide();
+    
+  });
+
+  $('#ximportContactModal').on("click", function () {
+    $("#importContactQRCode").empty();
+    contacts = []
+    $importContactModal.hide();
+    
   });
 
   $("#doneImportContactModal").click(function () {
+    $("#importContactQRCode").empty();
+    contacts = []
     $importContactModal.hide();
+    
   });
 
   $("#addContact").on('click', async function () {
@@ -988,7 +1036,7 @@ $(document).ready(function () {
       height: 245,
       colorDark : "#000000",
       colorLight : "#ffffff",
-      correctLevel: QRCode.CorrectLevel.H,
+      correctLevel: QRCode.CorrectLevel.M,
     });
 
     $("#doneShowPaymentOffer").click(function () {
@@ -998,6 +1046,12 @@ $(document).ready(function () {
     });
 
     $("#closeShowPaymentOffer").click(function () {
+      $offerQRModal.hide();
+      $("#offerQRBarcode").empty();
+
+    });
+
+    ("#xShowPaymentOffer").click(function () {
       $offerQRModal.hide();
       $("#offerQRBarcode").empty();
 
