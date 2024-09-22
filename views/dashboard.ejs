@@ -90,7 +90,7 @@
         }
 
         .footer-icon-right {
-            margin-left: auto; 
+            margin-left: auto;
             padding-right: 40px;
         }
 
@@ -100,9 +100,10 @@
 
         .footer-text {
             color: white;
-        /* margin-left: 34px; Align text with the starting point of other icons */ 
+            /* margin-left: 34px; Align text with the starting point of other icons */
             flex-grow: 1;
         }
+
         .main-content {
             padding: 20px;
         }
@@ -135,16 +136,22 @@
         .zaprite-image {
             width: 20px;
             height: 20px;
-            border-radius: 5px; 
+            border-radius: 5px;
             margin-right: 5px;
         }
 
         .side-panel .menu i {
             margin-right: 5px;
-            
+
         }
 
-
+        #barcodeContainer {
+            border: 2px solid #000000;
+            padding: 3px;
+            display: inline-block;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+        }
     </style>
 
 
@@ -222,12 +229,12 @@
         }
 
         .modal-content input[type="text"]::placeholder {
-            color: #666; 
+            color: #666;
             opacity: 1;
         }
 
         .modal-content input[type="password"]::placeholder {
-            color: #666; 
+            color: #666;
             opacity: 1;
         }
 
@@ -248,12 +255,14 @@
         }
 
         #contactPaymentType select {
-            background-color: #000;;
+            background-color: #000;
+            ;
             color: #ffff;
         }
 
         #contactPaymentType option {
-            background-color: #000000;;
+            background-color: #000000;
+            ;
             color: #ffff;
         }
 
@@ -278,7 +287,7 @@
             cursor: pointer;
         }
 
-        .payment-button-group button:hover{
+        .payment-button-group button:hover {
             background-color: #d97d1e;
         }
 
@@ -336,7 +345,7 @@
             border: 1px solid #f09026;
         }
 
-        #submitOffer:hover{
+        #submitOffer:hover {
             background-color: #d97d1e;
         }
 
@@ -353,8 +362,8 @@
             border: 1px solid #f09026;
         }
 
-        
-        #submitPaymentSuccess:hover{
+
+        #submitPaymentSuccess:hover {
             background-color: #d97d1e;
         }
 
@@ -371,7 +380,7 @@
             border: 1px solid #f09026;
         }
 
-        #submitContact:hover{
+        #submitContact:hover {
             background-color: #d97d1e;
         }
 
@@ -389,7 +398,7 @@
 
         }
 
-        #submitInvoice:hover{
+        #submitInvoice:hover {
             background-color: #d97d1e;
         }
 
@@ -465,7 +474,7 @@
         .copy-btn:hover {
             background-color: #222222;
         }
-              
+
         .decode-invoice {
             background-color: #222222;
             padding: 15px;
@@ -474,7 +483,7 @@
 
         .decoded-invoice-item {
             display: flex;
-            align-items: center; 
+            align-items: center;
             margin-bottom: 10px;
         }
 
@@ -511,7 +520,7 @@
         #cancelPaymentRequest:hover {
             background-color: #111111;
         }
-        
+
 
         #nextToSharePaymentRequest {
             background-color: #f09026;
@@ -526,7 +535,7 @@
             border: 1px solid #f09026;
         }
 
-        #nextToSharePaymentRequest:hover{
+        #nextToSharePaymentRequest:hover {
             background-color: #d97d1e;
         }
 
@@ -561,7 +570,7 @@
             border: 1px solid #f09026;
         }
 
-        #doneSharePaymentRequest:hover{
+        #doneSharePaymentRequest:hover {
             background-color: #d97d1e;
         }
 
@@ -591,7 +600,7 @@
             border: 1px solid #f09026;
         }
 
-        
+
         #sharePaymentRequestModal .modal-content {
             width: 500px;
             height: 500px;
@@ -604,9 +613,8 @@
 
         .check-icon {
             font-size: 128px;
-            color:  #f09026;
+            color: #f09026;
         }
-
     </style>
     <link rel="stylesheet" href="public/font-awesome-4.7.0/css/font-awesome.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
@@ -623,31 +631,36 @@
                     <h2>Phoneixd Wallet</h2>
                 </div>
                 <div class="menu">
-                    <a href="#" class="menu-item selected" style="text-decoration: none;" id="home" style="margin-right: 3px;"><i
-                            class="bi bi-grid"> </i>Dashboard</a>
+                    <a href="#" class="menu-item selected" style="text-decoration: none;" id="home"
+                        style="margin-right: 3px;"><i class="bi bi-grid"> </i>Dashboard</a>
                     <a href="#" class="menu-item" style="text-decoration: none;" id="transactions"><i
-                            class="bi bi-lightning-charge" > </i>Transactions</a>
+                            class="bi bi-lightning-charge"> </i>Transactions</a>
                     <a href="#" class="menu-item" style="text-decoration: none;" id="contacts"><i
                             class="bi bi-person-lines-fill"> </i>Contacts</a>
-                    <a href="#" class="menu-item" style="text-decoration: none;" id="settings"><i class="bi bi-gear" style="margin-right: 3px;">
+                    <a href="#" class="menu-item" style="text-decoration: none;" id="settings"><i class="bi bi-gear"
+                            style="margin-right: 3px;">
                         </i>Settings</a>
                 </div>
 
                 <div class="footer">
                     <div class="footer-item" id="zaprite-link">
-                        <img class="zaprite-image" src="/public/images/zaprite logo.png"> 
-                        <a href="https://zaprite.com/"  style="text-decoration: none;" id="home"> <span class="footer-text">Zaprite</span></a>
+                        <img class="zaprite-image" src="/public/images/zaprite logo.png">
+                        <a href="https://zaprite.com/" style="text-decoration: none;" id="home"> <span
+                                class="footer-text">Zaprite</span></a>
                         <i class="bi bi-arrow-up footer-icon-right"></i>
                     </div>
                     <div class="footer-item" id="log-out">
                         <i class="bi bi-box-arrow-right footer-icon"></i>
-                        <a href="#" style="text-decoration: none;" id="home"><span class="footer-text">Log Out</span></a>
-                        
+                        <a href="#" style="text-decoration: none;" id="home"><span class="footer-text">Log
+                                Out</span></a>
+
                     </div>
                     <div class="footer-item" id="github-link">
-                        <a href="https://github.com/hkarani/phoenix-server-lightning-wallet" style="text-decoration: none;" id="home">  <span class="footer-text" style="color: #444444;">Version 0.1.0</span></a>
+                        <a href="https://github.com/hkarani/phoenix-server-lightning-wallet"
+                            style="text-decoration: none;" id="home"> <span class="footer-text"
+                                style="color: #444444;">Version 0.1.0</span></a>
                         <i class="bi bi-github footer-icon-right"></i>
-                    </div>    
+                    </div>
                 </div>
             </div>
 
@@ -691,7 +704,7 @@
                     <label for="requestInvoice">Request*</label>
                     <input type="text" id="requestInvoice" name="requestInvoice" class="form-control"
                         placeholder="Enter Request Invoice ">
-                </div>               
+                </div>
             </form>
             <div id="invoice-error-message" style="color: red; display: none;"></div>
             <div class="decode-invoice" style="display: none;">
@@ -702,11 +715,11 @@
                 <div class="decoded-invoice-item">
                     <p class="invoiceAmount">Amount</p>
                     <p class="invoiceAmount">- sats</p>
-                </div>                
+                </div>
                 <div class="decoded-invoice-item">
                     <p class="fees">Fee</p>
                     <p class="fees">- sats</p>
-                </div>              
+                </div>
             </div>
             <button class="" type="button" id="backToPaymentType"><i class="bi bi-arrow-left"> </i>Back</button>
             <button class="" type="button" id="submitInvoice">Send <i class="bi bi-check2"></i></button>
@@ -728,11 +741,11 @@
                     <input type="text" id="contactPaymentAmount" name="contactPaymentAmount" class="form-control"
                         placeholder="Add an amount in sats..">
                     <label for="contactPaymentDescription">Desription:</label>
-                    <input type="text" id="contactPaymentDescription" name="contactPaymentDescription" class="form-control"
-                        placeholder="Optional">
+                    <input type="text" id="contactPaymentDescription" name="contactPaymentDescription"
+                        class="form-control" placeholder="Optional">
                 </div>
             </form>
-            <div id="contact-error-message" style="color: red; display: none; padding-bottom: 10px;"></div>            
+            <div id="contact-error-message" style="color: red; display: none; padding-bottom: 10px;"></div>
             <button class="" type="button" id="backToPaymentType"><i class="bi bi-arrow-left"> </i>Back</button>
             <button class="" type="button" id="submitContact">Send <i class="bi bi-check2"></i></button>
         </div>
@@ -770,9 +783,8 @@
             <div class="icon-container">
                 <i class="bi bi-check-circle check-icon"></i>
             </div>
-            
-            <button class="" type="button" id="submitPaymentSuccess">OK <i
-                    class="bi bi-check2"></i></button>
+
+            <button class="" type="button" id="submitPaymentSuccess">OK <i class="bi bi-check2"></i></button>
         </div>
     </div>
 
@@ -811,26 +823,28 @@
         <div class="modal-content">
             <span class="close" data-modal="sharePaymentRequestModal">&times;</span>
             <h2>Share Payment Request</h2>
-            <div id="barcode" class="barcode"></div>
+            <div id="barcodeContainer" class="barcode">
+                <div id="barcode"></div>
+            </div>
 
             <div class="string-box">
                 <input type="text" id="invoiceString" class="invoice-string" readonly>
                 <button class="copy-btn" onclick="copyInvoice()"><i class="fa fa-copy"></i></button>
             </div>
 
-            <button class="" type="button" id="closeSharePaymentRequest"><i
-                    class="bi bi-x"></i>Close</button>
-            <button class="" type="button" id="doneSharePaymentRequest">Done <i
-                    class="bi bi-check2"></i></button>
+            <button class="" type="button" id="closeSharePaymentRequest"><i class="bi bi-x"></i>Close</button>
+            <button class="" type="button" id="doneSharePaymentRequest">Done <i class="bi bi-check2"></i></button>
         </div>
     </div>
 
     <div id="offerQRModal" class="modal">
         <div class="modal-content">
             <span class="close" data-modal="offerQRModal">&times;</span>
-            <h2>Bol12 Offer QR-Code</h2>         
-            
-            <div id="offerQRBarcode" class="barcode"></div>
+            <h2>Bol12 Offer QR-Code</h2>
+            <div id="barcodeContainer" class="barcode">
+                <div id="offerQRBarcode"></div>
+            </div>
+          
             <button class="" type="button" id="closeShowPaymentOffer"><i class="bi bi-x"></i>Close</button>
             <button class="" type="button" id="doneShowPaymentOffer">Done <i class="bi bi-check2"></i></button>
         </div>

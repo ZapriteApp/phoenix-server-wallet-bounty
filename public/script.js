@@ -738,10 +738,11 @@ $(document).ready(function () {
         // // $('.invoice').html(`${data.serialized}`);
         new QRCode($("#barcode")[0], {
           text: invoiceString,
-          width: 256,
-          height: 256,
+          width: 245,
+          height: 245,
+          colorDark : "#000000",
+          colorLight : "#ffffff",
           correctLevel: QRCode.CorrectLevel.H,
-          render: "svg"
         });
 
         $sharePaymentRequestModal.show();
@@ -760,6 +761,7 @@ $(document).ready(function () {
 
   $('#sharePaymentRequestModal').on('click', '#doneSharePaymentRequest', function () {
     $sharePaymentRequestModal.hide();
+    $("#barcode").empty();
     $.ajax({
       url: 'views/partials/transactions.ejs',
       method: 'GET',
@@ -982,8 +984,11 @@ $(document).ready(function () {
     $offerQRModal.show();
     new QRCode($("#offerQRBarcode")[0], {
       text: offerText,
-      width: 256,
-      height: 256
+      width: 245,
+      height: 245,
+      colorDark : "#000000",
+      colorLight : "#ffffff",
+      correctLevel: QRCode.CorrectLevel.H,
     });
 
     $("#doneShowPaymentOffer").click(function () {
