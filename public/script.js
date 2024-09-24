@@ -1068,6 +1068,14 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   const errorMessage = $('#login-error-message');
+
+  $('#password').keypress(function(event) {
+    if (event.which === 13) {
+      event.preventDefault();
+      $('#login-button  ').click();
+    }
+  });
+
   $('#login-button').click(function (e) {
     const password = $('#password').val();
     console.log(password)
