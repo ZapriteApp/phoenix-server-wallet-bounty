@@ -743,8 +743,8 @@ $(document).ready(function () {
           text: invoiceString,
           width: 245,
           height: 245,
-          colorDark : "#000000",
-          colorLight : "#ffffff",
+          colorDark: "#000000",
+          colorLight: "#ffffff",
           correctLevel: QRCode.CorrectLevel.M,
         });
 
@@ -831,29 +831,29 @@ $(document).ready(function () {
     console.log("Add contact modal clicked")
 
     fetch('/api/get-offer')
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok ' + response.statusText);
-      }
-      return response.json();
-    })
-    .then(data => {
-      new QRCode($("#importContactQRCode")[0], {
-        text: data,
-        width: 245,
-        height: 245,
-        colorDark : "#000000",
-        colorLight : "#ffffff",
-        correctLevel: QRCode.CorrectLevel.M,
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok ' + response.statusText);
+        }
+        return response.json();
+      })
+      .then(data => {
+        new QRCode($("#importContactQRCode")[0], {
+          text: data,
+          width: 245,
+          height: 245,
+          colorDark: "#000000",
+          colorLight: "#ffffff",
+          correctLevel: QRCode.CorrectLevel.M,
+        });
+      })
+      .catch(error => {
+        console.error('Error fetching offer:', error);
       });
-    })
-    .catch(error => {
-      console.error('Error fetching offer:', error);
-    });
-    
+
     $importContactModal.show();
 
-  
+
   });
 
   $(".pagination").on("click", "#newContact", function () {
@@ -870,21 +870,21 @@ $(document).ready(function () {
     $("#importContactQRCode").empty();
     contacts = []
     $importContactModal.hide();
-    
+
   });
 
   $('#ximportContactModal').on("click", function () {
     $("#importContactQRCode").empty();
     contacts = []
     $importContactModal.hide();
-    
+
   });
 
   $("#doneImportContactModal").click(function () {
     $("#importContactQRCode").empty();
     contacts = []
     $importContactModal.hide();
-    
+
   });
 
   $("#addContact").on('click', async function () {
@@ -1034,8 +1034,8 @@ $(document).ready(function () {
       text: offerText,
       width: 245,
       height: 245,
-      colorDark : "#000000",
-      colorLight : "#ffffff",
+      colorDark: "#000000",
+      colorLight: "#ffffff",
       correctLevel: QRCode.CorrectLevel.M,
     });
 
@@ -1069,7 +1069,7 @@ $(document).ready(function () {
 $(document).ready(function () {
   const errorMessage = $('#login-error-message');
 
-  $('#password').keypress(function(event) {
+  $('#password').keypress(function (event) {
     if (event.which === 13) {
       event.preventDefault();
       $('#login-button  ').click();
@@ -1096,7 +1096,7 @@ $(document).ready(function () {
       .then(response => response.json())
       .then(data => {
         if (data.success) {
-          
+
           localStorage.setItem('token', data.token);
           window.location.href = '';
         } else {
@@ -1118,45 +1118,45 @@ $(document).ready(function () {
     if (window.location.pathname !== '/login') {
       window.location.href = '/login';
     }
-    
+
   })
 
-   //Authenticate
-   const token = localStorage.getItem('token');
-   if (!token) {
-     if (window.location.pathname !== '/login') {
+  //Authenticate
+  const token = localStorage.getItem('token');
+  if (!token) {
+    if (window.location.pathname !== '/login') {
       console.log("Redirecting to home");
       window.location.href = '/login';
-    }       
-     return;
-   }
+    }
+    return;
+  }
 
-   fetch('http://localhost:3000/api/authenticate', {
-     method: 'GET',
-     headers: {
-       'Authorization': `Bearer ${token}`,
-     },
-   })
-   .then(response => {
-     if (!response.ok) {
-      if (window.location.pathname !== '/login') {
-        window.location.href = '/login';
+  fetch('http://localhost:3000/api/authenticate', {
+    method: 'GET',
+    headers: {
+      'Authorization': `Bearer ${token}`,
+    },
+  })
+    .then(response => {
+      if (!response.ok) {
+        if (window.location.pathname !== '/login') {
+          window.location.href = '/login';
+        }
+        return null
       }
-       return null
-     }
-     return response.json();
-   })
-   .then(data => {
-    if (data){
-      if (window.location.pathname !== '/') {
-        console.log("Redirecting to home");
-        window.location.href = '/';
+      return response.json();
+    })
+    .then(data => {
+      if (data) {
+        if (window.location.pathname !== '/') {
+          console.log("Redirecting to home");
+          window.location.href = '/';
+        }
       }
-    }  
-   })
-   .catch(error => {
-    console.log(error)
-   });
+    })
+    .catch(error => {
+      console.log(error)
+    });
 })
 
 $(document).ready(function () {
@@ -1193,7 +1193,7 @@ $(document).ready(function () {
       console.error('Error fetching balance:', error);
     });
 
-    fetch('/api/is-password-set')
+  fetch('/api/is-password-set')
     .then(response => {
       if (!response.ok) {
         throw new Error('Network response was not ok ' + response.statusText);
@@ -1201,7 +1201,7 @@ $(document).ready(function () {
       return response.json();
     })
     .then(data => {
-      if(data.success){
+      if (data.success) {
         $('.passwordSet').html(`Password Set <i class="bi bi-check2"></i>`);
       }
     })
@@ -1265,10 +1265,6 @@ function truncateText(text, maxLength) {
 };
 
 $('#exportCsv').on('click', () => {
-  const csvRows = [];
-  const headers = ['Payment Type', 'TimeStamp', 'Label', 'Amount', 'Type', 'Status', 'Actions'];
-  csvRows.push(headers.join(','));
-  let paymenytsData = [];
   fetch(`/api/list-incoming-and-outgoing`)
     .then(response => {
       if (!response.ok) {
@@ -1277,36 +1273,42 @@ $('#exportCsv').on('click', () => {
       return response.json();
     })
     .then(data => {
-      paymentsData = data;
+      console.log(data)
+      var paymentsData = data;
+      console.log(paymentsData)
+      const csvRows = [];
+      const headers = ['TimeStamp', 'Label', 'Amount', 'Type', 'Status'];
+      csvRows.push(headers.join(','));
+      paymentsData.forEach(payment => {
+        const paymentITag = payment.hasOwnProperty("receivedSat") ? 'Payment' : 'Transfer';
+        const status = payment.isPaid ? 'Completed' : 'Uncompleted';
+        const row = [
+          formatTimestamp(payment.createdAt),
+          payment.hasOwnProperty("description") ? payment.description : "Label",
+          payment.hasOwnProperty("receivedSat") ? payment.receivedSat : -payment.sent,
+          paymentITag,
+        ];
+        csvRows.push(row.join(','));
+
+      });
+
+      const csvString = csvRows.join('\n');
+      const blob = new Blob([csvString], { type: 'text/csv' });
+      const url = URL.createObjectURL(blob);
+
+      const a = document.createElement('a');
+      a.href = url;
+      const date = Date.now()
+      a.download = `Phoenixd transactions(${formatTimestamp(date)}).csv`;
+      a.click();
+      URL.revokeObjectURL(url);
     })
     .catch(error => {
       console.error('Error fetching balance:', error);
     });
-  paymenytsData.forEach(payment => {
-    const transferITag = payment.hasOwnProperty("receivedSat") ? 'Arrow-Up-Right' : 'Arrow-Down-Left';
-    const paymentITag = payment.hasOwnProperty("receivedSat") ? 'Payment' : 'Transfer';
-    const status = payment.isPaid ? 'Completed' : 'Uncompleted';
-    const row = [
-      transferITag,
-      formatTimestamp(payment.createdAt),
-      payment.hasOwnProperty("description") ? payment.description : "Label",
-      payment.hasOwnProperty("receivedSat") ? payment.receivedSat : -payment.sent,
-      paymentITag,
-      status,
-      'Three-Dots-Vertical' // Placeholder for Actions icon
-    ];
-    csvRows.push(row.join(','));
-  });
 
-  const csvString = csvRows.join('\n');
-  const blob = new Blob([csvString], { type: 'text/csv' });
-  const url = URL.createObjectURL(blob);
 
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = 'transactions.csv';
-  a.click();
-  URL.revokeObjectURL(url);
+
 });
 
 $('#downloadOffer').on('click', function () {
