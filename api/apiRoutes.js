@@ -191,9 +191,13 @@ router.post('/is-password-set', async (req, res) => {
 
 router.post('/login', async (req, res) => {
     const { password } = req.body;
-    const storedPassword = db.data.password[0].password; 
+    const storedPassword = db.data.password?.[0]?.password || null; 
+    if(storedPassword == null){
+        return res.json({ success: true, message: 'Login successful'} );
+    }
 
     try {
+       
         const match = await bcrypt.compare(password, storedPassword);
         if (match) {
 
@@ -238,20 +242,26 @@ router.get('/get-config-info', async (req, res) => {
 
 router.get('/is-password-set', (req, res) => {  
     try {
-        const storedPassword = db.data?.password?.[0]?.password;
-        if(!storedPassword){
-            res.status(200).json({ success: false });
+        const storedPassword = db.data?.password?.[0]?.password || null;
+        if(storedPassword == null){
+            return res.status(200).json({ success: false });
 
         }
-      res.status(200).json({ success: true });
+      return res.status(200).json({ success: true });
     } catch (error) {
-      res.status(401).json({ success: false });
+      return res.status(401).json({ success: false });
     }
 });
 
 router.get('/authenticate', (req, res) => {
     console.log("authenticating")
-    const storedPassword = db.data?.password?.[0]?.password;
+    const storedPassword = db.data?.password?.[0]?.password || null;
+    console.log(storedPassword)
+    
+    if(storedPassword == null){
+        return res.status(200).json({ success: true });
+    }
+
     const authHeader = req.headers.authorization;
     if (!authHeader) {
       return res.status(401).json({ message: 'Token required' });
@@ -259,13 +269,13 @@ router.get('/authenticate', (req, res) => {
     const token = authHeader.split(' ')[1];    
     try {
         if(!storedPassword){
-            res.status(200).json({ success: true });
+            return res.status(200).json({ success: true });
 
         }
       const user = jwt.verify(token, httpPassword);
-      res.status(200).json({ success: true, user });
+      return res.status(200).json({ success: true, user });
     } catch (error) {
-      res.status(401).json({ success: false });
+      return res.status(401).json({ success: false });
     }
 });
 
