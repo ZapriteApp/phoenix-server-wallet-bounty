@@ -220,11 +220,13 @@ router.post('/login', async (req, res) => {
 router.get('/get-btc-price', async (req, res) => {
     try  {
      const btcPrice = await utils.getBitconPrice();
-     res.json({ btcPrice: btcPrice })
+     return res.json({ btcPrice: btcPrice })
     }
     catch(error) {
         console.log(error)
-        res.status(500).json({ "message": error});
+        const btcPrice = await utils.getBitconPrice();
+        console.log(btcPrice)
+        return res.status(500).json({  btcPrice: btcPrice});
     }
 });
 
