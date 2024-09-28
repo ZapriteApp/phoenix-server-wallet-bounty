@@ -109,7 +109,21 @@
     .wallet-seed-phrase.visible {
         filter: none; 
     }
-    
+
+    .adminPassword, .restrictedPassword {
+        filter: blur(8px); 
+        transition: filter 0.3s ease-in-out;
+    }
+
+    .adminPassword.visible {
+        filter: none; 
+    }
+
+    .restrictedPassword.visible {
+        filter: none; 
+
+    }
+
     .required-asterisk {
         color: red;
     }
@@ -133,7 +147,7 @@
         <span
             class="wallet-seed-phrase" id="wallet-seed-phrase"></span>
         <span class="icons">
-            <button id="copyWalletSeedPhrase" class="copy-btn"><i class="bi bi-eye"></i></button> 
+            <button id="seeWalletSeedPhrase" class="copy-btn"><i class="bi bi-eye"></i></button> 
             <button id="copyWalletSeedPhrase" class="copy-btn"><i class="bi bi-copy" ></i></button>          
         </span>
     </div>
@@ -147,6 +161,7 @@
         <span
             class="adminPassword" id="adminPassword"></span>
         <span class="icons">
+            <button id="seeAdminPassword" class="copy-btn"><i class="bi bi-eye"></i></button>
             <button id="copyAdminPassword" class="copy-btn"><i class="bi bi-copy" ></i></button>          
         </span>
     </div>
@@ -156,6 +171,7 @@
         <span
             class="restrictedPassword" id="restrictedPassword"></span>
         <span class="icons">
+            <button id="seeRestrictedPassword" class="copy-btn"><i class="bi bi-eye"></i></button>
             <button id="copyRestrictedPassword" class="copy-btn"><i class="bi bi-copy" ></i></button>          
         </span>
     </div>

@@ -963,6 +963,8 @@ $(document).ready(function () {
 });
 
 $(document).ready(function () {
+
+  
   var $updatePasswordModal = $("#updatePasswordModal");
   let errorMessage = $('#update-password-error-message');
 
@@ -971,6 +973,10 @@ $(document).ready(function () {
     console.log("Update password modal up")
     $updatePasswordModal.show();
   });
+
+  $('#seeWalletSeedPhrase').on('click', function() {
+    $('#wallet-seed-phrase').toggleClass('visible');
+  })
 
   $("#doneUpdatePassword").click(function () {
     var newPassword = $("#newPassword").val();
@@ -1194,6 +1200,14 @@ $(document).ready(function () {
 })
 
 $(document).ready(function () {
+  
+  $('#seeAdminPassword').on('click', function() {
+    $('#adminPassword').toggleClass('visible');
+  })
+
+  $('#seeRestrictedPassword').on('click', function() {
+    $('#restrictedPassword').toggleClass('visible');
+  })
 
   fetch('/api/get-config-info')
     .then(response => {
@@ -1233,6 +1247,10 @@ $(document).ready(function () {
 
   $('#copyAdminPassword').on('click', function () {
     copyPassword('#adminPassword');
+  });
+
+   $('#copyWalletSeedPhrase').on('click', function () {
+    copyPassword('#wallet-seed-phrase');
   });
 
   // Event listener for restricted password copy button
