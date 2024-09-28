@@ -1213,6 +1213,23 @@ $(document).ready(function () {
       console.error('Error fetching balance:', error);
     });
 
+    fetch('/api/get-seed-phrase')
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok ' + response.statusText);
+      }
+      // console.log(response.json())
+      return response.json();
+    })
+    .then(data => {
+      console.log(data)
+      $('#wallet-seed-phrase').html(data.seed);
+
+    })
+    .catch(error => {
+      console.error('Error fetching balance:', error);
+    });
+
 
   $('#copyAdminPassword').on('click', function () {
     copyPassword('#adminPassword');

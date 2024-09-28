@@ -82,7 +82,7 @@ export async function getBitconPrice() {
 
   } catch (error) {
     console.error(`Error fetching Bitcoin price: ${error.message}`);
-    // throw error;
+    return db.data.btcPrice[0].btcPrice;
   }
 }
 
@@ -106,6 +106,17 @@ export function readConfigFile(filePath) {
   }
 }
 
+export function readSeedWords(filePath) {
+  try {
+    const data = fs.readFileSync(filePath, 'utf8');
+    const lines = data.split('\n');
+    const firstLine = lines[0];
+    return firstLine;
+  } catch (err) {
+    console.error('Error reading file:', err);
+    return null;
+  }
+}
 
 export function getId() {
   return uuidv4();

@@ -242,6 +242,19 @@ router.get('/get-config-info', async (req, res) => {
     }
 });
 
+router.get('/get-seed-phrase', (req, res) => {
+    try {
+      const configPath = path.join(process.env.HOME || process.env.USERPROFILE, '.phoenix', 'seed.dat');
+      const seed = utils.readSeedWords(configPath);
+      
+      return res.json({ seed });
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({ message: error.message });
+    }
+  });
+
+
 router.get('/is-password-set', (req, res) => {  
     try {
         const storedPassword = db.data?.password?.[0]?.password || null;

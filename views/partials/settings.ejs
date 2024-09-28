@@ -55,7 +55,7 @@
         white-space: nowrap;
     }
     
-    .adminPassword, .restrictedPassword {
+    .adminPassword, .restrictedPassword, .wallet-seed-phrase {
         flex-grow: 1; 
         overflow: hidden;
         text-overflow: ellipsis;
@@ -94,7 +94,22 @@
         border: 1px solid #f09026;
     }
 
+    .copy-btn {
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 5px;
+    }
 
+    .wallet-seed-phrase {
+        filter: blur(8px); 
+        transition: filter 0.3s ease-in-out;
+    }
+
+    .wallet-seed-phrase.visible {
+        filter: none; 
+    }
+    
     .required-asterisk {
         color: red;
     }
@@ -108,6 +123,20 @@
         <p class="passwordSet"> No password set <i class="bi bi-exclamation-triangle-fill"></i></p>
         <button id="updatePassword" class="update-password-button">Update password <i class="bi bi-arrow-right"></i></button>
     </div>    
+</div>
+
+<div class="heading">Wallet seed phrase</div>
+<div class="wallet-seed">
+    <p>Authentication requires the password below</p>
+    <p>Wallet seed phrase</p>
+    <div class="stringBox">
+        <span
+            class="wallet-seed-phrase" id="wallet-seed-phrase"></span>
+        <span class="icons">
+            <button id="copyWalletSeedPhrase" class="copy-btn"><i class="bi bi-eye"></i></button> 
+            <button id="copyWalletSeedPhrase" class="copy-btn"><i class="bi bi-copy" ></i></button>          
+        </span>
+    </div>
 </div>
 
 <div class="heading">API passwords </div>
@@ -131,6 +160,8 @@
         </span>
     </div>
 </div>
+
+
 
 <div id="updatePasswordModal" class="modal">
     <div class="modal-content">
