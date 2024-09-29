@@ -329,6 +329,8 @@ $(document).ready(function () {
   var $offerPaymentType = $("#offerPaymentType");
   var $contactPaymentType = $("#contactPaymentType");
   var $successfulPaymentModal = $("#successfulPaymentModal");
+  var $failedPaymentModal = $("#failedPaymentModal");
+
 
   // Get the button that opens the modal
   var $sendButton = $("#sendButton");
@@ -430,6 +432,7 @@ $(document).ready(function () {
     const invoice = $("#requestInvoice").val().trim();
     let amountSat = $("#requestInvoiceAmount").val();
     let errorMessage = $('#invoice-error-message');
+    let paymentFailedErrorMessage = $('#failed-payment-error-message');
     amountSat = parseInt(amountSat)
     console.log(invoice);
     console.log(amountSat);
@@ -464,18 +467,28 @@ $(document).ready(function () {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({ amountSat, invoice })
-        })
-          .then(response => {
+        }).then(response => {
             if (!response.ok) {
               throw new Error('Network response was not ok ' + response.statusText);
             }
-            console.log(response.json());
+            // console.log(response.json());
+            return response.json()
+          }).then(data => {
+            if(data.reason){
+              $invoicePaymentType.hide();
+              paymentFailedErrorMessage.text(capitalizeFirstLetter(data.reason))
+              paymentFailedErrorMessage.show()
+              $failedPaymentModal.show();
+            }else{
+              $invoicePaymentType.hide();
+              $successfulPaymentModal.show();
+              $("#requestInvoice").val("");
+              $('.decode-invoice').show();
+            }
+            console.log(data)
           })
 
-        $invoicePaymentType.hide();
-        $successfulPaymentModal.show();
-        $("#requestInvoice").val("");
-        $('.decode-invoice').show();
+        
       } else {
         errorMessage.text("The request invoice is not decodable.");
         errorMessage.show();
@@ -503,6 +516,7 @@ $(document).ready(function () {
     const amountSat = $("#offerAmount").val().trim();
     const message = $("#offerDescription").val().trim();
     let errorMessage = $('#offer-error-message');
+    let paymentFailedErrorMessage = $('#failed-payment-error-message');
     console.log(offer);
     console.log(amountSat);
     console.log(message);
@@ -548,12 +562,25 @@ $(document).ready(function () {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({ amountSat, offer, message })
-        })
-          .then(response => {
+        }).then(response => {
             if (!response.ok) {
               throw new Error('Network response was not ok ' + response.statusText);
             }
-            console.log(response.json());
+            return response.json()
+          }).then(data => {
+            if(data.reason){
+              $offerPaymentType.hide();
+              paymentFailedErrorMessage.text(capitalizeFirstLetter(data.reason))
+              paymentFailedErrorMessage.show()
+              $failedPaymentModal.show();
+            }else{
+              $offerPaymentType.hide();
+              $successfulPaymentModal.show();
+              $("#requestOffer").val("");
+              $("#offerAmount").val("");
+              $("#offerDesription").val("");
+            }
+            console.log(data)
           })
 
       } else {
@@ -567,8 +594,8 @@ $(document).ready(function () {
       return false;
     }
 
-    $offerPaymentType.hide();
-    $successfulPaymentModal.show();
+    // $offerPaymentType.hide();
+    // $successfulPaymentModal.show();
 
     $("#requestOffer").val("");
     $("#offerAmount").val("");
@@ -585,6 +612,7 @@ $(document).ready(function () {
     console.log("Pay contact button clicked")
     const contactIdRaw = $("#paymentContact").val();
     let errorMessage = $('#contact-error-message');
+    let paymentFailedErrorMessage = $('#failed-payment-error-message');
     let contactOffer;
     if (contactIdRaw == null) {
       errorMessage.text("You have not selected a contact.");
@@ -638,11 +666,19 @@ $(document).ready(function () {
         if (!response.ok) {
           throw new Error('Network response was not ok ' + response.statusText);
         }
-        console.log(response.json());
-      })
+        return response.json()
+      }).then(data => {
+        if(data.reason){
+          $contactPaymentType.hide();
+          paymentFailedErrorMessage.text(capitalizeFirstLetter(data.reason))
+          paymentFailedErrorMessage.show()
+          $failedPaymentModal.show();
+        }else{
+          $contactPaymentType.hide();
+          $successfulPaymentModal.show();
+        }
 
-    $contactPaymentType.hide();
-    $successfulPaymentModal.show();
+      })
 
     $("#contactPaymentDescription").val(" ");
     $("#contactPaymentAmount").val(" ");
@@ -658,7 +694,12 @@ $(document).ready(function () {
 
   $("#successfulPaymentModal").on("click", "#submitPaymentSuccess", function () {
     console.log("Submit clicked")
-    $successfulPaymentModal.hide();
+    $failedPaymentModal.hide();
+  });
+
+  $("#failedPaymentModal").on("click", "#okFailedPayment", function () {
+    console.log("Failed button clicked")
+    $failedPaymentModal.hide();
   });
 
 })
@@ -1236,7 +1277,6 @@ $(document).ready(function () {
       return response.json();
     })
     .then(data => {
-      console.log(data)
       $('#wallet-seed-phrase').html(data.seed);
 
     })
@@ -1250,7 +1290,7 @@ $(document).ready(function () {
   });
 
    $('#copyWalletSeedPhrase').on('click', function () {
-    copyPassword('#wallet-seed-phrase');
+    copyPassword('#wallet-seed-phrase');  
   });
 
   // Event listener for restricted password copy button
@@ -1437,5 +1477,13 @@ function copyPassword(passwordId) {
   tempInput.val(passwordText).select();
   document.execCommand('copy');
   tempInput.remove();
+}
+
+function capitalizeFirstLetter(string) {
+  if (string.length === 0) {
+    return string;
+  }
+
+  return string[0].toUpperCase() + string.slice(1);
 }
 

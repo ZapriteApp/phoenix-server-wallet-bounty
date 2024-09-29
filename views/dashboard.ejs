@@ -361,6 +361,19 @@
             border: 1px solid #f09026;
         }
 
+        #okFailedPayment{
+            background-color: #f09026;
+            color: white;
+            font-size: 16px;
+            padding: 10px;
+            position: absolute;
+            bottom: 10px;
+            right: 20px;
+            text-align: center;
+            cursor: pointer;
+            border: 1px solid #f09026;
+        }
+
 
         #submitPaymentSuccess:hover {
             background-color: #d97d1e;
@@ -784,6 +797,19 @@
             </div>
 
             <button class="" type="button" id="submitPaymentSuccess">OK <i class="bi bi-check2"></i></button>
+        </div>
+    </div>
+
+    <div id="failedPaymentModal" class="modal">
+        <div class="modal-content">
+            <span class="close" data-modal="failedPaymentModal">&times;</span>
+            <h3>Failed Transaction</h3>
+            <div id="failed-payment-error-message" style="color: red; display: none;  padding-bottom: 10px;">Reason</div>
+            <div class="icon-container">
+                <i class="bi bi-exclamation-diamond-fill check-icon"></i>
+            </div>
+
+            <button class="" type="button" id="okFailedPayment">OK <i class="bi bi-check2"></i></button>
         </div>
     </div>
 
