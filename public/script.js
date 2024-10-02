@@ -694,7 +694,7 @@ $(document).ready(function () {
 
   $("#successfulPaymentModal").on("click", "#submitPaymentSuccess", function () {
     console.log("Submit clicked")
-    $failedPaymentModal.hide();
+    $successfulPaymentModal.hide();
   });
 
   $("#failedPaymentModal").on("click", "#okFailedPayment", function () {
