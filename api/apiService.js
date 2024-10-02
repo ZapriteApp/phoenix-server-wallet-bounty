@@ -1,11 +1,15 @@
 import axios from 'axios';
 import dotenv from 'dotenv';
+import path from 'path'
 import { response } from 'express';
+import * as utils from '../utils/utils.js'
 dotenv.config();
 
 let baseUrl = process.env.PHOENIX_API_URL
 const username = '';
-const httpPassword = process.env.HTTP_PASSWORD;
+const configPath = path.join(process.env.HOME || process.env.USERPROFILE, '.phoenix', 'phoenix.conf');
+const configs = utils.readConfigFile(configPath)
+const httpPassword = configs["http-password"];
 const headers = {
   'Authorization': 'Basic ' + Buffer.from(`${username}:${httpPassword}`).toString('base64')
 };
