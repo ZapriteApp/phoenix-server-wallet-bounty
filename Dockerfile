@@ -26,15 +26,11 @@ RUN wget https://github.com/ACINQ/phoenixd/releases/download/v0.3.3/phoenix-0.3.
     && unzip -j phoenix-0.3.3-linux-x64.zip -d /usr/local/bin/ \
     && chmod +x /usr/local/bin/phoenixd
 
-COPY docker_entrypoint.sh /usr/src/app/docker_entrypoint.sh
-# COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-RUN chmod +x /usr/src/app/docker_entrypoint.sh
-
-RUN chmod -R 755 /usr/local/bin/
+RUN chmod -R 755 /usr/src/app/start.sh
 
 EXPOSE 3000 
 
-CMD ["/usr/src/app/docker_entrypoint.sh"]
+CMD ["/usr/src/app/start.sh"]
 
 
 
