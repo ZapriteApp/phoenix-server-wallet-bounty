@@ -71,7 +71,7 @@ export async function getBitconPrice() {
       if (timeDifference <= thirtyMinutes) {
         return db.data.btcPrice[0].btcPrice;
       }
-    }    
+    }
 
     const response = await axios.get('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd');
     const bitcoinPrice = response.data.bitcoin.usd;
@@ -104,6 +104,27 @@ export function readConfigFile(filePath) {
   } catch (err) {
     console.error('Error reading config file:', err);
   }
+}
+
+export function checkIsSessionExpired(timestamp) {
+  if (!timestamp) {
+    return true;
+  }
+
+  const currentTime = Date.now();
+
+  const timestampValue = Number(timestamp);
+
+  if (isNaN(timestampValue)) {
+    return true;
+  }
+  const timeDifference = currentTime - timestampValue;
+
+  if (timeDifference > 3600000) {
+    return true;
+  }
+
+  return false;
 }
 
 export function readSeedWords(filePath) {

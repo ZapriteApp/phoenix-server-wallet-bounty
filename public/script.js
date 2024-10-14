@@ -1015,7 +1015,7 @@ $(document).ready(function () {
     $updatePasswordModal.show();
   });
 
-  $('#seeWalletSeedPhrase').on('click', function() {
+  $('#seeWalletSeedPhrase').on('click', async function() {
     $('#wallet-seed-phrase').toggleClass('visible');
   })
 
@@ -1123,7 +1123,8 @@ $(document).ready(function () {
     }
   });
 
-  $('#login-button').click(function (e) {
+  $('#login-button').click(async function (e) {
+    e.preventDefault();
     const password = $('#password').val();
     console.log(password)
 
@@ -1143,9 +1144,10 @@ $(document).ready(function () {
       .then(response => response.json())
       .then(data => {
         if (data.success) {
-
-          localStorage.setItem('token', data.token);
-          window.location.href = '';
+          if (window.location.pathname !== '/') {
+            window.location.href = '/';
+          }
+          // console.log("logging in")
         } else {
           errorMessage.text('Invalid password. Please try again.');
           errorMessage.show();
@@ -1171,12 +1173,7 @@ $(document).ready(function () {
     if (data.success) {
       $('.passwordSet').html(`Password Set <i class="bi bi-check2"></i>`);
       $('#log-out').click(function (e) {
-
-        localStorage.removeItem('token');
-        if (window.location.pathname !== '/login') {
-          window.location.href = '/login';
-        }
-    
+        logout()    
       })
     }
   })
@@ -1184,28 +1181,12 @@ $(document).ready(function () {
     console.error('Error fetching balance:', error);
   });
 
-
-
- 
-
-  //Authenticate
-  const token = localStorage.getItem('token');
-  if (!token) {
-    if (window.location.pathname !== '/login') {
-      console.log("Redirecting to home");
-      window.location.href = '/login';
-    }
-    return;
-  }
-
   fetch('http://localhost:3000/api/authenticate', {
-    method: 'GET',
-    headers: {
-      'Authorization': `Bearer ${token}`,
-    },
+    method: 'GET'
   })
     .then(response => {
       if (!response.ok) {
+        console.log(response.status)
         if (window.location.pathname !== '/login') {
           window.location.href = '/login';
         }
@@ -1470,7 +1451,7 @@ async function getContactOffer(contactId) {
   }
 }
 
-function copyPassword(passwordId) {
+async function copyPassword(passwordId) {
   var passwordText = $(passwordId).text();
   var tempInput = $('<input>');
   $('body').append(tempInput);
@@ -1478,6 +1459,32 @@ function copyPassword(passwordId) {
   document.execCommand('copy');
   tempInput.remove();
 }
+
+function logout() {
+  console.log("Logging out")
+  fetch('/api/logout', {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json',
+      },
+  })
+  .then(response => response.json())
+  .then(data => {
+      if (data.success) {
+        if (window.location.pathname !== '/login') {
+          window.location.href = '/login';
+        }
+        return null
+        console.log("Logging out")
+      } else {
+          console.error('Logout failed:', data.message);
+      }
+  })
+  .catch(error => {
+      console.error('Error during logout:', error);
+  });
+}
+
 
 function capitalizeFirstLetter(string) {
   if (string.length === 0) {

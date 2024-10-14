@@ -160,9 +160,10 @@ router.post('/save-password', async (req, res) => {
     try  {
         const hashedPassword = await bcrypt.hash(password, 10);
         if (db.data.password.length === 0) {
-            db.data.password.push({ password: hashedPassword });
+            db.data.password.push({ password: hashedPassword, timeStamp: Date.now() });
           } else {
             db.data.password[0].password = hashedPassword;
+            db.data.password[0].timeStamp = Date.now();
         }
         await db.write()
         res.json({message: "Password saved successfully"});
@@ -176,8 +177,8 @@ router.post('/save-password', async (req, res) => {
 router.post('/is-password-set', async (req, res) => {
     try {
         const storedPassword = db.data?.password?.[0]?.password;
-        if (match) {
-            return res.json({ success: true, message: 'Password', token } );
+        if (storedPassword) {
+            return res.json({ success: true, message: 'Password' } );
         } else {
             return res.json({ success: false,  message: 'Password is not set' });
         }
@@ -200,16 +201,33 @@ router.post('/login', async (req, res) => {
        
         const match = await bcrypt.compare(password, storedPassword);
         if (match) {
-
-            const payload = { message: 'Authenticated successfully' };
-            const token = jwt.sign(payload, httpPassword, { expiresIn: '1h' });
-            return res.json({ success: true, message: 'Login successful', token } );
+            console.log("Password match")
+            db.data.password[0].timeStamp = Date.now()
+            await db.write()
+            
+            return res.json({ success: true, message: 'Login successful'} );
         } else {
             return res.json({ success: false,  message: 'Invalid password' });
         }
 
     }catch(error) {
         console.error('Error comparing passwords:', error);
+        return res.status(500).json({ success: false, message: 'Server error' });
+    }
+    
+});
+
+router.post('/logout', async (req, res) => {
+    console.log("logging out")
+    try {
+        console.log(db.data.password[0].timeStamp)
+        db.data.password[0].timeStamp = ''
+        await db.write()
+        return res.json({ success: true, message: 'Logut successful'} );    
+
+    }catch(error) {
+        console.log("Error logging out")
+        console.error('Error loging out:', error);
         return res.status(500).json({ success: false, message: 'Server error' });
     }
     
@@ -268,27 +286,25 @@ router.get('/is-password-set', (req, res) => {
     }
 });
 
-router.get('/authenticate', (req, res) => {
+router.get('/authenticate', async (req, res) => {
     console.log("authenticating")
     const storedPassword = db.data?.password?.[0]?.password || null;
-    console.log(storedPassword)
-    
+    const timeStamp = db.data?.password?.[0]?.timeStamp || null;  
+
     if(storedPassword == null){
         return res.status(200).json({ success: true });
     }
 
-    const authHeader = req.headers.authorization;
-    if (!authHeader) {
-      return res.status(401).json({ message: 'Token required' });
-    }  
-    const token = authHeader.split(' ')[1];    
+    const isSessionExpired = utils.checkIsSessionExpired(timeStamp)  
+   
     try {
-        if(!storedPassword){
-            return res.status(200).json({ success: true });
-
+        if(!isSessionExpired){
+            console.log("Sesssion is on")
+            return res.status(200).json({ success: true});
+        }else {
+            console.log("Sesssion has expired")
+            return res.status(401).json({ success: false });
         }
-      const user = jwt.verify(token, httpPassword);
-      return res.status(200).json({ success: true, user });
     } catch (error) {
       return res.status(401).json({ success: false });
     }
