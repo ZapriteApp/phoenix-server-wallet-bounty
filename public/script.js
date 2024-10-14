@@ -1007,6 +1007,7 @@ $(document).ready(function () {
 
   
   var $updatePasswordModal = $("#updatePasswordModal");
+  var $successPasswordSetModal = $("#successPasswordSetModal");
   let errorMessage = $('#update-password-error-message');
 
 
@@ -1068,7 +1069,13 @@ $(document).ready(function () {
     $("#newPassword").val("");
     $("#confirmPassword").val("");
     $updatePasswordModal.hide();
+    $successPasswordSetModal.show();
   });
+
+  $("#submitSuccessPasswordSet").click(function () {
+    $successPasswordSetModal.hide();
+  });
+
 })
 
 $(document).ready(function () {
@@ -1091,6 +1098,7 @@ $(document).ready(function () {
       $("#offerQRBarcode").empty();
 
     });
+    
 
     $("#closeShowPaymentOffer").click(function () {
       $offerQRModal.hide();

@@ -81,6 +81,20 @@
         border: 1px solid #f09026;
     }
 
+        
+    #submitSuccessPasswordSet {
+        background-color: #f09026;
+        color: white;
+        font-size: 16px;
+        padding: 10px;
+        position: absolute;
+        bottom: 10px;
+        right: 20px;
+        text-align: center;
+        cursor: pointer;
+        border: 1px solid #f09026;
+    }
+
     #closeUpdatePassword {
         background-color: #000000;
         color: #f09026;
@@ -201,4 +215,19 @@
         <button class="" type="button" id="doneUpdatePassword">Confirm <i class="bi bi-check2"></i></button>
     </div>
 </div>
+
+<!-- Success password set-->
+<div id="successPasswordSetModal" class="modal">
+    <div class="modal-content">
+        <span class="close" data-modal="successPasswordSetModal">&times;</span>
+        <h3>Success! Password Set</h3>
+
+        <div class="icon-container">
+            <i class="bi bi-check-circle check-icon"></i>
+        </div>
+
+        <button class="" type="button" id="submitSuccessPasswordSet">OK <i class="bi bi-check2"></i></button>
+    </div>
+</div>
+
 <script src="/public/script.js"></script>
