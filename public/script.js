@@ -1019,7 +1019,7 @@ $(document).ready(function () {
     
    
     $('.seed-form label').each(function(index) {
-      $(this).text(`Seed ${randomNumberArr[index]}:`);
+      $(this).text(`Seed Word ${randomNumberArr[index]}:`);
     });
     $confirmSeedPhraseModal.show();
   });
@@ -1039,9 +1039,6 @@ $(document).ready(function () {
       errorMessage.show();
       return;
     }
-
-
-
     // let seedWordsInput = []
     // seedWordsInput.push(seed1, seed2, seed3, seed4)
     fetch('/api/get-seed-phrase')
@@ -1071,17 +1068,18 @@ $(document).ready(function () {
         $confirmSeedPhraseModal.hide();
         $failedConfirmSeedModal.show()
        }
-      // console.log(confirmedSeedWords)
-      // console.log(walletSeedWords)
-      // console.log(seedWordsInput)
 
     })
     .catch(error => {
       console.error('Error fetching balance:', error);
     });
 
-    // $confirmSeedPhraseModal.hide();
-    // $updatePasswordModal.show();
+    $("#seed1").val("");
+    $("#seed2").val("");
+    $("#seed3").val("");
+    $("#seed4").val("");
+    randomNumberArr = []
+    
   });
 
   $('#seeWalletSeedPhrase').on('click', async function() {
@@ -1142,6 +1140,10 @@ $(document).ready(function () {
 
   $("#submitSuccessPasswordSet").click(function () {
     $successPasswordSetModal.hide();
+  });
+
+  $("#cancelConfirmSeed").click(function () {
+    $confirmSeedPhraseModal.hide();
   });
 
 })
