@@ -95,6 +95,19 @@
         border: 1px solid #f09026;
     }
 
+    #okFailedConfirmSeed {
+        background-color: #f09026;
+        color: white;
+        font-size: 16px;
+        padding: 10px;
+        position: absolute;
+        bottom: 10px;
+        right: 20px;
+        text-align: center;
+        cursor: pointer;
+        border: 1px solid #f09026;
+    }
+
         
     #submitSuccessPasswordSet {
         background-color: #f09026;
@@ -109,7 +122,33 @@
         border: 1px solid #f09026;
     }
 
+    #doneConfirmSeed {
+        background-color: #f09026;
+        color: white;
+        font-size: 16px;
+        padding: 10px;
+        position: absolute;
+        bottom: 10px;
+        right: 20px;
+        text-align: center;
+        cursor: pointer;
+        border: 1px solid #f09026;
+    }
+
     #closeUpdatePassword {
+        background-color: #000000;
+        color: #f09026;
+        font-size: 16px;
+        padding: 10px;
+        position: absolute;
+        bottom: 10px;
+        left: 20px;
+        cursor: pointer;
+        text-align: center;
+        border: 1px solid #f09026;
+    }
+
+    #cancelConfirmSeed {
         background-color: #000000;
         color: #f09026;
         font-size: 16px;
@@ -205,7 +244,31 @@
     </div>
 </div>
 
-
+<div id="confirmSeedPhraseModal" class="modal">
+    <div class="modal-content">
+        <span class="close" data-modal="confirmSeedPhraseModal">&times;</span>
+        <h2>Confirm</h2>
+        <h3>Confirm your wallet seed before setting password</h3>
+        <form>
+            <div class="form-group seed-form">
+                <label for="seed1">Seed</label>
+                <input type="text" id="seed1" name="seed1" class="form-control"
+                    placeholder="">
+                <label for="seed2">Seed:</label>
+                <input type="text" id="seed2" name="seed2" class="form-control" placeholder="">
+                <label for="">Seed:</label>
+                <input type="seed3" id="seed3" name="seed3" class="form-control"
+                    placeholder="">
+                <label for="seed4">Seed:</label>
+                <input type="text" id="seed4" name="" class="form-control"
+                    placeholder="">
+            </div>
+        </form>
+        <div id="seed-error-message" style="color: red; display: none; padding-bottom: 10px;"></div>
+        <button class="" type="button" id="cancelConfirmSeed"><i class="bi bi-arrow-left"> </i>Back</button>
+        <button class="" type="button" id="doneConfirmSeed">Done <i class="bi bi-check2"></i></button>
+    </div>
+</div>
 
 <div id="updatePasswordModal" class="modal">
     <div class="modal-content">
@@ -241,6 +304,17 @@
         </div>
 
         <button class="" type="button" id="submitSuccessPasswordSet">OK <i class="bi bi-check2"></i></button>
+    </div>
+</div>
+
+<div id="failedConfirmSeedModal" class="modal">
+    <div class="modal-content">
+        <span class="close" data-modal="failedConfirmSeedModal">&times;</span>
+        <h3>Seed Words Mismatch</h3>
+        <div class="icon-container">
+            <i class="bi bi-exclamation-diamond-fill check-icon"></i>
+        </div>
+        <button class="" type="button" id="okFailedConfirmSeed">OK <i class="bi bi-check2"></i></button>
     </div>
 </div>
 

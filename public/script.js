@@ -1007,13 +1007,81 @@ $(document).ready(function () {
 
   
   var $updatePasswordModal = $("#updatePasswordModal");
+  var $failedConfirmSeedModal = $("#failedConfirmSeedModal");
   var $successPasswordSetModal = $("#successPasswordSetModal");
+  var $confirmSeedPhraseModal = $("#confirmSeedPhraseModal")
   let errorMessage = $('#update-password-error-message');
 
+  let randomNumberArr = generateRandomNumbers()
 
   $("#updatePassword").click(function () {
-    console.log("Update password modal up")
-    $updatePasswordModal.show();
+    
+    
+   
+    $('.seed-form label').each(function(index) {
+      $(this).text(`Seed ${randomNumberArr[index]}:`);
+    });
+    $confirmSeedPhraseModal.show();
+  });
+
+
+  $("#doneConfirmSeed").click(function () {
+    console.log(randomNumberArr)
+    let seed1 = $("#seed1").val().trim()
+    let seed2 = $("#seed2").val().trim()
+    let seed3 = $("#seed3").val().trim()
+    let seed4 = $("#seed4").val().trim()
+
+    let errorMessage = $('#seed-error-message');
+
+    if (seed1 === "" || seed2 === "" || seed3 === "" || seed4 === "") {
+      errorMessage.text("All fields are required. Please fill out all seeds.");
+      errorMessage.show();
+      return;
+    }
+
+
+
+    // let seedWordsInput = []
+    // seedWordsInput.push(seed1, seed2, seed3, seed4)
+    fetch('/api/get-seed-phrase')
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok ' + response.statusText);
+      }
+      return response.json();
+    })
+    .then(data => {
+      let seedWordsInput = []
+      seedWordsInput.push(seed1, seed2, seed3, seed4)
+      let confirmedSeedWords = []
+      let seedStr = data.seed
+      let walletSeedWords = seedStr.split(" ")
+      confirmedSeedWords.push(walletSeedWords[randomNumberArr[0]-1], walletSeedWords[randomNumberArr[1]-1],
+        walletSeedWords[randomNumberArr[2] - 1], walletSeedWords[randomNumberArr[3] - 1]
+       )
+
+       let allMatch = seedWordsInput.every((str, index) => str === confirmedSeedWords[index]);
+
+       if (allMatch) {
+         console.log("All strings match the array elements.");
+         $confirmSeedPhraseModal.hide();
+          $updatePasswordModal.show();
+       } else {
+        $confirmSeedPhraseModal.hide();
+        $failedConfirmSeedModal.show()
+       }
+      // console.log(confirmedSeedWords)
+      // console.log(walletSeedWords)
+      // console.log(seedWordsInput)
+
+    })
+    .catch(error => {
+      console.error('Error fetching balance:', error);
+    });
+
+    // $confirmSeedPhraseModal.hide();
+    // $updatePasswordModal.show();
   });
 
   $('#seeWalletSeedPhrase').on('click', async function() {
@@ -1502,3 +1570,13 @@ function capitalizeFirstLetter(string) {
   return string[0].toUpperCase() + string.slice(1);
 }
 
+function generateRandomNumbers() {
+  const numbers = [];
+  while (numbers.length < 4) {
+    const randomNumber = Math.floor(Math.random() * 12) + 1;
+    if (!numbers.includes(randomNumber)) {
+      numbers.push(randomNumber);
+    }
+  }
+  return numbers;
+}
