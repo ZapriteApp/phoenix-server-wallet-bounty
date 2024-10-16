@@ -32,6 +32,7 @@ $(document).ready(function () {
           const pageData = paymentsData.slice(startIndex, endIndex);
 
           pageData.forEach(function (payment) {
+            // console.log(payment)
             const transferITag = `<i class="bi bi-arrow-up-right"></i>`;
             const paymentITag = `<i class="bi bi-arrow-down-left"></i>`;
             const row = `
@@ -42,7 +43,12 @@ $(document).ready(function () {
                   <td>${payment.hasOwnProperty("receivedSat") ? payment.receivedSat : payment.sent}</td>
                   <td>${payment.hasOwnProperty("receivedSat") ? "Payment" : "Transfer"}</td>
                   <td>${payment.isPaid ? 'Completed' : 'Uncompleted'}</td>
-                  <td><i class="bi bi-three-dots-vertical"></i></td>
+                  <td>
+                    <button class="transaction-action-btn transaction-action-btn-icon" id="transaction-action" data-payment-hash="${payment.paymentHash}">
+                      <i class="bi bi-three-dots-vertical"></i>
+                    </button>
+                  </td>
+
               </tr>
           `;
             $tableBody.append(row);
@@ -92,6 +98,12 @@ $(document).ready(function () {
               console.error('Error fetching balance:', error);
             });
         }
+
+        $('#transaction-action').click(function () {
+          // const paymentId = $(this).data('payment-hash');
+          console.log("something logged")
+
+        });
 
         $('#prevPage').click(function () {
           if (currentPage > 1) {
