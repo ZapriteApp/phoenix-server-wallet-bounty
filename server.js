@@ -39,6 +39,10 @@ app.get('/home', (req, res) => {
   res.render('dashboard');
 });
 
+app.get('/health/interface', (req, res) => {
+  res.status(200).json({ status: 'OK', message: 'Interface is healthy' });
+});
+
 
 app.get('/login', (req, res) => {
   res.render('login');
