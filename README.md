@@ -61,12 +61,13 @@ It lets you easily manage your phoenixd transactions and leverage the power of P
 <img src="imgs/goToCommunityStore.png" alt="System menu" width="50%">
 </p>
 
-2. Add the [Phoenixd Wallet Community Store link](https://github.com/hkarani/umbrel-community-app-store) 
+2. Add the Phoenixd Wallet Community App Store link
+<code>https://github.com/hkarani/umbrel-community-app-store </code>
 <p align="center">
 <img src="imgs/add-community-app-store-link.png" alt="System menu" width="50%">
 </p>
 
-3.Open the community store and open Phoenixd Lightning Wallet
+3.Open the community store and select Phoenixd Lightning Wallet
 <p align="center">
 <img src="imgs/open-the-community-store.png" alt="System menu" width="50%">
 </p>
