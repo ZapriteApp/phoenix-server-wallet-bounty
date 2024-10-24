@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  phoenixd-lightning-wallet-ui:
+    build:
+      context: .  
+      dockerfile: Dockerfile
+    volumes:
+      - ../phoenixd-lightning-wallet/data/pslw:/root/.phoenix 
+      - ../phoenixd-lightning-wallet/data/datajson:/usr/src/app/dbjson
+    ports:
+      - "3000:3000" 
+    environment:
+      - PHOENIX_API_URL=http://127.0.0.1:9740
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+volumes:
+  data_phoenix:
+  data_dbjson:
