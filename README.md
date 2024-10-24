@@ -40,17 +40,19 @@ It lets you easily manage your phoenixd transactions and leverage the power of P
 
 # Installing on Start9OS
 ### 1. Install as a Sideload Serivice
-1. Download phoenixd-lightning-wallet-ui.s9pk on your Start9os server [link] (https://github.com/hkarani/phoenixd-lightning-wallet-ui-startos/releases/download/v0.1.1/phoenixd-lightning-wallet-ui.s9pk)
+1. Download phoenixd-lightning-wallet-ui.s9pk on your Start9os server by opening the [link] (https://github.com/hkarani/phoenixd-lightning-wallet-ui-startos/releases/download/v0.1.1/ phoenixd-lightning-wallet-ui.s9pk)
 
 2. Go **System > Sideload a Service**
 <p align="center">
 <img src="imgs/start9systemmenu.png" alt="System menu" width="50%">
 </p>
 
-3. Browse to upload phoenixd-lightning-wallet-ui.s9pk and install
+3. Browse to the the downloaded phoenixd-lightning-wallet-ui.s9pk and install
 <p align="center">
 <img src="imgs/start9sideload.png" alt="System menu" width="50%">
 </p>
+
+4. Start you the service on Start9
 
 # Installing on Umbrel
 
