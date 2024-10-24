@@ -38,7 +38,8 @@ It lets you easily manage your phoenixd transactions and leverage the power of P
 - [ ] Nostr Wallet Connect
 - [ ] Choose default currency
 
-# Installing on Start9OS
+# Installing on Start9
+[Full Start9 instructions](https://github.com/hkarani/phoenixd-lightning-wallet-ui-startos)
 ### 1. Install as a Sideload Serivice
 1. Download phoenixd-lightning-wallet-ui.s9pk on your Start9os server by opening the [link] (https://github.com/hkarani/phoenixd-lightning-wallet-ui-startos/releases/download/v0.1.1/ phoenixd-lightning-wallet-ui.s9pk)
 
@@ -55,6 +56,8 @@ It lets you easily manage your phoenixd transactions and leverage the power of P
 4. Start you the service on Start9
 
 # Installing on Umbrel
+
+[Full Umbrell instructions](https://github.com/hkarani/umbrel-community-app-store)
 
 1. Go **Umbrell App Store**  > and click **Community App Store** at the 3-dots menu
 <p align="center">
