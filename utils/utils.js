@@ -26,7 +26,7 @@ export function isBolt11(value) {
     return False;
   }
 
-  fetch('/api/decode-invoice')
+  fetch('/api/decodeinvoice')
     .then(response => {
       if (!response.ok) {
         throw new Error('Network response was not ok ' + response.statusText);
@@ -46,7 +46,7 @@ export function isBolt12(value) {
     return False;
   }
 
-  fetch('/api/decode-offer')
+  fetch('/api/decodeoffer')
     .then(response => {
       if (!response.ok) {
         throw new Error('Network response was not ok ' + response.statusText);
