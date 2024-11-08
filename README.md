@@ -16,19 +16,19 @@ A lighting wallet for Start9 and Umbrell on top Phoenix server.
 - [Installing on Umbrel](#installation-on-umbrel)
 
 ## Introduction
-This project is a Lightning wallet interface built on top of [Phoenixd server](https://phoenix.acinq.co/server/) designed for [Umbrel Server](https://umbrel.com/umbrelos). 
+This project is a Lightning wallet interface built on top of [Phoenixd server](https://phoenix.acinq.co/server/) designed for [Umbrel Server](https://umbrel.com/umbrelos) and [Start9](https://start9.com/). 
 
 It lets you easily manage your phoenixd transactions and leverage the power of Phoenixd for your Bitcoin Lightning wallet needs.
 
 # Features
 
-- [x] ~~Send and receive bitcoin with Bolt11 invoices and BOLT12 offers~~
-- [x] ~~Transactions history~~
-- [x] ~~Pay wallet contacts~~
-- [x] ~~Contacts address book and pay contacts~~
-- [x] ~~Password login~~
-- [x] ~~Import Wallet offer with QR Scan~~
-- [x] ~~Scan QR to pay BOLT11 invoices and wallet offer~~
+- [x] Send and receive bitcoin with Bolt11 invoices and BOLT12 offers
+- [x] Transactions history
+- [x] Pay wallet contacts
+- [x] Contacts address book and pay contacts
+- [x] Password login
+- [x] Import Wallet offer with QR Scan
+- [x] Scan QR to pay BOLT11 invoices and wallet offer
 
 - [ ] Wallet notifications
 - [ ] Create multiple wallets

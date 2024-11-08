@@ -11,7 +11,7 @@ dotenv.config();
 const router = express.Router();
 const httpPassword = process.env.HTTP_PASSWORD;
 
-router.get('/get-balance', async (req, res) => {
+router.get('/getbalance', async (req, res) => {
     try  {
         const data = await apiService.getBalance();
         res.json(data);
@@ -22,7 +22,7 @@ router.get('/get-balance', async (req, res) => {
     }
 });
 
-router.post('/pay-invoice', async(req, res) => {
+router.post('/payinvoice', async(req, res) => {
     const { amountSat, invoice } = req.body;
     try {
         const data = await apiService.payInvoice(amountSat, invoice);
@@ -32,7 +32,7 @@ router.post('/pay-invoice', async(req, res) => {
     }
 });
 
-router.get('/get-node-info', async(req, res) => {
+router.get('/getinfo', async(req, res) => {
     try {
         const data = await apiService.getNodeInfo();
         res.json(data);
@@ -41,7 +41,7 @@ router.get('/get-node-info', async(req, res) => {
     }
 });
 
-router.post('/create-invoice', async(req, res) => {
+router.post('/createinvoice', async(req, res) => {
     const { description, amountSat, externalId, webhookUrl } = req.body;
     try {
         const data = await apiService.createInvoice(description, amountSat, externalId, webhookUrl);
@@ -51,7 +51,7 @@ router.post('/create-invoice', async(req, res) => {
     }
 });
 
-router.get('/outgoing-payments', async(req, res) => {
+router.get('/outgoingpayments', async(req, res) => {
     const { from, to, limit, offset, all } = req.body;
     try {
         const data = await apiService.getOutgoingPayments(from, to, limit, offset, all);
@@ -61,7 +61,7 @@ router.get('/outgoing-payments', async(req, res) => {
     }
 });
 
-router.get('/incoming-payments', async(req, res) => {
+router.get('/incomingpayments', async(req, res) => {
     const { from, to, limit, offset, all } = req.body;
     try {
         const data = await apiService.getIncomingPayments(from, to, limit, offset, all);
@@ -71,7 +71,7 @@ router.get('/incoming-payments', async(req, res) => {
     }
 });
 
-router.post('/pay-offer', async(req, res) => {
+router.post('/payoffer', async(req, res) => {
     const { amountSat, offer, message } = req.body;
     try {
         const data = await apiService.payOffer(amountSat, offer, message);
@@ -81,7 +81,7 @@ router.post('/pay-offer', async(req, res) => {
     }
 });
 
-router.get('/get-offer', async (req, res) => {
+router.get('/getoffer', async (req, res) => {
     try  {
         const data = await apiService.getOffer();
         res.json(data);
@@ -91,7 +91,7 @@ router.get('/get-offer', async (req, res) => {
     }
 });
 
-router.get('/list-incoming-and-outgoing', async (req, res) => {
+router.get('/listincomingandoutgoing', async (req, res) => {
     try  {
         const data = await apiService.listIncomingAndOutgoing();
         res.json(data);
@@ -101,7 +101,7 @@ router.get('/list-incoming-and-outgoing', async (req, res) => {
     }
 });
 
-router.post('/decode-offer', async (req, res) => {
+router.post('/decodeoffer', async (req, res) => {
     const { offer } = req.body;    
     try  {
         const data = await apiService.decodeOffer(offer);
@@ -118,7 +118,7 @@ router.post('/decode-offer', async (req, res) => {
     }
 });
 
-router.post('/decode-invoice', async (req, res) => {
+router.post('/decodeinvoice', async (req, res) => {
     const { invoice } = req.body;
     try  {
         const data = await apiService.decodeInvoice(invoice);
@@ -129,7 +129,7 @@ router.post('/decode-invoice', async (req, res) => {
     }
 });
 
-router.post('/save-contact', async (req, res) => {
+router.post('/savecontact', async (req, res) => {
     const { name, offer, address } = req.body;
     const newContactsId = utils.getId();
     try  {
@@ -143,7 +143,7 @@ router.post('/save-contact', async (req, res) => {
     }
 });
 
-router.get('/get-contacts', async (req, res) => {
+router.get('/getcontacts', async (req, res) => {
     try  {
         const { contacts } = db.data
         res.json( { contacts } );
@@ -155,7 +155,7 @@ router.get('/get-contacts', async (req, res) => {
 });
 
 
-router.post('/save-password', async (req, res) => {
+router.post('/savepassword', async (req, res) => {
     const { password } = req.body;
     try  {
         const hashedPassword = await bcrypt.hash(password, 10);
@@ -174,7 +174,7 @@ router.post('/save-password', async (req, res) => {
     }
 });
 
-router.post('/is-password-set', async (req, res) => {
+router.post('/ispasswordset', async (req, res) => {
     try {
         const storedPassword = db.data?.password?.[0]?.password;
         if (storedPassword) {
@@ -235,7 +235,7 @@ router.post('/logout', async (req, res) => {
 
 
 
-router.get('/get-btc-price', async (req, res) => {
+router.get('/getbtcprice', async (req, res) => {
     try  {
      const btcPrice = await utils.getBitconPrice();
      return res.json({ btcPrice: btcPrice })
@@ -248,7 +248,7 @@ router.get('/get-btc-price', async (req, res) => {
     }
 });
 
-router.get('/get-config-info', async (req, res) => {
+router.get('/getconfiginfo', async (req, res) => {
     try  {
         const configPath = path.join(process.env.HOME || process.env.USERPROFILE, '.phoenix', 'phoenix.conf');
         const config = utils.readConfigFile(configPath);
@@ -260,7 +260,7 @@ router.get('/get-config-info', async (req, res) => {
     }
 });
 
-router.get('/get-seed-phrase', (req, res) => {
+router.get('/getseedphrase', (req, res) => {
     try {
       const configPath = path.join(process.env.HOME || process.env.USERPROFILE, '.phoenix', 'seed.dat');
       const seed = utils.readSeedWords(configPath);
@@ -273,7 +273,7 @@ router.get('/get-seed-phrase', (req, res) => {
   });
 
 
-router.get('/is-password-set', (req, res) => {  
+router.get('/ispasswordset', (req, res) => {  
     try {
         const storedPassword = db.data?.password?.[0]?.password || null;
         if(storedPassword == null){

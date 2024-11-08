@@ -83,7 +83,7 @@ $(document).ready(function () {
         }
 
         function fetchData() {
-          fetch(`/api/list-incoming-and-outgoing`)
+          fetch(`/api/listincomingandoutgoing`)
             .then(response => {
               if (!response.ok) {
                 throw new Error('Network response was not ok ' + response.statusText);
@@ -188,7 +188,7 @@ $(document).ready(function () {
         }
 
         function fetchData() {
-          fetch(`/api/get-contacts`)
+          fetch(`/api/getcontacts`)
             .then(response => {
               if (!response.ok) {
                 throw new Error('Network response was not ok ' + response.statusText);
@@ -248,7 +248,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   let balance;
-  fetch('/api/get-balance')
+  fetch('/api/getbalance')
     .then(response => {
       if (!response.ok) {
         throw new Error('Network response was not ok ' + response.statusText);
@@ -270,7 +270,7 @@ $(document).ready(function () {
   let balanceSat;
   let channelId;
 
-  fetch('/api/get-node-info')
+  fetch('/api/getinfo')
     .then(response => {
       if (!response.ok) {
         throw new Error('Network response was not ok ' + response.statusText);
@@ -298,7 +298,7 @@ $(document).ready(function () {
 
       $('#progressBar').css('width', inboundPercentage + '%');
 
-      fetch('/api/get-btc-price')
+      fetch('/api/getbtcprice')
         .then(response => {
           if (!response.ok) {
             throw new Error('Network response was not ok ' + response.statusText);
@@ -402,7 +402,7 @@ $(document).ready(function () {
     var invoice = $(this).val().trim();
 
     if (invoice !== "") {
-      fetch('/api/decode-invoice', {
+      fetch('/api/decodeinvoice', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -457,7 +457,7 @@ $(document).ready(function () {
     }
 
     try {
-      let response = await fetch('/api/decode-invoice', {
+      let response = await fetch('/api/decodeinvoice', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -473,7 +473,7 @@ $(document).ready(function () {
 
       if (data.amount) {
 
-        fetch('/api/pay-invoice', {
+        fetch('/api/payinvoice', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -553,7 +553,7 @@ $(document).ready(function () {
     }
 
     try {
-      let response = await fetch('/api/decode-offer', {
+      let response = await fetch('/api/decodeoffer', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -568,7 +568,7 @@ $(document).ready(function () {
       let data = await response.json();
 
       if (data.chain) {
-        fetch('/api/pay-offer', {
+        fetch('/api/payoffer', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -667,7 +667,7 @@ $(document).ready(function () {
     console.log(amountSat);
     console.log(message);
 
-    fetch('/api/pay-offer', {
+    fetch('/api/payoffer', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -775,7 +775,7 @@ $(document).ready(function () {
       return
     }
 
-    fetch('/api/create-invoice', {
+    fetch('/api/createinvoice', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -849,7 +849,7 @@ $(document).ready(function () {
 $(document).ready(function () {
   $('#copyOffer').click(copyInvoice);
   let balance;
-  fetch('/api/get-offer')
+  fetch('/api/getoffer')
     .then(response => {
       if (!response.ok) {
         throw new Error('Network response was not ok ' + response.statusText);
@@ -883,7 +883,7 @@ $(document).ready(function () {
   $("#importContact").click(function () {
     console.log("Add contact modal clicked")
 
-    fetch('/api/get-offer')
+    fetch('/api/getoffer')
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok ' + response.statusText);
@@ -973,7 +973,7 @@ $(document).ready(function () {
 
 
 
-    fetch('/api/save-contact', {
+    fetch('/api/savecontact', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -996,7 +996,7 @@ $(document).ready(function () {
 });
 
 $(document).ready(function () {
-  fetch(`/api/get-contacts`)
+  fetch(`/api/getcontacts`)
     .then(response => {
       if (!response.ok) {
         throw new Error('Network response was not ok ' + response.statusText);
@@ -1053,7 +1053,7 @@ $(document).ready(function () {
     }
     // let seedWordsInput = []
     // seedWordsInput.push(seed1, seed2, seed3, seed4)
-    fetch('/api/get-seed-phrase')
+    fetch('/api/getseedphrase')
     .then(response => {
       if (!response.ok) {
         throw new Error('Network response was not ok ' + response.statusText);
@@ -1129,7 +1129,7 @@ $(document).ready(function () {
     }
 
 
-    fetch('/api/save-password', {
+    fetch('/api/savepassword', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -1251,7 +1251,7 @@ $(document).ready(function () {
       });
   });
 
-  fetch('/api/is-password-set')
+  fetch('/api/ispasswordset')
   .then(response => {
     if (!response.ok) {
       throw new Error('Network response was not ok ' + response.statusText);
@@ -1321,7 +1321,7 @@ $(document).ready(function () {
     $('#restrictedPassword').toggleClass('visible');
   })
 
-  fetch('/api/get-config-info')
+  fetch('/api/getconfiginfo')
     .then(response => {
       if (!response.ok) {
         throw new Error('Network response was not ok ' + response.statusText);
@@ -1339,7 +1339,7 @@ $(document).ready(function () {
       console.error('Error fetching balance:', error);
     });
 
-    fetch('/api/get-seed-phrase')
+    fetch('/api/getseedphrase')
     .then(response => {
       if (!response.ok) {
         throw new Error('Network response was not ok ' + response.statusText);
@@ -1416,7 +1416,7 @@ function truncateText(text, maxLength) {
 };
 
 $('#exportCsv').on('click', () => {
-  fetch(`/api/list-incoming-and-outgoing`)
+  fetch(`/api/listincomingandoutgoing`)
     .then(response => {
       if (!response.ok) {
         throw new Error('Network response was not ok ' + response.statusText);
@@ -1507,7 +1507,7 @@ $('#copyChannelIdIcon').on('click', function () {
 
 async function isOfferValid(offer) {
   try {
-    let response = await fetch('/api/decode-offer', {
+    let response = await fetch('/api/decodeoffer', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -1528,7 +1528,7 @@ async function isOfferValid(offer) {
 }
 async function getContactOffer(contactId) {
   try {
-    const response = await fetch('/api/get-contacts');
+    const response = await fetch('/api/getcontacts');
     if (!response.ok) {
       throw new Error('Network response was not ok ' + response.statusText);
     }
