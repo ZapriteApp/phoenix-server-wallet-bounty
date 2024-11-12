@@ -1,0 +1,153 @@
+<body>
+    <head>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            background-color: #000000;
+            color: #ffffff;
+            margin: 0;
+            padding: 0
+        }
+
+        thead {
+            background-color: #000000;
+            color: #333333;
+        }
+
+        th, td {
+            border: none;
+            padding: 10px;
+            text-align: left;
+            font-size: 0.75em; 
+        }
+
+        tbody tr {
+            border-bottom: 1px solid #333333;
+        }
+
+        tbody tr:last-child {
+            border-bottom: none;
+        }
+
+        td:last-child {
+            text-align: center;
+        }
+
+        .bi-arrow-down-left {
+            color: green; 
+        }
+
+        .bi-arrow-up-right {
+            color:red; 
+
+        }
+
+        h3 {
+            color: #f19528; 
+            margin-top: 20px;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .pagination-controls {
+            display: flex;
+            align-items: center;
+        }
+
+        .pagination-button {
+            margin: 0 5px;
+            padding: 5px 10px;
+            background-color: #111111;
+            color: #ffffff;
+            border: none;
+            cursor: pointer;
+        }
+
+        .pagination-button:disabled {
+            background-color: #333333;
+            cursor: not-allowed;
+        }
+
+        .pagination-button:hover {
+            background-color: #222222;
+        }
+
+        .export-button {
+            background-color:#f19528;;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        .export-button:hover {
+            background-color: #d97d1e; 
+        }
+
+        .transaction-action-btn {
+            padding: 0;
+            width: auto; 
+            height: auto; 
+            cursor: pointer;
+            background-color: #111;
+            border: none;
+            outline: none;
+            /* box-shadow: 0 0 3px #f19528 */
+        } 
+
+        .transaction-action-btn-icon i {
+            font-size: 0.6rem;
+            color: white;
+        }
+
+        .transaction-action-btn-icon:hover {
+            color: #f0ad4e; 
+        }
+
+        td {
+            /* display: flex; */
+            justify-content: center;
+            align-items: center;
+        }
+
+    </style>
+</head>
+    <h2>Transactions</h2>
+    <h3> Activity</h3>
+    <p> Your full activity history for this account.</p>
+    <table id="paymentsTable">
+        <thead>
+            <tr>
+                <th></th>
+                <th>TimeStamp   </th>
+                <th>Label</th>
+                <th>Amount</th>
+                <th>Type</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Table rows will be inserted here by JavaScript -->
+        </tbody>
+    </table>
+    <div class="pagination">
+        <div class="pagination-controls">
+            <button id="prevPage" class="pagination-button" disabled>Previous</button>
+            <span id="pageInfo"></span>
+            <button id="nextPage" class="pagination-button">Next</button>
+        </div>
+        <button id="exportCsv" class="export-button">Export CSV</button>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</body>
+
+
+
+<script src="/public/script.js"></script>
